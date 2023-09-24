@@ -341,7 +341,24 @@ class _SettingsPageState extends State<SettingsPage> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 50)
+                  const SizedBox(height: 35),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Luca v 1.0.0',
+                      style:
+                          GoogleFonts.kanit(color: primaryColor, fontSize: 12),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Made in India.',
+                      style:
+                          GoogleFonts.kanit(color: primaryColor, fontSize: 12),
+                    ),
+                  ),
+                  SizedBox(height: 20),
                 ],
               ),
             ),

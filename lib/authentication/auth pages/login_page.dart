@@ -14,13 +14,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  Future<void> _signInAnonymously() async {
-    try {
-      await FirebaseAuth.instance.signInAnonymously();
-    } catch (e) {
-      print('Error signing in anonymously: $e');
-    }
-  }
+  // Future<void> _signInAnonymously() async {
+  //   try {
+  //     await FirebaseAuth.instance.signInAnonymously();
+  //   } catch (e) {
+  //     print('Error signing in anonymously: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -68,16 +68,16 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SquareTile(
-                    onTap: () => _signInAnonymously,
-                    imagePath: 'lib/images/google.png',
-                    text: 'Sign In Anonymously',
-                  ),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     SquareTile(
+              //       onTap: () => _signInAnonymously,
+              //       imagePath: 'lib/images/google.png',
+              //       text: 'Sign In Anonymously',
+              //     ),
+              //   ],
+              // ),
               const SizedBox(
                 height: 10,
               ),

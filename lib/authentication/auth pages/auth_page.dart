@@ -17,7 +17,7 @@ class AuthPage extends StatelessWidget {
                 title: 'Luca',
               );
             } else {
-              return const LoginPage();
+              return LoginPage();
             }
           }),
     );

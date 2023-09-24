@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:luca/components/square_tile.dart';
@@ -13,6 +14,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  Future<void> _signInAnonymously() async {
+    try {
+      await FirebaseAuth.instance.signInAnonymously();
+    } catch (e) {
+      print('Error signing in anonymously: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,16 +62,19 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SquareTile(
-                      onTap: () => AuthService().signInWithGoogle(),
-                      imagePath: 'lib/images/google.png'),
+                    onTap: () => AuthService().signInWithGoogle(),
+                    imagePath: 'lib/images/google.png',
+                    text: 'Sign In with Google',
+                  ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SquareTile(
-                    onTap: AuthService().signInAnonymously(),
+                    onTap: () => _signInAnonymously,
                     imagePath: 'lib/images/google.png',
+                    text: 'Sign In Anonymously',
                   ),
                 ],
               ),

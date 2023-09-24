@@ -3,8 +3,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 class SquareTile extends StatelessWidget {
   final String imagePath;
+  final String text;
   final Function()? onTap;
-  const SquareTile({super.key, required this.imagePath, required this.onTap});
+  const SquareTile(
+      {super.key,
+      required this.imagePath,
+      required this.onTap,
+      required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,7 @@ class SquareTile extends StatelessWidget {
             ),
             SizedBox(width: 10),
             Text(
-              'Sign In with Google',
+              text,
               style: GoogleFonts.kanit(fontSize: 20, color: Color(0xFF1E1E2A)),
             ),
           ],

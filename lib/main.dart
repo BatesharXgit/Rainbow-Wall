@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:luca/authentication/auth%20pages/auth_page.dart';
 import 'package:luca/myapp.dart';
 import 'package:luca/pages/util/favouritesManager.dart';
 import 'package:provider/provider.dart';
@@ -31,9 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LucaHome(
-        title: 'Luca',
-      ),
+      home: AuthPage(),
     );
   }
 }

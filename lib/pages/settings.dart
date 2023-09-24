@@ -338,6 +338,11 @@ class _SettingsPageState extends State<SettingsPage> {
                             size: 34,
                           ),
                         ),
+                        Icon(
+                          BootstrapIcons.youtube,
+                          color: primaryColor,
+                          size: 34,
+                        )
                       ],
                     ),
                   ),

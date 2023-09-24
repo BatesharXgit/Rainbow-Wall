@@ -57,6 +57,15 @@ class _LoginPageState extends State<LoginPage> {
                       imagePath: 'lib/images/google.png'),
                 ],
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SquareTile(
+                    onTap: AuthService().signInAnonymously(),
+                    imagePath: 'lib/images/google.png',
+                  ),
+                ],
+              ),
               const SizedBox(
                 height: 10,
               ),

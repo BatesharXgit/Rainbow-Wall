@@ -10,9 +10,9 @@ class LiveWallpaperPage extends StatefulWidget {
   _LiveWallpaperPageState createState() => _LiveWallpaperPageState();
 }
 
-class _LiveWallpaperPageState extends State<LiveWallpaperPage> {
+class _LiveWallpaperPageState extends State<LiveWallpaperPage>
+    with AutomaticKeepAliveClientMixin<LiveWallpaperPage> {
   PageController _pageController = PageController();
-
   List<String> videoUrls = [];
   int _currentVideoIndex = 0;
   VideoPlayerController? _controller;
@@ -26,53 +26,53 @@ class _LiveWallpaperPageState extends State<LiveWallpaperPage> {
     _pageController.addListener(_onPageChange);
   }
 
-  @override
-  void dispose() {
-    _controller?.removeListener(_onVideoStateChange);
-    _controller?.dispose();
-    _pageController.dispose();
-    super.dispose();
-  }
-
   Future<void> _fetchVideoUrls() async {
     final storageRef = FirebaseStorage.instance.ref('live');
     final ListResult result = await storageRef.listAll();
-    final videoUrls = await Future.wait(
-      result.items.map((item) => _getVideoUrl(item)),
-    );
 
     setState(() {
-      this.videoUrls = videoUrls;
+      videoUrls = result.items.map((item) => item.fullPath).toList();
     });
 
     _initializeVideoController(_currentVideoIndex);
   }
 
-  Future<String> _getVideoUrl(Reference ref) async {
-    return await ref.getDownloadURL();
-  }
-
-  Future<void> _initializeVideoController(int index) async {
+  void _initializeVideoController(int index) async {
     _controller?.dispose();
-    final videoUrl = videoUrls[index];
+    final videoUrl = await _getVideoUrl(index);
+
     final cachedVideo = await DefaultCacheManager().getFileFromCache(videoUrl);
 
     if (cachedVideo != null && cachedVideo.file.existsSync()) {
-      _controller = VideoPlayerController.file(cachedVideo.file);
+      _controller = VideoPlayerController.file(cachedVideo.file)
+        ..initialize().then((_) {
+          setState(() {
+            _videoInitialized = true;
+          });
+          _controller!.play();
+          _controller!.setLooping(true);
+          _isPlaying = true;
+        });
     } else {
-      final file = await DefaultCacheManager().getSingleFile(videoUrl);
-      _controller = VideoPlayerController.file(file);
+      var file = await DefaultCacheManager().getSingleFile(videoUrl);
+      _controller = VideoPlayerController.file(file)
+        ..initialize().then((_) {
+          setState(() {
+            _videoInitialized = true;
+          });
+          _controller!.play();
+          _controller!.setLooping(true);
+          _isPlaying = true;
+        });
     }
 
-    await _controller!.initialize();
-    setState(() {
-      _videoInitialized = true;
-      _isPlaying = true;
-    });
-
-    _controller!.setLooping(true);
     _controller!.addListener(_onVideoStateChange);
-    _controller!.play();
+  }
+
+  Future<String> _getVideoUrl(int index) async {
+    final ref = FirebaseStorage.instance.ref(videoUrls[index]);
+    final url = await ref.getDownloadURL();
+    return url;
   }
 
   void _onVideoStateChange() {
@@ -95,37 +95,39 @@ class _LiveWallpaperPageState extends State<LiveWallpaperPage> {
     }
   }
 
+  @override
+  void dispose() {
+    _controller?.removeListener(_onVideoStateChange);
+    _controller?.dispose();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+
   Future<void> applyLiveWallpaper(String videoUrl) async {
+    String result;
     try {
-      final httpUrl = await _getVideoUrl(
-        FirebaseStorage.instance.ref(videoUrls[_currentVideoIndex]),
-      );
-      final file = await DefaultCacheManager().getSingleFile(httpUrl);
+      final httpUrl = await _getVideoUrl(_currentVideoIndex);
 
+      var file = await DefaultCacheManager().getSingleFile(httpUrl);
       await _controller?.pause();
-      final result = await AsyncWallpaper.setLiveWallpaper(filePath: file.path);
-
-      if (result) {
-        print('Live wallpaper set');
-      } else {
-        print('Failed to set live wallpaper.');
-      }
-
-      setState(() {
-        _isPlaying = true;
-        _controller!.play();
-      });
+      result = await AsyncWallpaper.setLiveWallpaper(
+        filePath: file.path,
+      )
+          ? 'Live wallpaper set'
+          : 'Failed to set live wallpaper.';
     } catch (e) {
       print('Error applying live wallpaper: $e');
-      setState(() {
-        _isPlaying = true;
-        _controller!.play();
-      });
+      result = 'Failed to set live wallpaper.';
     }
+    print(result);
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     Color backgroundColor = Theme.of(context).colorScheme.background;
     Color primaryColor = Theme.of(context).colorScheme.primary;
     return Scaffold(
@@ -148,27 +150,25 @@ class _LiveWallpaperPageState extends State<LiveWallpaperPage> {
             child: PageView.builder(
               physics: ClampingScrollPhysics(),
               scrollDirection: Axis.vertical,
+              padEnds: true,
               controller: _pageController,
               itemCount: videoUrls.length,
               itemBuilder: (context, index) {
                 return Center(
                   child: _videoInitialized && _controller != null
-                      ? AspectRatio(
-                          aspectRatio: _controller!.value.aspectRatio,
-                          child: Visibility(
-                            visible: index == _currentVideoIndex,
-                            child: AnimatedSwitcher(
-                              duration: Duration(milliseconds: 100),
-                              child: _controller!.value.isInitialized
-                                  ? VideoPlayer(_controller!)
-                                  : Stack(
-                                      alignment: Alignment.center,
-                                      children: [
-                                        VideoPlayer(_controller!),
-                                        CircularProgressIndicator(),
-                                      ],
-                                    ),
-                            ),
+                      ? Visibility(
+                          visible: index == _currentVideoIndex,
+                          child: AnimatedSwitcher(
+                            duration: Duration(milliseconds: 100),
+                            child: _controller!.value.isInitialized
+                                ? VideoPlayer(_controller!)
+                                : Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      VideoPlayer(_controller!),
+                                      CircularProgressIndicator(),
+                                    ],
+                                  ),
                           ),
                         )
                       : CircularProgressIndicator(),

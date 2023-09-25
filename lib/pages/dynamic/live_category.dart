@@ -80,7 +80,7 @@ class _LiveWallCategoryState extends State<LiveWallCategory> {
                               child: Stack(
                                 children: [
                                   GestureDetector(
-                                    onTap: () => Get.to(LiveWallpaperPage()),
+                                    onTap: () => Get.to(CarsWallpaper()),
                                     child: Container(
                                       height: 250,
                                       decoration: BoxDecoration(

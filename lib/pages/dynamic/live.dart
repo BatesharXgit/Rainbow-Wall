@@ -12,6 +12,7 @@ class LiveWallpaperPage extends StatefulWidget {
 
 class _LiveWallpaperPageState extends State<LiveWallpaperPage> {
   PageController _pageController = PageController();
+
   List<String> videoUrls = [];
   int _currentVideoIndex = 0;
   VideoPlayerController? _controller;
@@ -23,7 +24,6 @@ class _LiveWallpaperPageState extends State<LiveWallpaperPage> {
     super.initState();
     _fetchVideoUrls();
     _pageController.addListener(_onPageChange);
-    // _initializeVideoController(_currentVideoIndex);
   }
 
   @override
@@ -37,18 +37,24 @@ class _LiveWallpaperPageState extends State<LiveWallpaperPage> {
   Future<void> _fetchVideoUrls() async {
     final storageRef = FirebaseStorage.instance.ref('live');
     final ListResult result = await storageRef.listAll();
+    final videoUrls = await Future.wait(
+      result.items.map((item) => _getVideoUrl(item)),
+    );
 
     setState(() {
-      videoUrls = result.items.map((item) => item.fullPath).toList();
+      this.videoUrls = videoUrls;
     });
 
     _initializeVideoController(_currentVideoIndex);
   }
 
+  Future<String> _getVideoUrl(Reference ref) async {
+    return await ref.getDownloadURL();
+  }
+
   Future<void> _initializeVideoController(int index) async {
     _controller?.dispose();
-    final videoUrl = await _getVideoUrl(index);
-
+    final videoUrl = videoUrls[index];
     final cachedVideo = await DefaultCacheManager().getFileFromCache(videoUrl);
 
     if (cachedVideo != null && cachedVideo.file.existsSync()) {
@@ -69,11 +75,6 @@ class _LiveWallpaperPageState extends State<LiveWallpaperPage> {
     _controller!.play();
   }
 
-  Future<String> _getVideoUrl(int index) async {
-    final ref = FirebaseStorage.instance.ref(videoUrls[index]);
-    return await ref.getDownloadURL();
-  }
-
   void _onVideoStateChange() {
     if (_controller!.value.isPlaying != _isPlaying) {
       setState(() {
@@ -89,23 +90,16 @@ class _LiveWallpaperPageState extends State<LiveWallpaperPage> {
         newPageIndex < videoUrls.length) {
       setState(() {
         _initializeVideoController(newPageIndex);
+        _currentVideoIndex = newPageIndex;
       });
-
-      if (newPageIndex < _currentVideoIndex) {
-        setState(() {
-          _currentVideoIndex = newPageIndex;
-        });
-      } else {
-        setState(() {
-          _currentVideoIndex = newPageIndex;
-        });
-      }
     }
   }
 
   Future<void> applyLiveWallpaper(String videoUrl) async {
     try {
-      final httpUrl = await _getVideoUrl(_currentVideoIndex);
+      final httpUrl = await _getVideoUrl(
+        FirebaseStorage.instance.ref(videoUrls[_currentVideoIndex]),
+      );
       final file = await DefaultCacheManager().getSingleFile(httpUrl);
 
       await _controller?.pause();
@@ -132,8 +126,22 @@ class _LiveWallpaperPageState extends State<LiveWallpaperPage> {
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.background;
+    Color primaryColor = Theme.of(context).colorScheme.primary;
     return Scaffold(
-      backgroundColor: Colors.black,
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: backgroundColor,
+        title: Text(
+          'Live Wallpapers',
+          style: GoogleFonts.kanit(
+            color: primaryColor,
+            fontSize: 22,
+          ),
+        ),
+      ),
+      backgroundColor: backgroundColor,
       body: Stack(
         children: [
           GestureDetector(

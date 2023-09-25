@@ -108,7 +108,8 @@ class _SettingsPageState extends State<SettingsPage> {
     }
   }
 
-  final Uri urlTwitter = Uri.parse('https://www.instagram.com/btr.xd/');
+  final Uri urlTwitter =
+      Uri.parse('https://twitter.com/btr__xd?t=idNA9giauYavchbF0ET5YA&s=08');
 
   Future<void> launchUrlTwitter() async {
     if (!await launchUrl(urlTwitter)) {
@@ -121,6 +122,14 @@ class _SettingsPageState extends State<SettingsPage> {
   Future<void> launchUrlGithub() async {
     if (!await launchUrl(urlGithub)) {
       throw Exception('Could not launch $urlGithub');
+    }
+  }
+
+  final Uri urlYoutube = Uri.parse('https://www.youtube.com/@XD.Official');
+
+  Future<void> launchUrlYoutube() async {
+    if (!await launchUrl(urlYoutube)) {
+      throw Exception('Could not launch $urlYoutube');
     }
   }
 
@@ -325,10 +334,13 @@ class _SettingsPageState extends State<SettingsPage> {
                             size: 34,
                           ),
                         ),
-                        Icon(
-                          BootstrapIcons.twitter,
-                          color: primaryColor,
-                          size: 34,
+                        GestureDetector(
+                          onTap: launchUrlTwitter,
+                          child: Icon(
+                            BootstrapIcons.twitter,
+                            color: primaryColor,
+                            size: 34,
+                          ),
                         ),
                         GestureDetector(
                           onTap: launchUrlGithub,
@@ -338,10 +350,13 @@ class _SettingsPageState extends State<SettingsPage> {
                             size: 34,
                           ),
                         ),
-                        Icon(
-                          BootstrapIcons.youtube,
-                          color: primaryColor,
-                          size: 34,
+                        GestureDetector(
+                          onTap: launchUrlYoutube,
+                          child: Icon(
+                            BootstrapIcons.youtube,
+                            color: primaryColor,
+                            size: 34,
+                          ),
                         )
                       ],
                     ),

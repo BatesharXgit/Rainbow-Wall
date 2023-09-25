@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:video_player/video_player.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -9,8 +10,7 @@ class LiveWallpaperPage extends StatefulWidget {
   _LiveWallpaperPageState createState() => _LiveWallpaperPageState();
 }
 
-class _LiveWallpaperPageState extends State<LiveWallpaperPage>
-    with AutomaticKeepAliveClientMixin<LiveWallpaperPage> {
+class _LiveWallpaperPageState extends State<LiveWallpaperPage> {
   PageController _pageController = PageController();
   List<String> videoUrls = [];
   int _currentVideoIndex = 0;
@@ -23,6 +23,15 @@ class _LiveWallpaperPageState extends State<LiveWallpaperPage>
     super.initState();
     _fetchVideoUrls();
     _pageController.addListener(_onPageChange);
+    // _initializeVideoController(_currentVideoIndex);
+  }
+
+  @override
+  void dispose() {
+    _controller?.removeListener(_onVideoStateChange);
+    _controller?.dispose();
+    _pageController.dispose();
+    super.dispose();
   }
 
   Future<void> _fetchVideoUrls() async {
@@ -36,42 +45,33 @@ class _LiveWallpaperPageState extends State<LiveWallpaperPage>
     _initializeVideoController(_currentVideoIndex);
   }
 
-  void _initializeVideoController(int index) async {
+  Future<void> _initializeVideoController(int index) async {
     _controller?.dispose();
     final videoUrl = await _getVideoUrl(index);
 
     final cachedVideo = await DefaultCacheManager().getFileFromCache(videoUrl);
 
     if (cachedVideo != null && cachedVideo.file.existsSync()) {
-      _controller = VideoPlayerController.file(cachedVideo.file)
-        ..initialize().then((_) {
-          setState(() {
-            _videoInitialized = true;
-          });
-          _controller!.play();
-          _controller!.setLooping(true);
-          _isPlaying = true;
-        });
+      _controller = VideoPlayerController.file(cachedVideo.file);
     } else {
-      var file = await DefaultCacheManager().getSingleFile(videoUrl);
-      _controller = VideoPlayerController.file(file)
-        ..initialize().then((_) {
-          setState(() {
-            _videoInitialized = true;
-          });
-          _controller!.play();
-          _controller!.setLooping(true);
-          _isPlaying = true;
-        });
+      final file = await DefaultCacheManager().getSingleFile(videoUrl);
+      _controller = VideoPlayerController.file(file);
     }
 
+    await _controller!.initialize();
+    setState(() {
+      _videoInitialized = true;
+      _isPlaying = true;
+    });
+
+    _controller!.setLooping(true);
     _controller!.addListener(_onVideoStateChange);
+    _controller!.play();
   }
 
   Future<String> _getVideoUrl(int index) async {
     final ref = FirebaseStorage.instance.ref(videoUrls[index]);
-    final url = await ref.getDownloadURL();
-    return url;
+    return await ref.getDownloadURL();
   }
 
   void _onVideoStateChange() {
@@ -88,54 +88,58 @@ class _LiveWallpaperPageState extends State<LiveWallpaperPage>
         newPageIndex >= 0 &&
         newPageIndex < videoUrls.length) {
       setState(() {
-        _currentVideoIndex = newPageIndex;
+        _initializeVideoController(newPageIndex);
       });
-      _initializeVideoController(newPageIndex);
+
+      if (newPageIndex < _currentVideoIndex) {
+        setState(() {
+          _currentVideoIndex = newPageIndex;
+        });
+      } else {
+        setState(() {
+          _currentVideoIndex = newPageIndex;
+        });
+      }
     }
   }
-
-  @override
-  void dispose() {
-    _controller?.removeListener(_onVideoStateChange);
-    _controller?.dispose();
-    _pageController.dispose();
-    super.dispose();
-  }
-
-  @override
-  bool get wantKeepAlive => true;
 
   Future<void> applyLiveWallpaper(String videoUrl) async {
-    String result;
     try {
       final httpUrl = await _getVideoUrl(_currentVideoIndex);
+      final file = await DefaultCacheManager().getSingleFile(httpUrl);
 
-      var file = await DefaultCacheManager().getSingleFile(httpUrl);
       await _controller?.pause();
-      result = await AsyncWallpaper.setLiveWallpaper(
-        filePath: file.path,
-      )
-          ? 'Live wallpaper set'
-          : 'Failed to set live wallpaper.';
+      final result = await AsyncWallpaper.setLiveWallpaper(filePath: file.path);
+
+      if (result) {
+        print('Live wallpaper set');
+      } else {
+        print('Failed to set live wallpaper.');
+      }
+
+      setState(() {
+        _isPlaying = true;
+        _controller!.play();
+      });
     } catch (e) {
       print('Error applying live wallpaper: $e');
-      result = 'Failed to set live wallpaper.';
+      setState(() {
+        _isPlaying = true;
+        _controller!.play();
+      });
     }
-    print(result);
   }
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
         children: [
           GestureDetector(
             child: PageView.builder(
-              physics: BouncingScrollPhysics(),
+              physics: ClampingScrollPhysics(),
               scrollDirection: Axis.vertical,
-              padEnds: false,
               controller: _pageController,
               itemCount: videoUrls.length,
               itemBuilder: (context, index) {
@@ -146,7 +150,7 @@ class _LiveWallpaperPageState extends State<LiveWallpaperPage>
                           child: Visibility(
                             visible: index == _currentVideoIndex,
                             child: AnimatedSwitcher(
-                              duration: Duration(milliseconds: 500),
+                              duration: Duration(milliseconds: 100),
                               child: _controller!.value.isInitialized
                                   ? VideoPlayer(_controller!)
                                   : Stack(
@@ -187,20 +191,29 @@ class _LiveWallpaperPageState extends State<LiveWallpaperPage>
             ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-              onPressed: () async {
+            child: GestureDetector(
+              onTap: () async {
                 if (_videoInitialized) {
                   await applyLiveWallpaper(videoUrls[_currentVideoIndex]);
-                  setState(() {
-                    _isPlaying = true;
-                    _controller!.play();
-                  });
                 }
               },
-              child: Text(
-                'Apply wallpaper',
-                style: TextStyle(color: Colors.black),
+              child: Container(
+                height: 50,
+                width: 200,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.background,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Apply Wallpaper',
+                    style: GoogleFonts.kanit(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 22,
+                    ),
+                  ),
+                ),
               ),
             ),
           ),

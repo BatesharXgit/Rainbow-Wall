@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_core/get_core.dart';
@@ -132,7 +133,7 @@ class MyHomePageState extends State<MyHomePage>
           body: SafeArea(
             child: Column(
               children: [
-                _buildAppBar(),
+                _buildAppBar(context),
                 _buildTabBar(),
                 Expanded(
                   child: _buildTabViews(),
@@ -145,16 +146,41 @@ class MyHomePageState extends State<MyHomePage>
     );
   }
 
-  Widget _buildAppBar() {
+  Widget _buildAppBar(context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Builder(
-            builder: (BuildContext context) {
-              return IconButton(
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0),
+            child: Text(
+              'LUCA',
+              style: TextStyle(
+                fontFamily: 'Anurati',
+                color: Theme.of(context).iconTheme.color,
+                fontSize: 30,
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                onPressed: () => Get.to(
+                  const SearchWallpaper(
+                    title: '',
+                  ),
+                  transition: Transition.fadeIn,
+                ),
+                icon: Icon(
+                  BootstrapIcons.search,
+                  color: Theme.of(context).iconTheme.color,
+                  size: 26,
+                ),
+              ),
+              IconButton(
                 icon: const Icon(
                   Iconsax.setting_2,
                   size: 30,
@@ -162,39 +188,8 @@ class MyHomePageState extends State<MyHomePage>
                 color: Theme.of(context).iconTheme.color,
                 onPressed: () =>
                     Get.to(SettingsPage(), transition: Transition.fadeIn),
-              );
-            },
-          ),
-          Builder(builder: (context) {
-            return Expanded(
-              child: Center(
-                child: Text(
-                  'LUCA',
-                  style: TextStyle(
-                    fontFamily: 'Anurati',
-                    color: Theme.of(context).iconTheme.color,
-                    fontSize: 30,
-                  ),
-                ),
               ),
-            );
-          }),
-          Builder(
-            builder: (BuildContext context) {
-              return GestureDetector(
-                onTap: () => Get.to(
-                  SearchWallpaper(
-                    title: '',
-                  ),
-                  transition: Transition.fadeIn,
-                ),
-                child: Icon(
-                  Iconsax.search_normal_1,
-                  color: Theme.of(context).iconTheme.color,
-                  size: 30,
-                ),
-              );
-            },
+            ],
           ),
         ],
       ),

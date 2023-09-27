@@ -9,6 +9,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:luca/pages/util/components.dart';
 import 'package:luca/pages/util/applyWallpaperPage.dart';
 import 'package:luca/pages/util/location_list.dart';
+import 'package:luca/pages/util/notify.dart';
 import 'package:luca/pages/util/searchresult.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:luca/pages/settings.dart';
@@ -153,20 +154,43 @@ class MyHomePageState extends State<MyHomePage>
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 10.0),
-            child: Text(
-              'LUCA',
-              style: TextStyle(
-                fontFamily: 'Anurati',
-                color: Theme.of(context).iconTheme.color,
-                fontSize: 30,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 48,
+                width: 48,
+                child: ClipRRect(
+                  child: Image.asset('lib/images/luca.png'),
+                ),
               ),
-            ),
+              const SizedBox(
+                width: 10.0,
+              ),
+              Text(
+                'LUCA',
+                style: TextStyle(
+                  fontFamily: 'Anurati',
+                  color: Theme.of(context).iconTheme.color,
+                  fontSize: 32,
+                ),
+              ),
+            ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              IconButton(
+                onPressed: () => Get.to(
+                  NotificationsPage(),
+                  transition: Transition.fadeIn,
+                ),
+                icon: Icon(
+                  Iconsax.notification,
+                  color: Theme.of(context).iconTheme.color,
+                  size: 30,
+                ),
+              ),
               IconButton(
                 onPressed: () => Get.to(
                   const SearchWallpaper(

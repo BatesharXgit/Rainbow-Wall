@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
                 child: Container(
                   color: Colors.black.withOpacity(0.3),
                 ),
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                       SquareTile(
                         onTap: () => AuthService().signInWithGoogle(),
                         imagePath: 'lib/images/google.png',
-                        text: 'Sign In with Google',
+                        text: 'Continue with Google',
                       ),
                     ],
                   ),

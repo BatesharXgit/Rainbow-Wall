@@ -18,11 +18,11 @@ import 'package:flutter/rendering.dart';
 final FirebaseStorage storage = FirebaseStorage.instance;
 
 final Reference wallpaperRef = storage.ref().child('wallpaper');
-final Reference aiRef = storage.ref().child('wallpaper');
+final Reference aiRef = storage.ref().child('ai');
 final Reference abstractRef = storage.ref().child('abstract');
 final Reference carsRef = storage.ref().child('cars');
 final Reference illustrationRef = storage.ref().child('illustration');
-final Reference fantasyRef = storage.ref().child('illustration');
+final Reference fantasyRef = storage.ref().child('fantasy');
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -165,7 +165,7 @@ class MyHomePageState extends State<MyHomePage>
                 ),
               ),
               const SizedBox(
-                width: 10.0,
+                width: 8.0,
               ),
               Text(
                 'LUCA',
@@ -270,7 +270,9 @@ class MyHomePageState extends State<MyHomePage>
           List<Reference> imageRefs = snapshot.data!.items;
 
           return GridView.builder(
-            physics: BouncingScrollPhysics(),
+            clipBehavior: Clip.none,
+            controller: ScrollController(),
+            physics: ClampingScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.75,

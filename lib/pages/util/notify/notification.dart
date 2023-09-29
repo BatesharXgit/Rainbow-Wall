@@ -1,22 +1,31 @@
-// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:luca/main.dart';
 
-// class NotificationAPi {
-//   static final _notifications = FlutterLocalNotificationsPlugin();
+class FirebaseApi {
+  final _firebaseMessaging = FirebaseMessaging.instance;
 
-//   static Future _notificationDetails() async {
-//     NotificationDetails(
-//       android: AndroidNotificationDetails(
-//           'channel id', 'channel name', 'channel description',
-//           importance: Importance.max),
-//     );
-//   }
+  Future<void> initNotifications() async {
+    await _firebaseMessaging.requestPermission();
 
-//   static Future showNotification({
-//     int id = 0,
-//     String? title,
-//     String? body,
-//     String? payload,
-//   }) async =>
-//       _notifications.show(id, title, body, await _notificationDetails(),
-//           payload: payload);
-// }
+    final fCMToken = await _firebaseMessaging.getToken();
+
+    print('Token: $fCMToken');
+
+    initPushNotifications();
+  }
+
+  void handleMessage(RemoteMessage? message) {
+    if (message == null) return;
+
+    navigatorKey.currentState
+        ?.pushNamed('/NotificationsPage', arguments: message);
+  }
+
+  Future initPushNotifications() async {
+    FirebaseMessaging.instance.getInitialMessage().then((handleMessage));
+
+    FirebaseMessaging.onMessageOpenedApp.listen((handleMessage));
+  }
+}

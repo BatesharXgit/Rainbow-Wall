@@ -4,15 +4,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:luca/authentication/auth%20pages/auth_page.dart';
 import 'package:luca/myapp.dart';
 import 'package:luca/pages/util/favouritesManager.dart';
+import 'package:luca/pages/util/notify/notification.dart';
+import 'package:luca/pages/util/notify/notify.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseApi().initNotifications();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
@@ -33,6 +37,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AuthPage(),
+      navigatorKey: navigatorKey,
+      routes: {
+        'notification_screen': (context) => const NotificationsPage(),
+      },
     );
   }
 }

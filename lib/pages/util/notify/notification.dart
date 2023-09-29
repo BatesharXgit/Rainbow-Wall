@@ -1,7 +1,9 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:luca/main.dart';
+import 'package:luca/pages/util/notify/notify.dart';
 
 class FirebaseApi {
   final _firebaseMessaging = FirebaseMessaging.instance;
@@ -19,8 +21,9 @@ class FirebaseApi {
   void handleMessage(RemoteMessage? message) {
     if (message == null) return;
 
-    navigatorKey.currentState
-        ?.pushNamed('/NotificationsPage', arguments: message);
+    Get.to(NotificationsPage());
+    // navigatorKey.currentState
+    //     ?.pushNamed('/notification_screen', arguments: message);
   }
 
   Future initPushNotifications() async {

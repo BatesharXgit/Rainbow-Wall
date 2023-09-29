@@ -181,10 +181,11 @@ class MyHomePageState extends State<MyHomePage>
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
-                onPressed: () => Get.to(
-                  NotificationsPage(),
-                  transition: Transition.fadeIn,
-                ),
+                onPressed: () {},
+                // onPressed: () => Get.to(
+                //   NotificationsPage(),
+                //   transition: Transition.fadeIn,
+                // ),
                 icon: Icon(
                   Iconsax.notification,
                   color: Theme.of(context).iconTheme.color,

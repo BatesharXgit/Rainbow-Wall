@@ -1,5 +1,4 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:luca/main.dart';
@@ -22,8 +21,8 @@ class FirebaseApi {
     if (message == null) return;
 
     Get.to(NotificationsPage());
-    // navigatorKey.currentState
-    //     ?.pushNamed('/notification_screen', arguments: message);
+    navigatorKey.currentState
+        ?.pushNamed('/notification_screen', arguments: message);
   }
 
   Future initPushNotifications() async {

@@ -11,7 +11,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/rendering.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:ui' as ui;
 
@@ -129,7 +128,7 @@ class _ApplyWallpaperPageState extends State<ApplyWallpaperPage> {
       bool success = await AsyncWallpaper.setWallpaper(
         url: widget.imageUrl,
         wallpaperLocation: AsyncWallpaper.HOME_SCREEN,
-        goToHome: true,
+        goToHome: false,
       );
 
       // ScaffoldMessenger.of(context).removeCurrentSnackBar();
@@ -177,7 +176,7 @@ class _ApplyWallpaperPageState extends State<ApplyWallpaperPage> {
       bool success = await AsyncWallpaper.setWallpaper(
         url: widget.imageUrl,
         wallpaperLocation: AsyncWallpaper.LOCK_SCREEN,
-        goToHome: true,
+        goToHome: false,
       );
 
       // ScaffoldMessenger.of(context).removeCurrentSnackBar();
@@ -225,7 +224,7 @@ class _ApplyWallpaperPageState extends State<ApplyWallpaperPage> {
       bool success = await AsyncWallpaper.setWallpaper(
         url: widget.imageUrl,
         wallpaperLocation: AsyncWallpaper.BOTH_SCREENS,
-        goToHome: true,
+        goToHome: false,
       );
 
       // ScaffoldMessenger.of(context).removeCurrentSnackBar();

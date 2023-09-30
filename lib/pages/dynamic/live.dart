@@ -16,7 +16,7 @@ class CarsWallpaper extends StatefulWidget {
 
 class _CarsWallpaperState extends State<CarsWallpaper>
     with AutomaticKeepAliveClientMixin<CarsWallpaper> {
-  PageController _pageController = PageController();
+  PageController _pageController = PageController(viewportFraction: 0.8);
   List<String> videoUrls = [];
   int _currentVideoIndex = 0;
   VideoPlayerController? _controller;
@@ -148,12 +148,12 @@ class _CarsWallpaperState extends State<CarsWallpaper>
         ),
       ),
       backgroundColor: backgroundColor,
-      body: Stack(
+      body: Column(
         children: [
-          GestureDetector(
+          Expanded(
             child: PageView.builder(
               physics: ClampingScrollPhysics(),
-              scrollDirection: Axis.vertical,
+              scrollDirection: Axis.horizontal,
               padEnds: true,
               controller: _pageController,
               itemCount: videoUrls.length,
@@ -165,7 +165,30 @@ class _CarsWallpaperState extends State<CarsWallpaper>
                           child: AnimatedSwitcher(
                             duration: Duration(milliseconds: 100),
                             child: _controller!.value.isInitialized
-                                ? VideoPlayer(_controller!)
+                                ? AnimatedContainer(
+                                    duration: const Duration(milliseconds: 250),
+                                    margin: const EdgeInsets.symmetric(
+                                        vertical: 32, horizontal: 16),
+                                    decoration: BoxDecoration(
+                                      color: backgroundColor,
+                                      borderRadius: BorderRadius.circular(16),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.3),
+                                          offset: const Offset(0, 6),
+                                          blurRadius: 8,
+                                        ),
+                                      ],
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(16),
+                                      child: AspectRatio(
+                                        aspectRatio:
+                                            _controller!.value.aspectRatio,
+                                        child: VideoPlayer(_controller!),
+                                      ),
+                                    ),
+                                  )
                                 : Stack(
                                     alignment: Alignment.center,
                                     children: [
@@ -179,12 +202,6 @@ class _CarsWallpaperState extends State<CarsWallpaper>
                 );
               },
             ),
-            onTap: () {
-              setState(() {
-                _isPlaying = !_isPlaying;
-                _isPlaying ? _controller!.play() : _controller!.pause();
-              });
-            },
           ),
           if (!_isPlaying && _videoInitialized)
             Center(
@@ -201,33 +218,33 @@ class _CarsWallpaperState extends State<CarsWallpaper>
                 },
               ),
             ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: GestureDetector(
-              onTap: () async {
-                if (_videoInitialized) {
-                  await applyLiveWallpaper(videoUrls[_currentVideoIndex]);
-                }
-              },
-              child: Container(
-                height: 50,
-                width: 200,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.background,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Apply Wallpaper',
-                    style: GoogleFonts.kanit(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontSize: 22,
-                    ),
+          GestureDetector(
+            onTap: () async {
+              if (_videoInitialized) {
+                await applyLiveWallpaper(videoUrls[_currentVideoIndex]);
+              }
+            },
+            child: Container(
+              height: 50,
+              width: 200,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.background,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'Apply Wallpaper',
+                  style: GoogleFonts.kanit(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: 22,
                   ),
                 ),
               ),
             ),
+          ),
+          const SizedBox(
+            height: 10,
           ),
         ],
       ),

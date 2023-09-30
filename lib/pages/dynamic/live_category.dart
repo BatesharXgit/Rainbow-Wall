@@ -3,7 +3,6 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:luca/pages/dynamic/live.dart';
-import 'package:luca/pages/dynamic/parallax_live.dart';
 
 class LiveWallCategory extends StatefulWidget {
   const LiveWallCategory({super.key});
@@ -81,7 +80,7 @@ class _LiveWallCategoryState extends State<LiveWallCategory> {
                           child: Stack(
                             children: [
                               GestureDetector(
-                                onTap: () => Get.to(VideosScreen()),
+                                onTap: () => Get.to(CarsWallpaper()),
                                 child: Container(
                                   height: 250,
                                   decoration: BoxDecoration(

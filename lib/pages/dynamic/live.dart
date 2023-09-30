@@ -168,7 +168,7 @@ class _CarsWallpaperState extends State<CarsWallpaper>
                                 ? AnimatedContainer(
                                     duration: const Duration(milliseconds: 250),
                                     margin: const EdgeInsets.symmetric(
-                                        vertical: 32, horizontal: 16),
+                                        vertical: 8.0, horizontal: 8.0),
                                     decoration: BoxDecoration(
                                       color: backgroundColor,
                                       borderRadius: BorderRadius.circular(16),

@@ -3,6 +3,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:luca/pages/dynamic/live.dart';
+import 'package:luca/pages/dynamic/parallax_live.dart';
 
 class LiveWallCategory extends StatefulWidget {
   const LiveWallCategory({super.key});
@@ -66,65 +67,65 @@ class _LiveWallCategoryState extends State<LiveWallCategory> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
-                child: ListView.builder(
-                    itemCount: categories.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return AnimationConfiguration.staggeredList(
-                        position: index,
-                        duration: const Duration(milliseconds: 375),
-                        child: SlideAnimation(
-                          verticalOffset: 50.0,
-                          child: FadeInAnimation(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Stack(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () => Get.to(CarsWallpaper()),
-                                    child: Container(
-                                      height: 250,
-                                      decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                            255, 24, 24, 24),
-                                        borderRadius: BorderRadius.circular(20),
-                                        image: DecorationImage(
-                                            image: NetworkImage(images[index]),
-                                            fit: BoxFit.cover),
-                                      ),
-                                    ),
+              child: ListView.builder(
+                itemCount: categories.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return AnimationConfiguration.staggeredList(
+                    position: index,
+                    duration: const Duration(milliseconds: 375),
+                    child: SlideAnimation(
+                      verticalOffset: 50.0,
+                      child: FadeInAnimation(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Stack(
+                            children: [
+                              GestureDetector(
+                                onTap: () => Get.to(VideosScreen()),
+                                child: Container(
+                                  height: 250,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        const Color.fromARGB(255, 24, 24, 24),
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                        image: NetworkImage(images[index]),
+                                        fit: BoxFit.cover),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      right: 60,
-                                      left: 60,
-                                      top: MediaQuery.of(context).padding.top +
-                                          200,
-                                    ),
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                          color: backgroundColor,
-                                          borderRadius:
-                                              BorderRadius.circular(10.0)),
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          categories[index],
-                                          style: GoogleFonts.kanit(
-                                              color: primaryColor,
-                                              fontSize: 22),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  right: 60,
+                                  left: 60,
+                                  top: MediaQuery.of(context).padding.top + 200,
+                                ),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      color: backgroundColor,
+                                      borderRadius:
+                                          BorderRadius.circular(10.0)),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      categories[index],
+                                      style: GoogleFonts.kanit(
+                                          color: primaryColor, fontSize: 22),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      );
-                    })),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),

@@ -14,6 +14,7 @@ import 'package:luca/pages/util/searchresult.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:luca/pages/settings.dart';
 import 'package:flutter/rendering.dart';
+import 'package:luca/pages/util/splash.dart';
 
 final FirebaseStorage storage = FirebaseStorage.instance;
 
@@ -47,6 +48,8 @@ class MyHomePageState extends State<MyHomePage>
   List<Reference> fantasyRefs = [];
 
   int index = 0;
+  bool _imagesLoaded = false;
+
   final List<String> data = [
     "For You",
     "AI",
@@ -60,11 +63,21 @@ class MyHomePageState extends State<MyHomePage>
   void initState() {
     super.initState();
     _tabController = TabController(length: data.length, vsync: this);
-    loadWallpaperImages();
-    loadCarsImages();
-    loadAbstractImages();
-    loadaiImages();
-    loadfantasyImages();
+    loadImages().then((_) {
+      setState(() {
+        _imagesLoaded = true;
+      });
+    });
+  }
+
+  Future<void> loadImages() async {
+    await Future.wait([
+      loadWallpaperImages(),
+      loadCarsImages(),
+      loadAbstractImages(),
+      loadaiImages(),
+      loadfantasyImages(),
+    ]);
   }
 
   @override
@@ -129,20 +142,19 @@ class MyHomePageState extends State<MyHomePage>
           key: _scaffoldKey,
           appBar: null,
           backgroundColor: Theme.of(context).colorScheme.background,
-          // backgroundColor: Color(0xFF131321),
-          // backgroundColor: Colors.black,
           body: SafeArea(
             child: Column(
               children: [
                 _buildAppBar(context),
                 _buildTabBar(),
                 Expanded(
-                  child: _buildTabViews(),
+                  child: _imagesLoaded ? _buildTabViews() : Container(),
                 ),
               ],
             ),
           ),
         ),
+        if (!_imagesLoaded) SplashScreen(),
       ],
     );
   }

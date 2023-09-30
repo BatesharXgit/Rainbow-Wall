@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:video_player/video_player.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -77,22 +78,63 @@ class VideoCard extends StatefulWidget {
 
 class _VideoCardState extends State<VideoCard> {
   late VideoPlayerController _controller;
+  bool _isDisposed = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(widget.videoUrl);
+    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl));
 
     _controller
-      ..addListener(() => setState(() {}))
+      ..addListener(() {
+        if (!_isDisposed) {
+          setState(() {});
+        }
+      })
       ..setLooping(true)
       ..setVolume(0)
-      ..initialize().then((_) => setState(() {}))
+      ..initialize().then((_) {
+        if (!_isDisposed) {
+          setState(() {});
+        }
+      })
+      ..play();
+    _loadVideo();
+  }
+
+  void _loadVideo() async {
+    final videoUrl = widget.videoUrl;
+    final cacheManager = DefaultCacheManager();
+
+    FileInfo? fileInfo = await cacheManager.getFileFromCache(videoUrl);
+
+    if (fileInfo != null && fileInfo.file.existsSync()) {
+      _controller = VideoPlayerController.file(fileInfo.file);
+    } else {
+      await cacheManager.downloadFile(videoUrl);
+      _controller = VideoPlayerController.file(
+          await cacheManager.getSingleFile(videoUrl));
+    }
+
+    _controller
+      ..addListener(() {
+        if (!_isDisposed) {
+          setState(() {});
+        }
+      })
+      ..setLooping(true)
+      ..setVolume(0)
+      ..initialize().then((_) {
+        if (!_isDisposed) {
+          setState(() {});
+        }
+      })
       ..play();
   }
 
   @override
   void dispose() {
+    _isDisposed = true;
     _controller.dispose();
     super.dispose();
   }

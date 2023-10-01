@@ -25,7 +25,6 @@ final Reference gamesRef = storage.ref().child('wallpaper');
 class Category extends StatefulWidget {
   const Category({
     Key? key,
-   
   }) : super(key: key);
 
   @override
@@ -33,16 +32,16 @@ class Category extends StatefulWidget {
 }
 
 class CategoryState extends State<Category> {
-  List<Reference> amoledRefs = [];
-  List<Reference> landscapesRefs = [];
-  List<Reference> cityscapesRefs = [];
-  List<Reference> spaceRefs = [];
-  List<Reference> stockRefs = [];
-  List<Reference> minimalistRefs = [];
-  List<Reference> natureRefs = [];
-  List<Reference> animalsRefs = [];
-  List<Reference> scifiRefs = [];
-  List<Reference> gamesRefs = [];
+  // List<Reference> amoledRefs = [];
+  // List<Reference> landscapesRefs = [];
+  // List<Reference> cityscapesRefs = [];
+  // List<Reference> spaceRefs = [];
+  // List<Reference> stockRefs = [];
+  // List<Reference> minimalistRefs = [];
+  // List<Reference> natureRefs = [];
+  // List<Reference> animalsRefs = [];
+  // List<Reference> scifiRefs = [];
+  // List<Reference> gamesRefs = [];
 
   final List<String> categories = [
     'Amoled',
@@ -57,100 +56,111 @@ class CategoryState extends State<Category> {
     'Games',
   ];
 
+  final List<String> _amoled = [
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Famoled%2F93.jpg?alt=media&token=dd4741da-9f8c-4c03-80b6-b2df77e5de74',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Famoled%2F83.jpg?alt=media&token=52cb7707-0ab0-4961-b3ad-8c79ff5c3b70',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Famoled%2F79.jpg?alt=media&token=ffd1a801-53c8-4df9-8269-d4a0cd394a19',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Famoled%2F76.jpg?alt=media&token=0f0b1b82-879b-421e-9382-e6fb5f1074ee',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Famoled%2F71.jpg?alt=media&token=98ede1b5-f454-43c5-a8d3-75431eb133a9',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Famoled%2F66.jpg?alt=media&token=3025b56b-c208-4844-8d37-c18df18b0843',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Famoled%2F59.jpg?alt=media&token=6db4ae15-1ea3-47c3-aa6e-b5db13ac759d',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Famoled%2F90.jpg?alt=media&token=5bac6a75-a3f0-4ce4-8f69-0b127c650d46'
+  ];
+
   @override
   void initState() {
     super.initState();
-    loadamoledImages();
-    loadlandscapesImages();
-    loadcityscapesImages();
-    loadspaceImages();
-    loadstockImages();
-    loadminimalistImages();
-    loadnatureImages();
-    loadanimalsmages();
-    loadscifiImages();
-    loadgamesImages();
+    // loadamoledImages();
+    // loadlandscapesImages();
+    // loadcityscapesImages();
+    // loadspaceImages();
+    // loadstockImages();
+    // loadminimalistImages();
+    // loadnatureImages();
+    // loadanimalsmages();
+    // loadscifiImages();
+    // loadgamesImages();
   }
 
-  Future<void> loadamoledImages() async {
-    final ListResult result = await amoledRef.listAll();
-    amoledRefs = result.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
-  }
+  // Future<void> loadamoledImages() async {
+  //   final ListResult result = await amoledRef.listAll();
+  //   amoledRefs = result.items.toList();
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  // }
 
-  Future<void> loadlandscapesImages() async {
-    final ListResult result = await landscapesRef.listAll();
-    landscapesRefs = result.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
-  }
+  // Future<void> loadlandscapesImages() async {
+  //   final ListResult result = await landscapesRef.listAll();
+  //   landscapesRefs = result.items.toList();
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  // }
 
-  Future<void> loadcityscapesImages() async {
-    final ListResult result = await cityscapesRef.listAll();
-    cityscapesRefs = result.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
-  }
+  // Future<void> loadcityscapesImages() async {
+  //   final ListResult result = await cityscapesRef.listAll();
+  //   cityscapesRefs = result.items.toList();
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  // }
 
-  Future<void> loadspaceImages() async {
-    final ListResult result = await spaceRef.listAll();
-    spaceRefs = result.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
-  }
+  // Future<void> loadspaceImages() async {
+  //   final ListResult result = await spaceRef.listAll();
+  //   spaceRefs = result.items.toList();
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  // }
 
-  Future<void> loadstockImages() async {
-    final ListResult result = await stockRef.listAll();
-    stockRefs = result.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
-  }
+  // Future<void> loadstockImages() async {
+  //   final ListResult result = await stockRef.listAll();
+  //   stockRefs = result.items.toList();
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  // }
 
-  Future<void> loadminimalistImages() async {
-    final ListResult result = await minimalistRef.listAll();
-    minimalistRefs = result.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
-  }
+  // Future<void> loadminimalistImages() async {
+  //   final ListResult result = await minimalistRef.listAll();
+  //   minimalistRefs = result.items.toList();
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  // }
 
-  Future<void> loadnatureImages() async {
-    final ListResult result = await natureRef.listAll();
-    natureRefs = result.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
-  }
+  // Future<void> loadnatureImages() async {
+  //   final ListResult result = await natureRef.listAll();
+  //   natureRefs = result.items.toList();
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  // }
 
-  Future<void> loadanimalsmages() async {
-    final ListResult result = await animalsRef.listAll();
-    animalsRefs = result.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
-  }
+  // Future<void> loadanimalsmages() async {
+  //   final ListResult result = await animalsRef.listAll();
+  //   animalsRefs = result.items.toList();
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  // }
 
-  Future<void> loadscifiImages() async {
-    final ListResult result = await scifiRef.listAll();
-    scifiRefs = result.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
-  }
+  // Future<void> loadscifiImages() async {
+  //   final ListResult result = await scifiRef.listAll();
+  //   scifiRefs = result.items.toList();
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  // }
 
-  Future<void> loadgamesImages() async {
-    final ListResult result = await gamesRef.listAll();
-    gamesRefs = result.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
-  }
+  // Future<void> loadgamesImages() async {
+  //   final ListResult result = await gamesRef.listAll();
+  //   gamesRefs = result.items.toList();
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -222,40 +232,19 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, amoledRefs.length),
+                        itemCount: min(8, _amoled.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          // final imageRef = amoledRefs[index];
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: FutureBuilder(
-                                future: amoledRefs[index].getDownloadURL(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return SizedBox(
-                                      width: 120,
-                                      child: _buildCircularIndicator(),
-                                    );
-                                  }
-                                  if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  }
-                                  if (!snapshot.hasData ||
-                                      snapshot.data == null) {
-                                    return const Text('No Data');
-                                  }
-
-                                  return SizedBox(
-                                    width: 120,
-                                    child: CachedNetworkImage(
-                                      imageUrl: snapshot.data.toString(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  );
-                                },
+                            child: SizedBox(
+                              width: 120,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: CachedNetworkImage(
+                                  imageUrl: _amoled[index],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           );

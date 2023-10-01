@@ -3,11 +3,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LiveWallCategory extends StatefulWidget {
-  final ScrollController controller;
-
   const LiveWallCategory({
     Key? key,
-    required this.controller,
     required Color color,
   }) : super(key: key);
 
@@ -71,7 +68,6 @@ class _LiveWallCategoryState extends State<LiveWallCategory> {
           children: [
             Expanded(
               child: ListView.builder(
-                controller: widget.controller,
                 itemCount: categories.length,
                 itemBuilder: (BuildContext context, int index) {
                   return AnimationConfiguration.staggeredList(

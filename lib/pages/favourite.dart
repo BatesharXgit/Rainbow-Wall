@@ -7,7 +7,7 @@ import 'package:luca/pages/util/favouritesManager.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteImagesPage extends StatelessWidget {
-  const FavoriteImagesPage({super.key, required ScrollController controller, required Color color});
+  const FavoriteImagesPage({super.key, required Color color});
 
   @override
   Widget build(BuildContext context) {

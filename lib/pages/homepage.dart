@@ -1,15 +1,11 @@
 import 'dart:ui';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
-import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:luca/pages/dynamic/live_category.dart';
-import 'package:luca/pages/favourite.dart';
-import 'package:luca/pages/static/wallpapers.dart';
 import 'package:luca/pages/util/components.dart';
 import 'package:luca/pages/util/applyWallpaperPage.dart';
 import 'package:luca/pages/util/location_list.dart';
@@ -30,10 +26,8 @@ final Reference illustrationRef = storage.ref().child('illustration');
 final Reference fantasyRef = storage.ref().child('fantasy');
 
 class MyHomePage extends StatefulWidget {
-  final ScrollController controller;
   const MyHomePage({
     Key? key,
-    required this.controller,
     required Color color,
   }) : super(key: key);
 
@@ -43,8 +37,8 @@ class MyHomePage extends StatefulWidget {
 
 class MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
-  late TabController _tabController;
   ScrollController scrollController = ScrollController();
+  late TabController _tabController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   List<Reference> wallpaperRefs = [];
@@ -77,6 +71,13 @@ class MyHomePageState extends State<MyHomePage>
     });
   }
 
+  @override
+  void dispose() {
+    scrollController.dispose();
+    _tabController.dispose();
+    super.dispose();
+  }
+
   Future<void> loadImages() async {
     await Future.wait([
       loadWallpaperImages(),
@@ -85,12 +86,6 @@ class MyHomePageState extends State<MyHomePage>
       loadaiImages(),
       loadfantasyImages(),
     ]);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
   }
 
   Future<void> loadWallpaperImages() async {
@@ -291,7 +286,8 @@ class MyHomePageState extends State<MyHomePage>
 
           return GridView.builder(
             clipBehavior: Clip.none,
-            controller: widget.controller,
+            controller: ScrollController(),
+            // controller: widget.controller,
             physics: ClampingScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

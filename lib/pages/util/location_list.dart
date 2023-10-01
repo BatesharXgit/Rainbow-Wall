@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:luca/pages/util/parallax.dart';
@@ -6,7 +8,7 @@ class LocationListItem extends StatelessWidget {
   LocationListItem({
     Key? key,
     required this.imageUrl,
-    required this.scrollController,
+    required this.scrollController, Uint8List? imageBytes,
   }) : super(key: key);
 
   final String imageUrl;

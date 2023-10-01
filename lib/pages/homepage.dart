@@ -14,6 +14,9 @@ import 'package:luca/pages/util/searchresult.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:luca/pages/settings.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'dart:typed_data';
+import 'package:http/http.dart' as http;
 
 final FirebaseStorage storage = FirebaseStorage.instance;
 
@@ -57,16 +60,16 @@ class MyHomePageState extends State<MyHomePage>
     "Fantasy",
   ];
 
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: data.length, vsync: this);
-    loadWallpaperImages();
-    loadCarsImages();
-    loadAbstractImages();
-    loadaiImages();
-    loadfantasyImages();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _tabController = TabController(length: data.length, vsync: this);
+  //   loadWallpaperImages();
+  //   loadCarsImages();
+  //   loadAbstractImages();
+  //   loadaiImages();
+  //   loadfantasyImages();
+  // }
 
   @override
   void dispose() {
@@ -75,34 +78,39 @@ class MyHomePageState extends State<MyHomePage>
     super.dispose();
   }
 
-  Future<void> loadWallpaperImages() async {
-    final ListResult result = await wallpaperRef.listAll();
-    wallpaperRefs = result.items.toList();
-  }
+  Future<void> loadImages() async {
+    final ListResult wallpaperResult = await wallpaperRef.listAll();
+    wallpaperRefs = wallpaperResult.items.toList();
 
-  Future<void> loadaiImages() async {
-    final ListResult result = await aiRef.listAll();
-    aiRefs = result.items.toList();
-  }
+    final ListResult aiResult = await aiRef.listAll();
+    aiRefs = aiResult.items.toList();
 
-  Future<void> loadillustrationImages() async {
-    final ListResult result = await illustrationRef.listAll();
-    illustrationRefs = result.items.toList();
-  }
+    final ListResult illustrationResult = await illustrationRef.listAll();
+    illustrationRefs = illustrationResult.items.toList();
 
-  Future<void> loadCarsImages() async {
     final ListResult carResult = await carsRef.listAll();
     carsRefs = carResult.items.toList();
-  }
 
-  Future<void> loadAbstractImages() async {
     final ListResult abstractResult = await abstractRef.listAll();
     abstractRefs = abstractResult.items.toList();
+
+    final ListResult fantasyResult = await fantasyRef.listAll();
+    fantasyRefs = fantasyResult.items.toList();
   }
 
-  Future<void> loadfantasyImages() async {
-    final ListResult result = await fantasyRef.listAll();
-    fantasyRefs = result.items.toList();
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: data.length, vsync: this);
+    loadImages();
+  }
+
+  Future<Uint8List> resizeImage(String imageUrl) async {
+    final response = await http.get(Uri.parse(imageUrl));
+    final List<int> originalImage = response.bodyBytes;
+
+    final Uint8List compressedImage = Uint8List.fromList(originalImage);
+
+    return compressedImage;
   }
 
   @override
@@ -305,30 +313,46 @@ class MyHomePageState extends State<MyHomePage>
   }
 
   Widget _buildImageWidget(String imageUrl) {
-    return Builder(builder: (context) {
-      return GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ApplyWallpaperPage(imageUrl: imageUrl),
-            ),
-          );
-        },
-        child: Hero(
-          tag: imageUrl,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: LocationListItem(
-                imageUrl: imageUrl,
-                scrollController: scrollController,
+    return Builder(
+      builder: (context) {
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ApplyWallpaperPage(imageUrl: imageUrl),
               ),
-            ),
+            );
+          },
+          child: FutureBuilder<Uint8List>(
+            future: resizeImage(imageUrl),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Components.buildCircularIndicator();
+              } else if (snapshot.hasError) {
+                return Components.buildErrorWidget();
+              } else if (snapshot.hasData) {
+                return Hero(
+                  tag: imageUrl,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: LocationListItem(
+                        imageBytes:
+                            snapshot.data, // Pass the resized image bytes
+                        scrollController: scrollController, imageUrl: imageUrl,
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                return Container();
+              }
+            },
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }

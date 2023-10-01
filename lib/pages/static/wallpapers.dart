@@ -4,6 +4,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:luca/pages/util/applyWallpaperPage.dart';
 
 import '../util/walls_category.dart';
 
@@ -17,19 +18,6 @@ class Category extends StatefulWidget {
 }
 
 class CategoryState extends State<Category> {
-  final List<String> categories = [
-    'Amoled',
-    'Landscapes',
-    'Cityscapes',
-    'Space',
-    'Stock',
-    'Minimalist',
-    'Nature',
-    'Animals',
-    'Sci-Fi',
-    'Games',
-  ];
-
   final List<String> _amoled = [
     'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Famoled%2F93.jpg?alt=media&token=dd4741da-9f8c-4c03-80b6-b2df77e5de74',
     'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Famoled%2F83.jpg?alt=media&token=52cb7707-0ab0-4961-b3ad-8c79ff5c3b70',
@@ -189,13 +177,90 @@ class CategoryState extends State<Category> {
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 120,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: CachedNetworkImage(
-                                  imageUrl: _amoled[index],
-                                  fit: BoxFit.cover,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ApplyWallpaperPage(
+                                        imageUrl: _amoled[index]),
+                                  ),
+                                );
+                              },
+                              child: SizedBox(
+                                width: 120,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: CachedNetworkImage(
+                                    imageUrl: _amoled[index],
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Nature",
+                          style: GoogleFonts.kanit(
+                            fontSize: 18,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(const NatureWallpaper());
+                          },
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "See All",
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
+                    child: SizedBox(
+                      height: 200,
+                      child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: 8,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ApplyWallpaperPage(
+                                        imageUrl: _nature[index]),
+                                  ),
+                                );
+                              },
+                              child: SizedBox(
+                                width: 120,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: CachedNetworkImage(
+                                    imageUrl: _nature[index],
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -246,67 +311,22 @@ class CategoryState extends State<Category> {
                             padding: const EdgeInsets.all(8.0),
                             child: SizedBox(
                               width: 120,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: CachedNetworkImage(
-                                  imageUrl: _space[index],
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Stock",
-                          style: GoogleFonts.kanit(
-                            fontSize: 18,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Get.to(const StockWallpapers());
-                          },
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "See All",
-                                style: TextStyle(
-                                    decoration: TextDecoration.underline),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
-                    child: SizedBox(
-                      height: 200,
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 8,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 120,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: CachedNetworkImage(
-                                  // imageUrl: _stock[index],
-                                  imageUrl: _space[index],
-                                  fit: BoxFit.cover,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ApplyWallpaperPage(
+                                          imageUrl: _space[index]),
+                                    ),
+                                  );
+                                },
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: CachedNetworkImage(
+                                    imageUrl: _space[index],
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -357,11 +377,22 @@ class CategoryState extends State<Category> {
                             padding: const EdgeInsets.all(8.0),
                             child: SizedBox(
                               width: 120,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: CachedNetworkImage(
-                                  imageUrl: _minimalist[index],
-                                  fit: BoxFit.cover,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ApplyWallpaperPage(
+                                          imageUrl: _minimalist[index]),
+                                    ),
+                                  );
+                                },
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: CachedNetworkImage(
+                                    imageUrl: _minimalist[index],
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -376,14 +407,14 @@ class CategoryState extends State<Category> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Nature",
+                          "Stock",
                           style: GoogleFonts.kanit(
                             fontSize: 18,
                           ),
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(const NatureWallpaper());
+                            Get.to(const StockWallpapers());
                           },
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -412,11 +443,23 @@ class CategoryState extends State<Category> {
                             padding: const EdgeInsets.all(8.0),
                             child: SizedBox(
                               width: 120,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: CachedNetworkImage(
-                                  imageUrl: _nature[index],
-                                  fit: BoxFit.cover,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ApplyWallpaperPage(
+                                          imageUrl: _stock[index]),
+                                    ),
+                                  );
+                                },
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: CachedNetworkImage(
+                                    // imageUrl: _stock[index],
+                                    imageUrl: _space[index],
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -465,13 +508,24 @@ class CategoryState extends State<Category> {
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 120,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: CachedNetworkImage(
-                                  imageUrl: _animals[index],
-                                  fit: BoxFit.cover,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ApplyWallpaperPage(
+                                        imageUrl: _animals[index]),
+                                  ),
+                                );
+                              },
+                              child: SizedBox(
+                                width: 120,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: CachedNetworkImage(
+                                    imageUrl: _animals[index],
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -520,13 +574,24 @@ class CategoryState extends State<Category> {
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 120,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: CachedNetworkImage(
-                                  imageUrl: _scifi[index],
-                                  fit: BoxFit.cover,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ApplyWallpaperPage(
+                                        imageUrl: _scifi[index]),
+                                  ),
+                                );
+                              },
+                              child: SizedBox(
+                                width: 120,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: CachedNetworkImage(
+                                    imageUrl: _scifi[index],
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -575,13 +640,24 @@ class CategoryState extends State<Category> {
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 120,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: CachedNetworkImage(
-                                  imageUrl: _games[index],
-                                  fit: BoxFit.cover,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ApplyWallpaperPage(
+                                        imageUrl: _games[index]),
+                                  ),
+                                );
+                              },
+                              child: SizedBox(
+                                width: 120,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: CachedNetworkImage(
+                                    imageUrl: _games[index],
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -589,6 +665,9 @@ class CategoryState extends State<Category> {
                         },
                       ),
                     ),
+                  ),
+                  const SizedBox(
+                    height: 60,
                   ),
                 ],
               ),

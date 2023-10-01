@@ -92,6 +92,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:luca/pages/dynamic/live_category.dart';
 import 'package:luca/pages/favourite.dart';
 import 'package:luca/pages/homepage.dart';
@@ -110,10 +111,10 @@ class _LucaHomeState extends State<LucaHome>
   late int currentPage;
   late TabController tabController;
   final List<Color> colors = [
-    Colors.yellow,
     Colors.red,
-    Colors.green,
-    Colors.blue,
+    Colors.red,
+    Colors.red,
+    Colors.red,
   ];
 
   @override
@@ -145,6 +146,10 @@ class _LucaHomeState extends State<LucaHome>
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.background;
+    Color primaryColor = Theme.of(context).colorScheme.primary;
+    Color secondaryColor = Theme.of(context).colorScheme.secondary;
+    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     final Color unselectedColor = colors[currentPage].computeLuminance() < 0.5
         ? Colors.black
         : Colors.white;
@@ -157,17 +162,18 @@ class _LucaHomeState extends State<LucaHome>
             controller: tabController,
             indicator: UnderlineTabIndicator(
                 borderSide: BorderSide(
-                    color: currentPage == 0
-                        ? colors[0]
-                        : currentPage == 1
-                            ? colors[1]
-                            : currentPage == 2
-                                ? colors[2]
-                                : currentPage == 3
-                                    ? colors[3]
-                                    : currentPage == 4
-                                        ? colors[4]
-                                        : unselectedColor,
+                    color: primaryColor,
+                    // color: currentPage == 0
+                    //     ? colors[0]
+                    //     : currentPage == 1
+                    //         ? colors[1]
+                    //         : currentPage == 2
+                    //             ? colors[2]
+                    //             : currentPage == 3
+                    //                 ? colors[3]
+                    //                 : currentPage == 4
+                    //                     ? colors[4]
+                    //                     : unselectedColor,
                     width: 4),
                 insets: EdgeInsets.fromLTRB(16, 0, 16, 8)),
             tabs: [
@@ -176,8 +182,9 @@ class _LucaHomeState extends State<LucaHome>
                 width: 40,
                 child: Center(
                     child: Icon(
-                  Icons.home,
-                  color: currentPage == 0 ? colors[0] : unselectedColor,
+                  Iconsax.home_1,
+                  // color: currentPage == 0 ? colors[0] : unselectedColor,
+                  color: primaryColor,
                 )),
               ),
               SizedBox(
@@ -185,8 +192,9 @@ class _LucaHomeState extends State<LucaHome>
                 width: 40,
                 child: Center(
                     child: Icon(
-                  Icons.search,
-                  color: currentPage == 1 ? colors[1] : unselectedColor,
+                  Iconsax.image4,
+                  // color: currentPage == 1 ? colors[1] : unselectedColor,
+                  color: primaryColor,
                 )),
               ),
               SizedBox(
@@ -194,8 +202,9 @@ class _LucaHomeState extends State<LucaHome>
                 width: 40,
                 child: Center(
                     child: Icon(
-                  Icons.favorite,
-                  color: currentPage == 3 ? colors[3] : unselectedColor,
+                  Iconsax.video_circle,
+                  // color: currentPage == 3 ? colors[3] : unselectedColor,
+                  color: primaryColor,
                 )),
               ),
               SizedBox(
@@ -203,8 +212,9 @@ class _LucaHomeState extends State<LucaHome>
                 width: 40,
                 child: Center(
                     child: Icon(
-                  Icons.settings,
-                  color: currentPage == 4 ? colors[4] : unselectedColor,
+                  Iconsax.heart,
+                  // color: currentPage == 4 ? colors[4] : unselectedColor,
+                  color: primaryColor,
                 )),
               ),
             ],
@@ -226,9 +236,10 @@ class _LucaHomeState extends State<LucaHome>
           curve: Curves.decelerate,
           showIcon: true,
           width: MediaQuery.of(context).size.width * 0.8,
-          barColor: colors[currentPage].computeLuminance() > 0.5
-              ? Colors.black
-              : Colors.white,
+          barColor: backgroundColor,
+          // barColor: colors[currentPage].computeLuminance() > 0.5
+          //     ? Colors.black
+          //     : Colors.white,
           start: 2,
           end: 0,
           offset: 10,
@@ -246,9 +257,9 @@ class _LucaHomeState extends State<LucaHome>
             physics: const NeverScrollableScrollPhysics(),
             children: [
               MyHomePage(color: colors[0]),
-              Category( color: colors[1]),
-              LiveWallCategory( color: colors[2]),
-              FavoriteImagesPage( color: colors[3]),
+              Category(color: colors[1]),
+              LiveWallCategory(color: colors[2]),
+              FavoriteImagesPage(color: colors[3]),
             ],
           ),
         ),

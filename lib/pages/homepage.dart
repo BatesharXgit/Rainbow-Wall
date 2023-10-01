@@ -14,7 +14,6 @@ import 'package:luca/pages/util/searchresult.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:luca/pages/settings.dart';
 import 'package:flutter/rendering.dart';
-import 'package:luca/pages/util/splash.dart';
 
 final FirebaseStorage storage = FirebaseStorage.instance;
 
@@ -49,7 +48,6 @@ class MyHomePageState extends State<MyHomePage>
   List<Reference> fantasyRefs = [];
 
   int index = 0;
-  bool _imagesLoaded = false;
 
   final List<String> data = [
     "For You",
@@ -65,9 +63,7 @@ class MyHomePageState extends State<MyHomePage>
     super.initState();
     _tabController = TabController(length: data.length, vsync: this);
     loadImages().then((_) {
-      setState(() {
-        _imagesLoaded = true;
-      });
+      setState(() {});
     });
   }
 
@@ -150,13 +146,12 @@ class MyHomePageState extends State<MyHomePage>
                 _buildAppBar(context),
                 _buildTabBar(),
                 Expanded(
-                  child: _imagesLoaded ? _buildTabViews() : SplashScreen(),
+                  child: _buildTabViews(),
                 ),
               ],
             ),
           ),
         ),
-        if (!_imagesLoaded) SplashScreen(),
       ],
     );
   }

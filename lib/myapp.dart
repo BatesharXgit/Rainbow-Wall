@@ -110,12 +110,12 @@ class _LucaHomeState extends State<LucaHome>
     with SingleTickerProviderStateMixin {
   late int currentPage;
   late TabController tabController;
-  final List<Color> colors = [
-    Colors.red,
-    Colors.red,
-    Colors.red,
-    Colors.red,
-  ];
+  // final List<Color> colors = [
+  //   Colors.red,
+  //   Colors.red,
+  //   Colors.red,
+  //   Colors.red,
+  // ];
 
   @override
   void initState() {
@@ -150,9 +150,9 @@ class _LucaHomeState extends State<LucaHome>
     Color primaryColor = Theme.of(context).colorScheme.primary;
     Color secondaryColor = Theme.of(context).colorScheme.secondary;
     Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
-    final Color unselectedColor = colors[currentPage].computeLuminance() < 0.5
-        ? Colors.black
-        : Colors.white;
+    // final Color unselectedColor = colors[currentPage].computeLuminance() < 0.5
+    //     ? Colors.black
+    //     : Colors.white;
     return SafeArea(
       child: Scaffold(
         appBar: null,
@@ -219,18 +219,8 @@ class _LucaHomeState extends State<LucaHome>
               ),
             ],
           ),
-          fit: StackFit.expand,
-          icon: (width, height) => Center(
-            child: IconButton(
-              padding: EdgeInsets.zero,
-              onPressed: null,
-              icon: Icon(
-                Icons.arrow_upward_rounded,
-                color: unselectedColor,
-                size: width,
-              ),
-            ),
-          ),
+          // fit: StackFit.expand,
+
           borderRadius: BorderRadius.circular(500),
           duration: Duration(milliseconds: 500),
           curve: Curves.decelerate,
@@ -256,10 +246,10 @@ class _LucaHomeState extends State<LucaHome>
             dragStartBehavior: DragStartBehavior.down,
             physics: const NeverScrollableScrollPhysics(),
             children: [
-              MyHomePage(color: colors[0]),
-              Category(color: colors[1]),
-              LiveWallCategory(color: colors[2]),
-              FavoriteImagesPage(color: colors[3]),
+              MyHomePage(),
+              Category(),
+              LiveWallCategory(),
+              FavoriteImagesPage(),
             ],
           ),
         ),

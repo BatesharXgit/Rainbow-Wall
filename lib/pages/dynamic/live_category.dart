@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 class LiveWallCategory extends StatefulWidget {
   const LiveWallCategory({
     Key? key,
-    required Color color,
+  
   }) : super(key: key);
 
   @override

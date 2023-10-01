@@ -27,7 +27,7 @@ final Reference fantasyRef = storage.ref().child('fantasy');
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
     Key? key,
-    required Color color,
+  
   }) : super(key: key);
 
   @override

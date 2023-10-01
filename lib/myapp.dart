@@ -110,12 +110,6 @@ class _LucaHomeState extends State<LucaHome>
     with SingleTickerProviderStateMixin {
   late int currentPage;
   late TabController tabController;
-  // final List<Color> colors = [
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  //   Colors.red,
-  // ];
 
   @override
   void initState() {
@@ -146,112 +140,103 @@ class _LucaHomeState extends State<LucaHome>
 
   @override
   Widget build(BuildContext context) {
-    Color backgroundColor = Theme.of(context).colorScheme.background;
+    Color backgroundColor = Theme.of(context).colorScheme.tertiary;
     Color primaryColor = Theme.of(context).colorScheme.primary;
-    Color secondaryColor = Theme.of(context).colorScheme.secondary;
-    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
+    // Color secondaryColor = Theme.of(context).colorScheme.secondary;
+    // Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     // final Color unselectedColor = colors[currentPage].computeLuminance() < 0.5
     //     ? Colors.black
     //     : Colors.white;
-    return SafeArea(
-      child: Scaffold(
-        appBar: null,
-        body: BottomBar(
-          child: TabBar(
-            indicatorPadding: const EdgeInsets.fromLTRB(6, 0, 6, 0),
-            controller: tabController,
-            indicator: UnderlineTabIndicator(
-                borderSide: BorderSide(
-                    color: primaryColor,
-                    // color: currentPage == 0
-                    //     ? colors[0]
-                    //     : currentPage == 1
-                    //         ? colors[1]
-                    //         : currentPage == 2
-                    //             ? colors[2]
-                    //             : currentPage == 3
-                    //                 ? colors[3]
-                    //                 : currentPage == 4
-                    //                     ? colors[4]
-                    //                     : unselectedColor,
-                    width: 4),
-                insets: EdgeInsets.fromLTRB(16, 0, 16, 8)),
-            tabs: [
-              SizedBox(
-                height: 55,
-                width: 40,
-                child: Center(
-                    child: Icon(
-                  Iconsax.home_1,
-                  // color: currentPage == 0 ? colors[0] : unselectedColor,
+    return Scaffold(
+      appBar: null,
+      body: BottomBar(
+        child: TabBar(
+          indicatorPadding: const EdgeInsets.fromLTRB(6, 0, 6, 0),
+          controller: tabController,
+          indicator: UnderlineTabIndicator(
+              borderSide: BorderSide(
                   color: primaryColor,
-                )),
-              ),
-              SizedBox(
-                height: 55,
-                width: 40,
-                child: Center(
-                    child: Icon(
-                  Iconsax.image4,
-                  // color: currentPage == 1 ? colors[1] : unselectedColor,
-                  color: primaryColor,
-                )),
-              ),
-              SizedBox(
-                height: 55,
-                width: 40,
-                child: Center(
-                    child: Icon(
-                  Iconsax.video_circle,
-                  // color: currentPage == 3 ? colors[3] : unselectedColor,
-                  color: primaryColor,
-                )),
-              ),
-              SizedBox(
-                height: 55,
-                width: 40,
-                child: Center(
-                    child: Icon(
-                  Iconsax.heart,
-                  // color: currentPage == 4 ? colors[4] : unselectedColor,
-                  color: primaryColor,
-                )),
-              ),
-            ],
-          ),
-          // fit: StackFit.expand,
+                  // color: currentPage == 0
+                  //     ? colors[0]
+                  //     : currentPage == 1
+                  //         ? colors[1]
+                  //         : currentPage == 2
+                  //             ? colors[2]
+                  //             : currentPage == 3
+                  //                 ? colors[3]
+                  //                 : currentPage == 4
+                  //                     ? colors[4]
+                  //                     : unselectedColor,
+                  width: 4),
+              insets: EdgeInsets.fromLTRB(16, 0, 16, 8)),
+          tabs: [
+            SizedBox(
+              height: 55,
+              width: 40,
+              child: Center(
+                  child: Icon(
+                Iconsax.home_1,
+                // color: currentPage == 0 ? colors[0] : unselectedColor,
+                color: primaryColor,
+              )),
+            ),
+            SizedBox(
+              height: 55,
+              width: 40,
+              child: Center(
+                  child: Icon(
+                Iconsax.image4,
+                // color: currentPage == 1 ? colors[1] : unselectedColor,
+                color: primaryColor,
+              )),
+            ),
+            SizedBox(
+              height: 55,
+              width: 40,
+              child: Center(
+                  child: Icon(
+                Iconsax.video_circle,
+                // color: currentPage == 3 ? colors[3] : unselectedColor,
+                color: primaryColor,
+              )),
+            ),
+            SizedBox(
+              height: 55,
+              width: 40,
+              child: Center(
+                  child: Icon(
+                Iconsax.heart,
+                // color: currentPage == 4 ? colors[4] : unselectedColor,
+                color: primaryColor,
+              )),
+            ),
+          ],
+        ),
+        // fit: StackFit.expand,
 
-          borderRadius: BorderRadius.circular(500),
-          duration: Duration(milliseconds: 500),
-          curve: Curves.decelerate,
-          showIcon: true,
-          width: MediaQuery.of(context).size.width * 0.8,
-          barColor: backgroundColor,
-          // barColor: colors[currentPage].computeLuminance() > 0.5
-          //     ? Colors.black
-          //     : Colors.white,
-          start: 2,
-          end: 0,
-          offset: 10,
-          barAlignment: Alignment.bottomCenter,
-          iconHeight: 35,
-          iconWidth: 35,
-          reverse: false,
-          hideOnScroll: true,
-          scrollOpposite: false,
-          onBottomBarHidden: () {},
-          onBottomBarShown: () {},
-          body: (context, controller) => TabBarView(
-            controller: tabController,
-            dragStartBehavior: DragStartBehavior.down,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              MyHomePage(),
-              Category(),
-              LiveWallCategory(),
-              FavoriteImagesPage(),
-            ],
-          ),
+        borderRadius: BorderRadius.circular(500),
+        duration: Duration(milliseconds: 500),
+        curve: Curves.decelerate,
+        showIcon: true,
+        width: MediaQuery.of(context).size.width * 0.8,
+        barColor: backgroundColor,
+        // barColor: colors[currentPage].computeLuminance() > 0.5
+        //     ? Colors.black
+        //     : Colors.white,
+        iconHeight: 35,
+        iconWidth: 35,
+        reverse: false,
+        hideOnScroll: false,
+        body: (context, controller) => TabBarView(
+          controller: tabController,
+          dragStartBehavior: DragStartBehavior.down,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
+            MyHomePage(),
+            Category(),
+            LiveWallCategory(),
+            FavoriteImagesPage(),
+          ],
         ),
       ),
     );

@@ -78,49 +78,31 @@ class MyHomePageState extends State<MyHomePage>
   Future<void> loadWallpaperImages() async {
     final ListResult result = await wallpaperRef.listAll();
     wallpaperRefs = result.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   Future<void> loadaiImages() async {
     final ListResult result = await aiRef.listAll();
     aiRefs = result.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   Future<void> loadillustrationImages() async {
     final ListResult result = await illustrationRef.listAll();
     illustrationRefs = result.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   Future<void> loadCarsImages() async {
     final ListResult carResult = await carsRef.listAll();
     carsRefs = carResult.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   Future<void> loadAbstractImages() async {
     final ListResult abstractResult = await abstractRef.listAll();
     abstractRefs = abstractResult.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   Future<void> loadfantasyImages() async {
     final ListResult result = await fantasyRef.listAll();
     fantasyRefs = result.items.toList();
-    if (mounted) {
-      setState(() {});
-    }
   }
 
   @override

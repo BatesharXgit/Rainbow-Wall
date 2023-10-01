@@ -9,6 +9,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:luca/pages/util/components.dart';
 import 'package:luca/pages/util/applyWallpaperPage.dart';
 import 'package:luca/pages/util/location_list.dart';
+import 'package:luca/pages/util/notify/notify.dart';
 import 'package:luca/pages/util/searchresult.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:luca/pages/settings.dart';
@@ -147,13 +148,16 @@ class MyHomePageState extends State<MyHomePage>
                 _buildAppBar(context),
                 _buildTabBar(),
                 Expanded(
-                  child: _imagesLoaded ? _buildTabViews() : Container(),
-                ),
+                    child:
+                        //  _imagesLoaded ?
+                        _buildTabViews()
+                    //  : SplashScreen(),
+                    ),
               ],
             ),
           ),
         ),
-        if (!_imagesLoaded) SplashScreen(),
+        // if (!_imagesLoaded) SplashScreen(),
       ],
     );
   }
@@ -192,11 +196,11 @@ class MyHomePageState extends State<MyHomePage>
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
-                onPressed: () {},
-                // onPressed: () => Get.to(
-                //   NotificationsPage(),
-                //   transition: Transition.fadeIn,
-                // ),
+                // onPressed: () {},
+                onPressed: () => Get.to(
+                  NotificationsPage(),
+                  transition: Transition.fadeIn,
+                ),
                 icon: Icon(
                   Iconsax.notification,
                   color: Theme.of(context).iconTheme.color,

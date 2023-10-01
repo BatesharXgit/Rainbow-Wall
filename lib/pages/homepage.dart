@@ -1,11 +1,15 @@
 import 'dart:ui';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
+import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:luca/pages/dynamic/live_category.dart';
+import 'package:luca/pages/favourite.dart';
+import 'package:luca/pages/static/wallpapers.dart';
 import 'package:luca/pages/util/components.dart';
 import 'package:luca/pages/util/applyWallpaperPage.dart';
 import 'package:luca/pages/util/location_list.dart';
@@ -26,9 +30,12 @@ final Reference illustrationRef = storage.ref().child('illustration');
 final Reference fantasyRef = storage.ref().child('fantasy');
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  final ScrollController controller;
+  const MyHomePage({
+    Key? key,
+    required this.controller,
+    required Color color,
+  }) : super(key: key);
 
   @override
   State<MyHomePage> createState() => MyHomePageState();
@@ -148,16 +155,13 @@ class MyHomePageState extends State<MyHomePage>
                 _buildAppBar(context),
                 _buildTabBar(),
                 Expanded(
-                    child:
-                        //  _imagesLoaded ?
-                        _buildTabViews()
-                    //  : SplashScreen(),
-                    ),
+                  child: _imagesLoaded ? _buildTabViews() : SplashScreen(),
+                ),
               ],
             ),
           ),
         ),
-        // if (!_imagesLoaded) SplashScreen(),
+        if (!_imagesLoaded) SplashScreen(),
       ],
     );
   }
@@ -287,7 +291,7 @@ class MyHomePageState extends State<MyHomePage>
 
           return GridView.builder(
             clipBehavior: Clip.none,
-            controller: ScrollController(),
+            controller: widget.controller,
             physics: ClampingScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

@@ -58,6 +58,7 @@ dependencies:
   video_thumbnail: ^0.5.3
   flutter_local_notifications: ^15.1.1
   firebase_messaging: ^14.6.8
+  flutter_floating_bottom_bar: ^1.2.0
 
 dev_dependencies:
   flutter_test:

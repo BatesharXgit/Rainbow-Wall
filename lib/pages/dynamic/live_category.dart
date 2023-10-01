@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:luca/pages/dynamic/live.dart';
 
 class LiveWallCategory extends StatefulWidget {
-  const LiveWallCategory({super.key});
+  final ScrollController controller;
+
+  const LiveWallCategory({
+    Key? key,
+    required this.controller,
+    required Color color,
+  }) : super(key: key);
 
   @override
   State<LiveWallCategory> createState() => _LiveWallCategoryState();
@@ -39,7 +43,7 @@ class _LiveWallCategoryState extends State<LiveWallCategory> {
     'https://i.pinimg.com/564x/9a/d8/c1/9ad8c1eb0e8a829768053011cc191723.jpg',
     'https://i.pinimg.com/564x/5e/54/54/5e5454fb45337d754aa77c5d3807b3e1.jpg',
     'https://i.pinimg.com/564x/1e/a6/2e/1ea62ec38bb580fd47f0caa9e8b9afef.jpg',
-    'https://i.pinimg.com/564x/68/04/a6/6804a66bfb44a32ffb1a4a948971d462.jpg'
+    'https://i.pinimg.com/564x/68/04/a6/6804a66bfb44a32ffb1a4a948971d462.jpg',
   ];
 
   @override
@@ -67,6 +71,7 @@ class _LiveWallCategoryState extends State<LiveWallCategory> {
           children: [
             Expanded(
               child: ListView.builder(
+                controller: widget.controller,
                 itemCount: categories.length,
                 itemBuilder: (BuildContext context, int index) {
                   return AnimationConfiguration.staggeredList(
@@ -80,7 +85,7 @@ class _LiveWallCategoryState extends State<LiveWallCategory> {
                           child: Stack(
                             children: [
                               GestureDetector(
-                                onTap: () => Get.to(CarsWallpaper()),
+                                onTap: () {},
                                 child: Container(
                                   height: 250,
                                   decoration: BoxDecoration(
@@ -88,8 +93,9 @@ class _LiveWallCategoryState extends State<LiveWallCategory> {
                                         const Color.fromARGB(255, 24, 24, 24),
                                     borderRadius: BorderRadius.circular(20),
                                     image: DecorationImage(
-                                        image: NetworkImage(images[index]),
-                                        fit: BoxFit.cover),
+                                      image: NetworkImage(images[index]),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -103,15 +109,17 @@ class _LiveWallCategoryState extends State<LiveWallCategory> {
                                   width: MediaQuery.of(context).size.width,
                                   height: 40,
                                   decoration: BoxDecoration(
-                                      color: backgroundColor,
-                                      borderRadius:
-                                          BorderRadius.circular(10.0)),
+                                    color: backgroundColor,
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
                                   child: Align(
                                     alignment: Alignment.center,
                                     child: Text(
                                       categories[index],
                                       style: GoogleFonts.kanit(
-                                          color: primaryColor, fontSize: 22),
+                                        color: primaryColor,
+                                        fontSize: 22,
+                                      ),
                                     ),
                                   ),
                                 ),

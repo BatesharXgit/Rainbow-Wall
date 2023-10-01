@@ -23,9 +23,9 @@ final Reference scifiRef = storage.ref().child('wallpaper');
 final Reference gamesRef = storage.ref().child('wallpaper');
 
 class Category extends StatefulWidget {
-  const Category({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const Category({
+    Key? key, required ScrollController controller, required Color color,
+  }) : super(key: key);
 
   @override
   State<Category> createState() => CategoryState();

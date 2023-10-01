@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:luca/authentication/auth%20pages/login_page.dart';
 import 'package:luca/myapp.dart';
+import 'package:luca/pages/homepage.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -13,8 +14,8 @@ class AuthPage extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return const LucaHome(
-                title: 'Luca',
+              return LucaHome(
+                title: '',
               );
             } else {
               return LoginPage();

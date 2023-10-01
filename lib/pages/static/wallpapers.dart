@@ -67,6 +67,20 @@ class CategoryState extends State<Category> {
     'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Famoled%2F90.jpg?alt=media&token=5bac6a75-a3f0-4ce4-8f69-0b127c650d46'
   ];
 
+  final List<String> _space = [];
+
+  final List<String> _stock = [];
+
+  final List<String> _minimalist = [];
+
+  final List<String> _nature = [];
+
+  final List<String> _animals = [];
+
+  final List<String> _scifi = [];
+
+  final List<String> _games = [];
+
   @override
   void initState() {
     super.initState();
@@ -232,7 +246,7 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, _amoled.length),
+                        itemCount: 8,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return Padding(
@@ -287,7 +301,7 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, _amoled.length),
+                        itemCount: 8,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return Padding(
@@ -342,7 +356,7 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, _amoled.length),
+                        itemCount: 8,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return Padding(
@@ -352,7 +366,7 @@ class CategoryState extends State<Category> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: CachedNetworkImage(
-                                  imageUrl: _amoled[index],
+                                  imageUrl: _space[index],
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -397,7 +411,7 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, _amoled.length),
+                        itemCount: 8,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return Padding(
@@ -407,7 +421,7 @@ class CategoryState extends State<Category> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: CachedNetworkImage(
-                                  imageUrl: _amoled[index],
+                                  imageUrl: _minimalist[index],
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -452,7 +466,7 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, _amoled.length),
+                        itemCount: 8,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return Padding(
@@ -462,7 +476,7 @@ class CategoryState extends State<Category> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: CachedNetworkImage(
-                                  imageUrl: _amoled[index],
+                                  imageUrl: _nature[index],
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -507,7 +521,7 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, _amoled.length),
+                        itemCount: 8,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return Padding(
@@ -517,7 +531,7 @@ class CategoryState extends State<Category> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: CachedNetworkImage(
-                                  imageUrl: _amoled[index],
+                                  imageUrl: _animals[index],
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -562,7 +576,7 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, _amoled.length),
+                        itemCount: 8,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return Padding(
@@ -572,7 +586,7 @@ class CategoryState extends State<Category> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: CachedNetworkImage(
-                                  imageUrl: _amoled[index],
+                                  imageUrl: _scifi[index],
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -617,7 +631,7 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, _amoled.length),
+                        itemCount: 8,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return Padding(
@@ -627,7 +641,7 @@ class CategoryState extends State<Category> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: CachedNetworkImage(
-                                  imageUrl: _amoled[index],
+                                  imageUrl: _games[index],
                                   fit: BoxFit.cover,
                                 ),
                               ),

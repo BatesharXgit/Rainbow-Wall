@@ -1,22 +1,14 @@
-import 'dart:ui';
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:luca/pages/util/components.dart';
-import 'package:luca/pages/util/applyWallpaperPage.dart';
-import 'package:luca/pages/util/location_list.dart';
 import 'package:luca/pages/util/notify/notify.dart';
 import 'package:luca/pages/util/searchresult.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:luca/pages/settings.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'dart:typed_data';
-import 'package:http/http.dart' as http;
 
 final FirebaseStorage storage = FirebaseStorage.instance;
 
@@ -60,22 +52,11 @@ class MyHomePageState extends State<MyHomePage>
     "Fantasy",
   ];
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _tabController = TabController(length: data.length, vsync: this);
-  //   loadWallpaperImages();
-  //   loadCarsImages();
-  //   loadAbstractImages();
-  //   loadaiImages();
-  //   loadfantasyImages();
-  // }
-
   @override
-  void dispose() {
-    scrollController.dispose();
-    _tabController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 6, vsync: this);
+    loadImages();
   }
 
   Future<void> loadImages() async {
@@ -98,19 +79,11 @@ class MyHomePageState extends State<MyHomePage>
     fantasyRefs = fantasyResult.items.toList();
   }
 
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: data.length, vsync: this);
-    loadImages();
-  }
-
-  Future<Uint8List> resizeImage(String imageUrl) async {
-    final response = await http.get(Uri.parse(imageUrl));
-    final List<int> originalImage = response.bodyBytes;
-
-    final Uint8List compressedImage = Uint8List.fromList(originalImage);
-
-    return compressedImage;
+  @override
+  void dispose() {
+    scrollController.dispose();
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override
@@ -173,7 +146,7 @@ class MyHomePageState extends State<MyHomePage>
               IconButton(
                 // onPressed: () {},
                 onPressed: () => Get.to(
-                  NotificationsPage(),
+                  const NotificationsPage(),
                   transition: Transition.fadeIn,
                 ),
                 icon: Icon(
@@ -202,7 +175,7 @@ class MyHomePageState extends State<MyHomePage>
                 ),
                 color: Theme.of(context).iconTheme.color,
                 onPressed: () =>
-                    Get.to(SettingsPage(), transition: Transition.fadeIn),
+                    Get.to(const SettingsPage(), transition: Transition.fadeIn),
               ),
             ],
           ),
@@ -217,7 +190,7 @@ class MyHomePageState extends State<MyHomePage>
       child: TabBar(
         physics: const BouncingScrollPhysics(),
         controller: _tabController,
-        indicator: BoxDecoration(
+        indicator: const BoxDecoration(
           color: Colors.transparent,
           border:
               Border(bottom: BorderSide(color: Colors.transparent, width: 0)),
@@ -240,14 +213,6 @@ class MyHomePageState extends State<MyHomePage>
     );
   }
 
-  Widget _buildLoadingWidget() {
-    return Center(
-      child: CircularProgressIndicator(
-        valueColor: AlwaysStoppedAnimation<Color>(const Color(0xB700FF00)),
-        backgroundColor: Colors.black,
-      ),
-    );
-  }
 
   Widget _buildImageGridFromRef(Reference imageRef) {
     return FutureBuilder<ListResult>(
@@ -263,9 +228,8 @@ class MyHomePageState extends State<MyHomePage>
           return GridView.builder(
             clipBehavior: Clip.none,
             controller: ScrollController(),
-            // controller: widget.controller,
-            physics: ClampingScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            physics: const ClampingScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.75,
             ),
@@ -289,7 +253,7 @@ class MyHomePageState extends State<MyHomePage>
             },
           );
         } else {
-          return Center(child: Text('No images available'));
+          return const Center(child: Text('No images available'));
         }
       },
     );
@@ -312,47 +276,4 @@ class MyHomePageState extends State<MyHomePage>
     );
   }
 
-  Widget _buildImageWidget(String imageUrl) {
-    return Builder(
-      builder: (context) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ApplyWallpaperPage(imageUrl: imageUrl),
-              ),
-            );
-          },
-          child: FutureBuilder<Uint8List>(
-            future: resizeImage(imageUrl),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Components.buildCircularIndicator();
-              } else if (snapshot.hasError) {
-                return Components.buildErrorWidget();
-              } else if (snapshot.hasData) {
-                return Hero(
-                  tag: imageUrl,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: LocationListItem(
-                        imageBytes:
-                            snapshot.data, // Pass the resized image bytes
-                        scrollController: scrollController, imageUrl: imageUrl,
-                      ),
-                    ),
-                  ),
-                );
-              } else {
-                return Container();
-              }
-            },
-          ),
-        );
-      },
-    );
-  }
 }

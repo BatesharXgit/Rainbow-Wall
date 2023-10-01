@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+// ignore: depend_on_referenced_packages
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
@@ -272,14 +273,14 @@ class _ApplyWallpaperPageState extends State<ApplyWallpaperPage> {
       context: context,
       builder: (BuildContext context) {
         return AnimatedOpacity(
-          duration: Duration(milliseconds: 200),
+          duration: const Duration(milliseconds: 200),
           opacity: isWidgetsVisible ? 1.0 : 0.0,
           child: Dialog(
             backgroundColor: Colors.transparent,
             child: BackdropFilter(
               filter: ui.ImageFilter.blur(sigmaX: 15, sigmaY: 15),
               child: AnimatedOpacity(
-                duration: Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 200),
                 opacity: isWidgetsVisible ? 1.0 : 0.0,
                 child: Align(
                   alignment: Alignment.center,
@@ -436,7 +437,7 @@ class _ApplyWallpaperPageState extends State<ApplyWallpaperPage> {
                 ),
               ),
               AnimatedOpacity(
-                duration: Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 500),
                 opacity: isWidgetsVisible ? 1.0 : 0.0,
                 child: Align(
                   alignment: Alignment.topRight,
@@ -476,7 +477,7 @@ class _ApplyWallpaperPageState extends State<ApplyWallpaperPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         AnimatedOpacity(
-                          duration: Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 500),
                           opacity: isWidgetsVisible ? 1.0 : 0.0,
                           child: Container(
                             decoration: BoxDecoration(
@@ -511,7 +512,7 @@ class _ApplyWallpaperPageState extends State<ApplyWallpaperPage> {
                           ),
                         ),
                         AnimatedOpacity(
-                          duration: Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 500),
                           opacity: isWidgetsVisible ? 1.0 : 0.0,
                           child: Container(
                             decoration: BoxDecoration(
@@ -529,7 +530,7 @@ class _ApplyWallpaperPageState extends State<ApplyWallpaperPage> {
                           ),
                         ),
                         AnimatedOpacity(
-                          duration: Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 500),
                           opacity: isWidgetsVisible ? 1.0 : 0.0,
                           child: Align(
                             alignment: Alignment.center,

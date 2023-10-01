@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/foundation.dart';
 
 class FavoriteImagesProvider extends ChangeNotifier {
-  SharedPreferences _prefs;
+  final SharedPreferences _prefs;
   List<String> favoriteImages = [];
 
   FavoriteImagesProvider(this._prefs) {

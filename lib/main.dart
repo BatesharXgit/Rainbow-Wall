@@ -25,7 +25,7 @@ Future<void> main() async {
   runApp(
     ChangeNotifierProvider(
       create: (context) => FavoriteImagesProvider(prefs),
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -36,11 +36,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
+      // debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.system,
       theme: lightTheme,
       darkTheme: darkTheme,
-      home: AuthPage(),
+      home: const AuthPage(),
       navigatorKey: navigatorKey,
       routes: {
         'notification_screen': (context) => const NotificationsPage(),

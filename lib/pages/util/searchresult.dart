@@ -3,13 +3,16 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:async_wallpaper/async_wallpaper.dart';
 import 'package:flutter/services.dart';
+// ignore: depend_on_referenced_packages
 import 'package:fluttertoast/fluttertoast.dart';
+// ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+// ignore: constant_identifier_names
 const String API_KEY =
     'tLLFbgWVeyvt2Onc1QYv0R1BZ3IfLH7iT7zduYlsHkDyB8eSpddwR2th';
 
@@ -24,7 +27,7 @@ class SearchWallpaper extends StatefulWidget {
 
 class SearchWallpaperState extends State<SearchWallpaper> {
   List<dynamic> _images = [];
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   bool _isLoading = false;
 
   @override
@@ -51,7 +54,6 @@ class SearchWallpaperState extends State<SearchWallpaper> {
         _isLoading = false;
       });
     } else {
-      print('Failed to load images');
       setState(() {
         _isLoading = false;
       });
@@ -69,8 +71,6 @@ class SearchWallpaperState extends State<SearchWallpaper> {
   Widget build(BuildContext context) {
     Color backgroundColor = Theme.of(context).colorScheme.background;
     Color primaryColor = Theme.of(context).colorScheme.primary;
-    Color secondaryColor = Theme.of(context).colorScheme.secondary;
-    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       appBar: null,
       backgroundColor: backgroundColor,
@@ -88,7 +88,7 @@ class SearchWallpaperState extends State<SearchWallpaper> {
               ),
               Expanded(
                 child: _isLoading
-                    ? Center(
+                    ? const Center(
                         child: CircularProgressIndicator(),
                       )
                     : _images.isEmpty
@@ -130,7 +130,7 @@ class SearchWallpaperState extends State<SearchWallpaper> {
                                         imageUrl: mediumImageUrl,
                                         fit: BoxFit.cover,
                                         errorWidget: (context, url, error) =>
-                                            Icon(Icons.error),
+                                            const Icon(Icons.error),
                                       ),
                                     ),
                                   ),
@@ -211,7 +211,7 @@ class SearchWallpaperState extends State<SearchWallpaper> {
     if (_debounceTimer != null && _debounceTimer!.isActive) {
       _debounceTimer!.cancel();
     }
-    _debounceTimer = Timer(Duration(milliseconds: 500), () {
+    _debounceTimer = Timer(const Duration(milliseconds: 500), () {
       _searchImages(query);
     });
   }
@@ -221,8 +221,8 @@ class FullScreenImage extends StatelessWidget {
   final String mediumImageUrl;
   final String originalImageUrl;
 
-  FullScreenImage(
-      {required this.mediumImageUrl, required this.originalImageUrl});
+  const FullScreenImage(
+      {super.key, required this.mediumImageUrl, required this.originalImageUrl});
   Future<void> applyHomescreen(BuildContext context) async {
     try {
       bool success = await AsyncWallpaper.setWallpaper(
@@ -330,8 +330,6 @@ class FullScreenImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color primaryColor = Theme.of(context).colorScheme.primary;
-    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     return Center(
       child: Stack(
         children: [

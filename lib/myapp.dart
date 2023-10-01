@@ -103,6 +103,7 @@ class LucaHome extends StatefulWidget {
   final String title;
 
   @override
+  // ignore: library_private_types_in_public_api
   _LucaHomeState createState() => _LucaHomeState();
 }
 
@@ -150,6 +151,30 @@ class _LucaHomeState extends State<LucaHome>
     return Scaffold(
       appBar: null,
       body: BottomBar(
+        borderRadius: BorderRadius.circular(500),
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.decelerate,
+        showIcon: true,
+        width: MediaQuery.of(context).size.width * 0.8,
+        barColor: backgroundColor,
+        // barColor: colors[currentPage].computeLuminance() > 0.5
+        //     ? Colors.black
+        //     : Colors.white,
+        iconHeight: 35,
+        iconWidth: 35,
+        reverse: false,
+        hideOnScroll: false,
+        body: (context, controller) => TabBarView(
+          controller: tabController,
+          dragStartBehavior: DragStartBehavior.down,
+          physics: const NeverScrollableScrollPhysics(),
+          children: const [
+            MyHomePage(),
+            Category(),
+            LiveWallCategory(),
+            FavoriteImagesPage(),
+          ],
+        ),
         child: TabBar(
           indicatorPadding: const EdgeInsets.fromLTRB(6, 0, 6, 0),
           controller: tabController,
@@ -168,7 +193,7 @@ class _LucaHomeState extends State<LucaHome>
                   //                     ? colors[4]
                   //                     : unselectedColor,
                   width: 4),
-              insets: EdgeInsets.fromLTRB(16, 0, 16, 8)),
+              insets: const EdgeInsets.fromLTRB(16, 0, 16, 8)),
           tabs: [
             SizedBox(
               height: 55,
@@ -210,32 +235,6 @@ class _LucaHomeState extends State<LucaHome>
                 color: primaryColor,
               )),
             ),
-          ],
-        ),
-        // fit: StackFit.expand,
-
-        borderRadius: BorderRadius.circular(500),
-        duration: Duration(milliseconds: 500),
-        curve: Curves.decelerate,
-        showIcon: true,
-        width: MediaQuery.of(context).size.width * 0.8,
-        barColor: backgroundColor,
-        // barColor: colors[currentPage].computeLuminance() > 0.5
-        //     ? Colors.black
-        //     : Colors.white,
-        iconHeight: 35,
-        iconWidth: 35,
-        reverse: false,
-        hideOnScroll: false,
-        body: (context, controller) => TabBarView(
-          controller: tabController,
-          dragStartBehavior: DragStartBehavior.down,
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            MyHomePage(),
-            Category(),
-            LiveWallCategory(),
-            FavoriteImagesPage(),
           ],
         ),
       ),

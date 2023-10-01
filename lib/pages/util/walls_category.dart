@@ -4,14 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:luca/pages/util/components.dart';
 
 final FirebaseStorage storage = FirebaseStorage.instance;
-final Reference amoledRef = storage.ref().child('wallpaper');
-final Reference spaceRef = storage.ref().child('cars');
-final Reference stockRef = storage.ref().child('illustration');
-final Reference minimalistRef = storage.ref().child('abstract');
-final Reference natureRef = storage.ref().child('wallpaper');
-final Reference animalsRef = storage.ref().child('wallpaper');
-final Reference scifiRef = storage.ref().child('wallpaper');
-final Reference gamesRef = storage.ref().child('wallpaper');
+final Reference amoledRef = storage.ref().child('category/amoled');
+final Reference spaceRef = storage.ref().child('category/space');
+final Reference stockRef = storage.ref().child('category/stock');
+final Reference minimalistRef = storage.ref().child('category/minimalist');
+final Reference natureRef = storage.ref().child('category/nature');
+final Reference animalsRef = storage.ref().child('category/animals');
+final Reference scifiRef = storage.ref().child('category/scifi');
+final Reference gamesRef = storage.ref().child('category/games');
 
 ScrollController scrollController = ScrollController();
 
@@ -77,8 +77,9 @@ class _AmoledWallpaperState extends State<AmoledWallpaper> {
                     List<Reference> imageRefs = snapshot.data!.items;
 
                     return GridView.builder(
-                      physics: BouncingScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 0.75,
                       ),
@@ -104,7 +105,7 @@ class _AmoledWallpaperState extends State<AmoledWallpaper> {
                       },
                     );
                   } else {
-                    return Center(child: Text('No images available'));
+                    return const Center(child: Text('No images available'));
                   }
                 },
               ),
@@ -177,8 +178,9 @@ class _SpaceWallpaperState extends State<SpaceWallpaper> {
                     List<Reference> imageRefs = snapshot.data!.items;
 
                     return GridView.builder(
-                      physics: BouncingScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 0.75,
                       ),
@@ -204,7 +206,7 @@ class _SpaceWallpaperState extends State<SpaceWallpaper> {
                       },
                     );
                   } else {
-                    return Center(child: Text('No images available'));
+                    return const Center(child: Text('No images available'));
                   }
                 },
               ),
@@ -278,8 +280,9 @@ class _StockWallpapersState extends State<StockWallpapers> {
                     List<Reference> imageRefs = snapshot.data!.items;
 
                     return GridView.builder(
-                      physics: BouncingScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 0.75,
                       ),
@@ -305,7 +308,7 @@ class _StockWallpapersState extends State<StockWallpapers> {
                       },
                     );
                   } else {
-                    return Center(child: Text('No images available'));
+                    return const Center(child: Text('No images available'));
                   }
                 },
               ),
@@ -378,8 +381,9 @@ class _MinimalistWallpaperState extends State<MinimalistWallpaper> {
                     List<Reference> imageRefs = snapshot.data!.items;
 
                     return GridView.builder(
-                      physics: BouncingScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 0.75,
                       ),
@@ -405,7 +409,7 @@ class _MinimalistWallpaperState extends State<MinimalistWallpaper> {
                       },
                     );
                   } else {
-                    return Center(child: Text('No images available'));
+                    return const Center(child: Text('No images available'));
                   }
                 },
               ),
@@ -479,8 +483,9 @@ class _NatureWallpaperState extends State<NatureWallpaper> {
                     List<Reference> imageRefs = snapshot.data!.items;
 
                     return GridView.builder(
-                      physics: BouncingScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 0.75,
                       ),
@@ -506,7 +511,7 @@ class _NatureWallpaperState extends State<NatureWallpaper> {
                       },
                     );
                   } else {
-                    return Center(child: Text('No images available'));
+                    return const Center(child: Text('No images available'));
                   }
                 },
               ),
@@ -581,8 +586,9 @@ class _AnimalsWallpaperState extends State<AnimalsWallpaper> {
                     List<Reference> imageRefs = snapshot.data!.items;
 
                     return GridView.builder(
-                      physics: BouncingScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 0.75,
                       ),
@@ -608,7 +614,7 @@ class _AnimalsWallpaperState extends State<AnimalsWallpaper> {
                       },
                     );
                   } else {
-                    return Center(child: Text('No images available'));
+                    return const Center(child: Text('No images available'));
                   }
                 },
               ),
@@ -682,8 +688,9 @@ class _ScifiWallpaperState extends State<ScifiWallpaper> {
                     List<Reference> imageRefs = snapshot.data!.items;
 
                     return GridView.builder(
-                      physics: BouncingScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 0.75,
                       ),
@@ -709,7 +716,7 @@ class _ScifiWallpaperState extends State<ScifiWallpaper> {
                       },
                     );
                   } else {
-                    return Center(child: Text('No images available'));
+                    return const Center(child: Text('No images available'));
                   }
                 },
               ),
@@ -782,8 +789,9 @@ class _GamesWallpaperState extends State<GamesWallpaper> {
                     List<Reference> imageRefs = snapshot.data!.items;
 
                     return GridView.builder(
-                      physics: BouncingScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 0.75,
                       ),
@@ -809,7 +817,7 @@ class _GamesWallpaperState extends State<GamesWallpaper> {
                       },
                     );
                   } else {
-                    return Center(child: Text('No images available'));
+                    return const Center(child: Text('No images available'));
                   }
                 },
               ),

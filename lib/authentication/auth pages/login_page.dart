@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:luca/components/square_tile.dart';
@@ -27,12 +26,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF131321),
+      backgroundColor: const Color(0xFF131321),
       body: SafeArea(
         child: Stack(
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('lib/images/bg.jpg'),
                   fit: BoxFit.cover,
@@ -57,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: Image.asset('lib/images/luca.png'),
                     ),
                   ),
-                  Center(
+                  const Center(
                     child: Text(
                       'LUCA',
                       style: TextStyle(
@@ -107,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       GestureDetector(
                         onTap: () {},
-                        child: Text(
+                        child: const Text(
                           'Privacy Policy',
                           style: TextStyle(
                             decoration: TextDecoration.underline,

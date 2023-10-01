@@ -23,7 +23,7 @@ class FavoriteImagesPage extends StatelessWidget {
             onPressed: () {
               _showClearFavoritesConfirmationDialog(context);
             },
-            icon: Icon(Iconsax.trash),
+            icon: const Icon(Iconsax.trash),
           )
         ],
         elevation: 0,
@@ -43,9 +43,8 @@ class FavoriteImagesPage extends StatelessWidget {
         child: Consumer<FavoriteImagesProvider>(
           builder: (context, provider, child) {
             final favoriteImages = provider.favoriteImages;
-            print('Favorite Images: $favoriteImages');
             return GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3, childAspectRatio: 0.65),
               itemCount: favoriteImages.length,
               itemBuilder: (context, index) {
@@ -83,15 +82,15 @@ class FavoriteImagesPage extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Clear Favorites?'),
+          title: const Text('Clear Favorites?'),
           content:
-              Text('Are you sure you want to clear all your favorite images?'),
+              const Text('Are you sure you want to clear all your favorite images?'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
@@ -100,7 +99,7 @@ class FavoriteImagesPage extends StatelessWidget {
                     .clearFavorites();
                 Navigator.of(context).pop();
               },
-              child: Text(
+              child: const Text(
                 'Clear',
                 style: TextStyle(color: Colors.red),
               ),

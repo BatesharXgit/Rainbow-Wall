@@ -19,7 +19,7 @@ class SquareTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30.0),
-          color: Color(0xFFE6EDFF),
+          color: const Color(0xFFE6EDFF),
         ),
         child: Row(
           children: [
@@ -27,10 +27,10 @@ class SquareTile extends StatelessWidget {
               imagePath,
               height: 30,
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
               text,
-              style: GoogleFonts.kanit(fontSize: 20, color: Color(0xFF1E1E2A)),
+              style: GoogleFonts.kanit(fontSize: 20, color: const Color(0xFF1E1E2A)),
             ),
           ],
         ),

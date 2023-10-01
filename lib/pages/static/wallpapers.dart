@@ -176,7 +176,7 @@ class CategoryState extends State<Category> {
       body: SafeArea(
         child: AnimationLimiter(
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Column(
               children: AnimationConfiguration.toStaggeredList(
                 duration: const Duration(milliseconds: 375),
@@ -200,9 +200,9 @@ class CategoryState extends State<Category> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(AmoledWallpaper());
+                            Get.to(const AmoledWallpaper());
                           },
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
@@ -221,7 +221,7 @@ class CategoryState extends State<Category> {
                     child: SizedBox(
                       height: 200,
                       child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemCount: min(8, amoledRefs.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
@@ -235,7 +235,7 @@ class CategoryState extends State<Category> {
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
-                                    return Container(
+                                    return SizedBox(
                                       width: 120,
                                       child: _buildCircularIndicator(),
                                     );
@@ -245,10 +245,10 @@ class CategoryState extends State<Category> {
                                   }
                                   if (!snapshot.hasData ||
                                       snapshot.data == null) {
-                                    return Text('No Data');
+                                    return const Text('No Data');
                                   }
 
-                                  return Container(
+                                  return SizedBox(
                                     width: 120,
                                     child: CachedNetworkImage(
                                       imageUrl: snapshot.data.toString(),
@@ -276,9 +276,9 @@ class CategoryState extends State<Category> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(SpaceWallpaper());
+                            Get.to(const SpaceWallpaper());
                           },
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
@@ -297,7 +297,7 @@ class CategoryState extends State<Category> {
                     child: SizedBox(
                       height: 200,
                       child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemCount: min(8, amoledRefs.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
@@ -311,7 +311,7 @@ class CategoryState extends State<Category> {
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
-                                    return Container(
+                                    return SizedBox(
                                       width: 120,
                                       child: _buildCircularIndicator(),
                                     );
@@ -321,9 +321,9 @@ class CategoryState extends State<Category> {
                                   }
                                   if (!snapshot.hasData ||
                                       snapshot.data == null) {
-                                    return Text('No Data');
+                                    return const Text('No Data');
                                   }
-                                  return Container(
+                                  return SizedBox(
                                     width: 120,
                                     child: CachedNetworkImage(
                                       imageUrl: snapshot.data.toString(),
@@ -351,9 +351,9 @@ class CategoryState extends State<Category> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(StockWallpapers());
+                            Get.to(const StockWallpapers());
                           },
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
@@ -372,7 +372,7 @@ class CategoryState extends State<Category> {
                     child: SizedBox(
                       height: 200,
                       child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemCount: min(8, amoledRefs.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
@@ -386,7 +386,7 @@ class CategoryState extends State<Category> {
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
-                                    return Container(
+                                    return SizedBox(
                                       width: 120,
                                       child: _buildCircularIndicator(),
                                     );
@@ -396,9 +396,9 @@ class CategoryState extends State<Category> {
                                   }
                                   if (!snapshot.hasData ||
                                       snapshot.data == null) {
-                                    return Text('No Data');
+                                    return const Text('No Data');
                                   }
-                                  return Container(
+                                  return SizedBox(
                                     width: 120,
                                     child: CachedNetworkImage(
                                       imageUrl: snapshot.data.toString(),
@@ -426,9 +426,9 @@ class CategoryState extends State<Category> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(MinimalistWallpaper());
+                            Get.to(const MinimalistWallpaper());
                           },
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
@@ -447,7 +447,7 @@ class CategoryState extends State<Category> {
                     child: SizedBox(
                       height: 200,
                       child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemCount: min(8, amoledRefs.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
@@ -461,7 +461,7 @@ class CategoryState extends State<Category> {
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
-                                    return Container(
+                                    return SizedBox(
                                       width: 120,
                                       child: _buildCircularIndicator(),
                                     );
@@ -471,9 +471,9 @@ class CategoryState extends State<Category> {
                                   }
                                   if (!snapshot.hasData ||
                                       snapshot.data == null) {
-                                    return Text('No Data');
+                                    return const Text('No Data');
                                   }
-                                  return Container(
+                                  return SizedBox(
                                     width: 120,
                                     child: CachedNetworkImage(
                                       imageUrl: snapshot.data.toString(),
@@ -501,9 +501,9 @@ class CategoryState extends State<Category> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(NatureWallpaper());
+                            Get.to(const NatureWallpaper());
                           },
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
@@ -522,7 +522,7 @@ class CategoryState extends State<Category> {
                     child: SizedBox(
                       height: 200,
                       child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemCount: min(8, amoledRefs.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
@@ -536,7 +536,7 @@ class CategoryState extends State<Category> {
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
-                                    return Container(
+                                    return SizedBox(
                                       width: 120,
                                       child: _buildCircularIndicator(),
                                     );
@@ -546,9 +546,9 @@ class CategoryState extends State<Category> {
                                   }
                                   if (!snapshot.hasData ||
                                       snapshot.data == null) {
-                                    return Text('No Data');
+                                    return const Text('No Data');
                                   }
-                                  return Container(
+                                  return SizedBox(
                                     width: 120,
                                     child: CachedNetworkImage(
                                       imageUrl: snapshot.data.toString(),
@@ -576,9 +576,9 @@ class CategoryState extends State<Category> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(AnimalsWallpaper());
+                            Get.to(const AnimalsWallpaper());
                           },
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
@@ -597,7 +597,7 @@ class CategoryState extends State<Category> {
                     child: SizedBox(
                       height: 200,
                       child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemCount: min(8, amoledRefs.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
@@ -611,7 +611,7 @@ class CategoryState extends State<Category> {
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
-                                    return Container(
+                                    return SizedBox(
                                       width: 120,
                                       child: _buildCircularIndicator(),
                                     );
@@ -621,9 +621,9 @@ class CategoryState extends State<Category> {
                                   }
                                   if (!snapshot.hasData ||
                                       snapshot.data == null) {
-                                    return Text('No Data');
+                                    return const Text('No Data');
                                   }
-                                  return Container(
+                                  return SizedBox(
                                     width: 120,
                                     child: CachedNetworkImage(
                                       imageUrl: snapshot.data.toString(),
@@ -651,9 +651,9 @@ class CategoryState extends State<Category> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(ScifiWallpaper());
+                            Get.to(const ScifiWallpaper());
                           },
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
@@ -672,7 +672,7 @@ class CategoryState extends State<Category> {
                     child: SizedBox(
                       height: 200,
                       child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemCount: min(8, amoledRefs.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
@@ -686,7 +686,7 @@ class CategoryState extends State<Category> {
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
-                                    return Container(
+                                    return SizedBox(
                                       width: 120,
                                       child: _buildCircularIndicator(),
                                     );
@@ -696,9 +696,9 @@ class CategoryState extends State<Category> {
                                   }
                                   if (!snapshot.hasData ||
                                       snapshot.data == null) {
-                                    return Text('No Data');
+                                    return const Text('No Data');
                                   }
-                                  return Container(
+                                  return SizedBox(
                                     width: 120,
                                     child: CachedNetworkImage(
                                       imageUrl: snapshot.data.toString(),
@@ -726,9 +726,9 @@ class CategoryState extends State<Category> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(GamesWallpaper());
+                            Get.to(const GamesWallpaper());
                           },
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
@@ -747,7 +747,7 @@ class CategoryState extends State<Category> {
                     child: SizedBox(
                       height: 200,
                       child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         itemCount: min(8, amoledRefs.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
@@ -761,7 +761,7 @@ class CategoryState extends State<Category> {
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
-                                    return Container(
+                                    return SizedBox(
                                       width: 120,
                                       child: _buildCircularIndicator(),
                                     );
@@ -771,9 +771,9 @@ class CategoryState extends State<Category> {
                                   }
                                   if (!snapshot.hasData ||
                                       snapshot.data == null) {
-                                    return Text('No Data');
+                                    return const Text('No Data');
                                   }
-                                  return Container(
+                                  return SizedBox(
                                     width: 120,
                                     child: CachedNetworkImage(
                                       imageUrl: snapshot.data.toString(),

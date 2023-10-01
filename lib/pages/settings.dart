@@ -17,14 +17,15 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   void _clearCache(BuildContext context) async {
     await DefaultCacheManager().emptyCache();
+    // ignore: use_build_context_synchronously
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        backgroundColor: Color(0xFF1E1E2A),
+        backgroundColor: const Color(0xFF1E1E2A),
         content: Text(
           'Cache cleared successfully 😊',
           style: GoogleFonts.kanit(color: Colors.white),
         ),
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ),
     );
   }
@@ -41,26 +42,25 @@ class _SettingsPageState extends State<SettingsPage> {
           context: context,
           builder: (BuildContext context) {
             Color backgroundColor = Theme.of(context).colorScheme.background;
-            Color primaryColor = Theme.of(context).colorScheme.primary;
-            Color secondaryColor = Theme.of(context).colorScheme.secondary;
-            Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
             return AlertDialog(
               backgroundColor: backgroundColor,
-              title: Text('Confirm Deletion'),
-              content: Text('Are you sure you want to delete your account?'),
+              title: const Text('Confirm Deletion'),
+              content: const Text('Are you sure you want to delete your account?'),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text('Cancel'),
+                  child: const Text('Cancel'),
                 ),
                 TextButton(
                   onPressed: () async {
                     await user.delete();
+                    // ignore: use_build_context_synchronously
                     Navigator.of(context).pop();
+                    // ignore: use_build_context_synchronously
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text('Account deleted successfully.'),
                       ),
                     );
@@ -76,13 +76,12 @@ class _SettingsPageState extends State<SettingsPage> {
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('No user is currently signed in.'),
           ),
         );
       }
     } catch (e) {
-      print("Error deleting user account: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Error deleting user account: $e'),
@@ -153,7 +152,7 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: AnimationLimiter(
           child: Center(
             child: Column(
@@ -166,7 +165,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
                 children: [
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text(
                     'LUCA',
                     style: TextStyle(
@@ -179,9 +178,9 @@ class _SettingsPageState extends State<SettingsPage> {
                     'Harmonize Your Experience!',
                     style: TextStyle(color: secondaryColor),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    margin: const EdgeInsets.symmetric(vertical: 10),
                     width: 300,
                     height: 250,
                     decoration: BoxDecoration(
@@ -212,7 +211,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             size: 28,
                           ),
                           title: const Text('Changelog'),
-                          subtitle: Text('Recent improvements and fixes',
+                          subtitle: const Text('Recent improvements and fixes',
                               style: TextStyle(color: Colors.grey)),
                           iconColor: primaryColor,
                           textColor: primaryColor,
@@ -223,7 +222,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         ListTile(
                           leading: const Icon(Iconsax.trash),
                           title: const Text('Clear Cache'),
-                          subtitle: Text('Clear all cached data',
+                          subtitle: const Text('Clear all cached data',
                               style: TextStyle(color: Colors.grey)),
                           iconColor: primaryColor,
                           textColor: primaryColor,
@@ -236,7 +235,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    margin: const EdgeInsets.symmetric(vertical: 10),
                     width: 300,
                     height: 150,
                     decoration: BoxDecoration(
@@ -252,7 +251,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             size: 28,
                           ),
                           title: const Text('Liscenses'),
-                          subtitle: Text('View open source liscenses',
+                          subtitle: const Text('View open source liscenses',
                               style: TextStyle(color: Colors.grey)),
                           iconColor: primaryColor,
                           textColor: primaryColor,
@@ -264,7 +263,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         ListTile(
                           leading: const Icon(Icons.policy_outlined),
                           title: const Text('Privacy Policy'),
-                          subtitle: Text('Luca privacy policy',
+                          subtitle: const Text('Luca privacy policy',
                               style: TextStyle(color: Colors.grey)),
                           iconColor: primaryColor,
                           textColor: primaryColor,
@@ -276,7 +275,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    margin: const EdgeInsets.symmetric(vertical: 10),
                     width: 300,
                     height: 150,
                     decoration: BoxDecoration(
@@ -289,7 +288,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         ListTile(
                           leading: const Icon(Iconsax.logout),
                           title: const Text('Logout'),
-                          subtitle: Text('Logout of your account',
+                          subtitle: const Text('Logout of your account',
                               style: TextStyle(color: Colors.grey)),
                           iconColor: primaryColor,
                           textColor: primaryColor,
@@ -298,7 +297,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         ListTile(
                           leading: const Icon(Iconsax.trash),
                           title: const Text('Delete Account'),
-                          subtitle: Text(
+                          subtitle: const Text(
                             'Warning! This cannot be undone',
                             style: TextStyle(color: Colors.grey),
                           ),
@@ -311,7 +310,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
                     color: Colors.transparent,
                     child: Row(
@@ -378,7 +377,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           GoogleFonts.kanit(color: primaryColor, fontSize: 12),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
@@ -391,18 +390,18 @@ class _SettingsPageState extends State<SettingsPage> {
   void _showAboutAppBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (BuildContext context) {
         return Container(
-          color: Color(0xFF1E1E2A),
-          padding: EdgeInsets.all(20),
+          color: const Color(0xFF1E1E2A),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 'About the App',
                 style: TextStyle(
                   color: Colors.white,
@@ -410,7 +409,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 '🌟 Immerse yourself in the world of Luca – the ultimate wallpaper app. Discover an extensive selection of static and dynamic wallpapers across various categories, all presented through a beautifully designed and intuitive interface. Elevate your device\'s aesthetic with Luca\'s stunning visuals that cater to every mood and style. 🎨📱',
                 style: TextStyle(
@@ -418,7 +417,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Version: 1.0.0',
                 style: TextStyle(
@@ -437,14 +436,14 @@ class _SettingsPageState extends State<SettingsPage> {
 void _showChangelogBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
-    shape: RoundedRectangleBorder(
+    shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
     builder: (BuildContext context) {
       return Container(
-        color: Color(0xFF1E1E2A),
-        padding: EdgeInsets.all(20),
-        child: Column(
+        color: const Color(0xFF1E1E2A),
+        padding: const EdgeInsets.all(20),
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -478,7 +477,7 @@ class ChangelogEntry extends StatelessWidget {
   final String date;
   final List<String> changes;
 
-  ChangelogEntry({
+  const ChangelogEntry({super.key, 
     required this.version,
     required this.date,
     required this.changes,
@@ -491,33 +490,33 @@ class ChangelogEntry extends StatelessWidget {
       children: [
         Text(
           'Version $version',
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           'Released on $date',
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.grey,
             fontSize: 14,
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: changes.map((change) {
             return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('•', style: TextStyle(color: Colors.white, fontSize: 18)),
-                SizedBox(width: 8),
+                const Text('•', style: TextStyle(color: Colors.white, fontSize: 18)),
+                const SizedBox(width: 8),
                 Flexible(
                   child: Text(
                     change,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
               ],

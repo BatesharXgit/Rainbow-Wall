@@ -15,7 +15,7 @@ class NotificationsPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Iconsax.trash),
+            icon: const Icon(Iconsax.trash),
           )
         ],
         elevation: 0,

@@ -287,39 +287,19 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, amoledRefs.length),
+                        itemCount: min(8, _amoled.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          // final imageRef = amoledRefs[index];
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: FutureBuilder(
-                                future: amoledRefs[index].getDownloadURL(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return SizedBox(
-                                      width: 120,
-                                      child: _buildCircularIndicator(),
-                                    );
-                                  }
-                                  if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  }
-                                  if (!snapshot.hasData ||
-                                      snapshot.data == null) {
-                                    return const Text('No Data');
-                                  }
-                                  return SizedBox(
-                                    width: 120,
-                                    child: CachedNetworkImage(
-                                      imageUrl: snapshot.data.toString(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  );
-                                },
+                            child: SizedBox(
+                              width: 120,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: CachedNetworkImage(
+                                  imageUrl: _amoled[index],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           );
@@ -362,39 +342,19 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, amoledRefs.length),
+                        itemCount: min(8, _amoled.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          // final imageRef = amoledRefs[index];
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: FutureBuilder(
-                                future: amoledRefs[index].getDownloadURL(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return SizedBox(
-                                      width: 120,
-                                      child: _buildCircularIndicator(),
-                                    );
-                                  }
-                                  if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  }
-                                  if (!snapshot.hasData ||
-                                      snapshot.data == null) {
-                                    return const Text('No Data');
-                                  }
-                                  return SizedBox(
-                                    width: 120,
-                                    child: CachedNetworkImage(
-                                      imageUrl: snapshot.data.toString(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  );
-                                },
+                            child: SizedBox(
+                              width: 120,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: CachedNetworkImage(
+                                  imageUrl: _amoled[index],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           );
@@ -437,39 +397,19 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, amoledRefs.length),
+                        itemCount: min(8, _amoled.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          // final imageRef = amoledRefs[index];
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: FutureBuilder(
-                                future: amoledRefs[index].getDownloadURL(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return SizedBox(
-                                      width: 120,
-                                      child: _buildCircularIndicator(),
-                                    );
-                                  }
-                                  if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  }
-                                  if (!snapshot.hasData ||
-                                      snapshot.data == null) {
-                                    return const Text('No Data');
-                                  }
-                                  return SizedBox(
-                                    width: 120,
-                                    child: CachedNetworkImage(
-                                      imageUrl: snapshot.data.toString(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  );
-                                },
+                            child: SizedBox(
+                              width: 120,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: CachedNetworkImage(
+                                  imageUrl: _amoled[index],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           );
@@ -512,39 +452,19 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, amoledRefs.length),
+                        itemCount: min(8, _amoled.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          // final imageRef = amoledRefs[index];
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: FutureBuilder(
-                                future: amoledRefs[index].getDownloadURL(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return SizedBox(
-                                      width: 120,
-                                      child: _buildCircularIndicator(),
-                                    );
-                                  }
-                                  if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  }
-                                  if (!snapshot.hasData ||
-                                      snapshot.data == null) {
-                                    return const Text('No Data');
-                                  }
-                                  return SizedBox(
-                                    width: 120,
-                                    child: CachedNetworkImage(
-                                      imageUrl: snapshot.data.toString(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  );
-                                },
+                            child: SizedBox(
+                              width: 120,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: CachedNetworkImage(
+                                  imageUrl: _amoled[index],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           );
@@ -587,39 +507,19 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, amoledRefs.length),
+                        itemCount: min(8, _amoled.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          // final imageRef = amoledRefs[index];
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: FutureBuilder(
-                                future: amoledRefs[index].getDownloadURL(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return SizedBox(
-                                      width: 120,
-                                      child: _buildCircularIndicator(),
-                                    );
-                                  }
-                                  if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  }
-                                  if (!snapshot.hasData ||
-                                      snapshot.data == null) {
-                                    return const Text('No Data');
-                                  }
-                                  return SizedBox(
-                                    width: 120,
-                                    child: CachedNetworkImage(
-                                      imageUrl: snapshot.data.toString(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  );
-                                },
+                            child: SizedBox(
+                              width: 120,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: CachedNetworkImage(
+                                  imageUrl: _amoled[index],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           );
@@ -662,39 +562,19 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, amoledRefs.length),
+                        itemCount: min(8, _amoled.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          // final imageRef = amoledRefs[index];
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: FutureBuilder(
-                                future: amoledRefs[index].getDownloadURL(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return SizedBox(
-                                      width: 120,
-                                      child: _buildCircularIndicator(),
-                                    );
-                                  }
-                                  if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  }
-                                  if (!snapshot.hasData ||
-                                      snapshot.data == null) {
-                                    return const Text('No Data');
-                                  }
-                                  return SizedBox(
-                                    width: 120,
-                                    child: CachedNetworkImage(
-                                      imageUrl: snapshot.data.toString(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  );
-                                },
+                            child: SizedBox(
+                              width: 120,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: CachedNetworkImage(
+                                  imageUrl: _amoled[index],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           );
@@ -737,39 +617,19 @@ class CategoryState extends State<Category> {
                       height: 200,
                       child: ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        itemCount: min(8, amoledRefs.length),
+                        itemCount: min(8, _amoled.length),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          // final imageRef = amoledRefs[index];
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: FutureBuilder(
-                                future: amoledRefs[index].getDownloadURL(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return SizedBox(
-                                      width: 120,
-                                      child: _buildCircularIndicator(),
-                                    );
-                                  }
-                                  if (snapshot.hasError) {
-                                    return Text('Error: ${snapshot.error}');
-                                  }
-                                  if (!snapshot.hasData ||
-                                      snapshot.data == null) {
-                                    return const Text('No Data');
-                                  }
-                                  return SizedBox(
-                                    width: 120,
-                                    child: CachedNetworkImage(
-                                      imageUrl: snapshot.data.toString(),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  );
-                                },
+                            child: SizedBox(
+                              width: 120,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: CachedNetworkImage(
+                                  imageUrl: _amoled[index],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           );

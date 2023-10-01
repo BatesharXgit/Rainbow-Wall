@@ -1,26 +1,11 @@
-import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../util/walls_category.dart';
-
-final FirebaseStorage storage = FirebaseStorage.instance;
-final Reference amoledRef = storage.ref().child('wallpaper');
-final Reference landscapesRef = storage.ref().child('wallpaper');
-final Reference cityscapesRef = storage.ref().child('wallpaper');
-final Reference spaceRef = storage.ref().child('wallpaper');
-final Reference stockRef = storage.ref().child('wallpaper');
-final Reference minimalistRef = storage.ref().child('wallpaper');
-final Reference natureRef = storage.ref().child('wallpaper');
-final Reference animalsRef = storage.ref().child('wallpaper');
-final Reference scifiRef = storage.ref().child('wallpaper');
-final Reference gamesRef = storage.ref().child('wallpaper');
 
 class Category extends StatefulWidget {
   const Category({
@@ -32,17 +17,6 @@ class Category extends StatefulWidget {
 }
 
 class CategoryState extends State<Category> {
-  // List<Reference> amoledRefs = [];
-  // List<Reference> landscapesRefs = [];
-  // List<Reference> cityscapesRefs = [];
-  // List<Reference> spaceRefs = [];
-  // List<Reference> stockRefs = [];
-  // List<Reference> minimalistRefs = [];
-  // List<Reference> natureRefs = [];
-  // List<Reference> animalsRefs = [];
-  // List<Reference> scifiRefs = [];
-  // List<Reference> gamesRefs = [];
-
   final List<String> categories = [
     'Amoled',
     'Landscapes',
@@ -67,114 +41,78 @@ class CategoryState extends State<Category> {
     'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Famoled%2F90.jpg?alt=media&token=5bac6a75-a3f0-4ce4-8f69-0b127c650d46'
   ];
 
-  final List<String> _space = [];
+  final List<String> _space = [
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fspace%2F89.jpg?alt=media&token=c875c03b-bdfa-4aef-b8b3-f4db12282132',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fspace%2F87.jpg?alt=media&token=781d3e0f-e785-4ff7-818d-bc0f515968c8',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fspace%2F91.jpg?alt=media&token=f81a01d6-7cd7-432e-b96b-8fce1ba7582e',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fspace%2F63.jpg?alt=media&token=22269ca5-b699-48b1-80f6-3030f8f02abc',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fspace%2F69.jpg?alt=media&token=65b35575-8529-4bb4-89ee-e788b89573cd',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fspace%2F58.jpg?alt=media&token=a2888011-e06d-40f2-97dd-b53c10afcd2f',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fspace%2F77.jpg?alt=media&token=fe42823e-f2b6-4733-b9d6-2d9caf7a0008',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fspace%2F68.jpg?alt=media&token=1cff5422-cdf1-4e0c-998a-f67484fbaa5d'
+  ];
 
   final List<String> _stock = [];
 
-  final List<String> _minimalist = [];
+  final List<String> _minimalist = [
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fminimalist%2F52.png?alt=media&token=9935c772-8975-480b-8605-e578bee29459',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fminimalist%2F59.jpg?alt=media&token=f9d82472-7e9e-4b49-ab8c-c3054b283e7e',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fminimalist%2F81.jpg?alt=media&token=e3c08b97-0be5-4ed8-b9c1-8357212b5526',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fminimalist%2F96.jpg?alt=media&token=e021f3f1-6c0b-45fe-8e7b-3f650e15de16',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fminimalist%2F87.jpg?alt=media&token=a0bcde27-6c86-412d-9726-41f18c40ba81',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fminimalist%2F85.jpg?alt=media&token=f60349ef-5582-4d6f-a975-0a19e6c06c43',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fminimalist%2F83.jpg?alt=media&token=7d13a965-64e8-421a-9c90-858744c21d1c',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fminimalist%2F93.jpg?alt=media&token=24dd6946-4785-4ac1-92cc-d10b089b3e9c'
+  ];
 
-  final List<String> _nature = [];
+  final List<String> _nature = [
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fnature%2F56.jpg?alt=media&token=90efadf0-29c9-4c59-9f49-8a135ac2f82d',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fnature%2F57.jpg?alt=media&token=41282535-1cac-4b7a-9ba6-b9d1ed4f8df9',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fnature%2F58.jpg?alt=media&token=e3f7fafb-32bd-43b8-b006-118f91d77048',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fnature%2F62.jpg?alt=media&token=776c544d-453f-4f09-9783-e29597ad376b',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fnature%2F63.jpg?alt=media&token=f1ccb12a-d7f3-4aae-9315-a6b93a55943d',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fnature%2F93.jpg?alt=media&token=48d9f5e9-88b5-459b-aa78-c751d69cd541',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fnature%2F68.jpg?alt=media&token=c9b7e182-0c08-4af1-9e9f-4e9527c2da3d',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fnature%2F90.jpg?alt=media&token=28a131a6-314d-4ed0-9675-012dcd4b7649'
+  ];
 
-  final List<String> _animals = [];
+  final List<String> _animals = [
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanimals%2F67.jpg?alt=media&token=cffe8e0c-0b86-4fae-ae9d-61c5158e042c',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanimals%2F68.jpg?alt=media&token=8054027c-4f6e-4320-a4b7-3f407a53eccb',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanimals%2F69.jpg?alt=media&token=9bd70d8d-fced-4ca3-8f53-b1c80534c7da',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanimals%2F70.png?alt=media&token=cd524a68-c8ae-4fe1-8560-da91a131ee7b',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanimals%2F71.jpg?alt=media&token=8370b1fc-6afa-4fab-9689-7a696d860536',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanimals%2F72.png?alt=media&token=100c73e6-5641-475d-a517-e1a3c3239b29',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanimals%2F83.jpg?alt=media&token=b639cd42-92c5-45be-abe0-afd5c15a92f5',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanimals%2F78.jpg?alt=media&token=907aad23-5d05-4ed7-be65-51bf056294c8'
+  ];
 
-  final List<String> _scifi = [];
+  final List<String> _scifi = [
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fscifi%2F100.jpg?alt=media&token=9e287ebb-d175-46dd-baec-82de147d729f',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fscifi%2F81.jpg?alt=media&token=aef50f00-90d6-4ea9-96e3-cde9a6c966fa',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fscifi%2F82.jpg?alt=media&token=439d7dc3-1e1b-4d3d-989b-407fa40a1fe3',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fscifi%2F83.jpg?alt=media&token=d42f4d86-ce69-4f12-a799-8cd4b7306c18',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fscifi%2F85.jpg?alt=media&token=5dc04103-19d4-4ee1-922a-5c1d8996d04d',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fscifi%2F87.jpg?alt=media&token=a6fbcc31-4b06-418b-b8ac-31df9bc46ce8',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fscifi%2F88.jpg?alt=media&token=e2053fcd-f3ad-4a34-9626-4d58807f2833',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fscifi%2F89.jpg?alt=media&token=a820d22b-b1db-4f3d-a8b3-88634a63f873'
+  ];
 
-  final List<String> _games = [];
+  final List<String> _games = [
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fgames%2F70.jpg?alt=media&token=b1b86a38-ecf3-4170-bc75-d8ec1dab3bf6',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fgames%2F47.jpg?alt=media&token=c93db61e-c0b4-42e4-ba1f-d4799aa541b5',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fgames%2F100.jpg?alt=media&token=b5709db6-31ba-460b-a7f2-6d0e103b425f',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fgames%2F44.jpg?alt=media&token=dc3ee1bb-3a69-4ce9-b8c6-ce25aa76b89e',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fgames%2F49.jpg?alt=media&token=770de000-5a97-4473-95fb-9dcb79d04e59',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fgames%2F58.jpg?alt=media&token=78f5d43f-7ff5-4762-bdb2-744048aa0d11',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fgames%2F73.jpg?alt=media&token=d56dce5d-91c7-49b0-b9ff-71bd2932b546',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fgames%2F91.jpg?alt=media&token=cd0b5b71-5a69-4915-b6bc-52397b20a927'
+  ];
 
   @override
   void initState() {
     super.initState();
-    // loadamoledImages();
-    // loadlandscapesImages();
-    // loadcityscapesImages();
-    // loadspaceImages();
-    // loadstockImages();
-    // loadminimalistImages();
-    // loadnatureImages();
-    // loadanimalsmages();
-    // loadscifiImages();
-    // loadgamesImages();
   }
-
-  // Future<void> loadamoledImages() async {
-  //   final ListResult result = await amoledRef.listAll();
-  //   amoledRefs = result.items.toList();
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  // }
-
-  // Future<void> loadlandscapesImages() async {
-  //   final ListResult result = await landscapesRef.listAll();
-  //   landscapesRefs = result.items.toList();
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  // }
-
-  // Future<void> loadcityscapesImages() async {
-  //   final ListResult result = await cityscapesRef.listAll();
-  //   cityscapesRefs = result.items.toList();
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  // }
-
-  // Future<void> loadspaceImages() async {
-  //   final ListResult result = await spaceRef.listAll();
-  //   spaceRefs = result.items.toList();
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  // }
-
-  // Future<void> loadstockImages() async {
-  //   final ListResult result = await stockRef.listAll();
-  //   stockRefs = result.items.toList();
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  // }
-
-  // Future<void> loadminimalistImages() async {
-  //   final ListResult result = await minimalistRef.listAll();
-  //   minimalistRefs = result.items.toList();
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  // }
-
-  // Future<void> loadnatureImages() async {
-  //   final ListResult result = await natureRef.listAll();
-  //   natureRefs = result.items.toList();
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  // }
-
-  // Future<void> loadanimalsmages() async {
-  //   final ListResult result = await animalsRef.listAll();
-  //   animalsRefs = result.items.toList();
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  // }
-
-  // Future<void> loadscifiImages() async {
-  //   final ListResult result = await scifiRef.listAll();
-  //   scifiRefs = result.items.toList();
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  // }
-
-  // Future<void> loadgamesImages() async {
-  //   final ListResult result = await gamesRef.listAll();
-  //   gamesRefs = result.items.toList();
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -311,7 +249,7 @@ class CategoryState extends State<Category> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: CachedNetworkImage(
-                                  imageUrl: _amoled[index],
+                                  imageUrl: _space[index],
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -366,6 +304,7 @@ class CategoryState extends State<Category> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: CachedNetworkImage(
+                                  // imageUrl: _stock[index],
                                   imageUrl: _space[index],
                                   fit: BoxFit.cover,
                                 ),

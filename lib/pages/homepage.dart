@@ -27,7 +27,6 @@ final Reference fantasyRef = storage.ref().child('fantasy');
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
     Key? key,
-  
   }) : super(key: key);
 
   @override
@@ -62,9 +61,11 @@ class MyHomePageState extends State<MyHomePage>
   void initState() {
     super.initState();
     _tabController = TabController(length: data.length, vsync: this);
-    loadImages().then((_) {
-      setState(() {});
-    });
+    loadWallpaperImages();
+    loadCarsImages();
+    loadAbstractImages();
+    loadaiImages();
+    loadfantasyImages();
   }
 
   @override
@@ -72,16 +73,6 @@ class MyHomePageState extends State<MyHomePage>
     scrollController.dispose();
     _tabController.dispose();
     super.dispose();
-  }
-
-  Future<void> loadImages() async {
-    await Future.wait([
-      loadWallpaperImages(),
-      loadCarsImages(),
-      loadAbstractImages(),
-      loadaiImages(),
-      loadfantasyImages(),
-    ]);
   }
 
   Future<void> loadWallpaperImages() async {

@@ -8,7 +8,7 @@ ThemeData darkTheme = ThemeData(
     secondary: Colors.grey,
     tertiary: Color(0xFF1E1E2A),
   ),
-  iconTheme: const IconThemeData(color: Colors.white),
+  iconTheme: IconThemeData(color: Colors.white),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: Color(0xFF131321),
     selectedItemColor: Color(0xFFE1E9F0),
@@ -23,7 +23,7 @@ ThemeData lightTheme = ThemeData(
       primary: Color(0xFF131321),
       secondary: Colors.grey,
       tertiary: Color(0xFFDCE2FA)),
-  iconTheme: const IconThemeData(
+  iconTheme: IconThemeData(
     color: Color(0xFF131321),
   ),
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(

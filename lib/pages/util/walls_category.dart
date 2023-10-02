@@ -2,6 +2,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:luca/pages/util/components.dart';
+import 'package:luca/themes/themes.dart';
 
 final FirebaseStorage storage = FirebaseStorage.instance;
 final Reference amoledRef = storage.ref().child('category/amoled');
@@ -51,6 +52,7 @@ class _AmoledWallpaperState extends State<AmoledWallpaper> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
+        iconTheme: Theme.of(context).iconTheme,
         backgroundColor: backgroundColor,
         title: Text(
           'Amoled',
@@ -151,6 +153,7 @@ class _SpaceWallpaperState extends State<SpaceWallpaper> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        iconTheme: Theme.of(context).iconTheme,
         centerTitle: true,
         backgroundColor: backgroundColor,
         title: Text(
@@ -253,6 +256,7 @@ class _StockWallpapersState extends State<StockWallpapers> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        iconTheme: Theme.of(context).iconTheme,
         centerTitle: true,
         backgroundColor: backgroundColor,
         title: Text(
@@ -355,6 +359,7 @@ class _MinimalistWallpaperState extends State<MinimalistWallpaper> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
+        iconTheme: Theme.of(context).iconTheme,
         backgroundColor: backgroundColor,
         title: Text(
           'Minimalist',
@@ -456,6 +461,7 @@ class _NatureWallpaperState extends State<NatureWallpaper> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        iconTheme: Theme.of(context).iconTheme,
         centerTitle: true,
         backgroundColor: backgroundColor,
         title: Text(
@@ -560,6 +566,7 @@ class _AnimalsWallpaperState extends State<AnimalsWallpaper> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
+        iconTheme: Theme.of(context).iconTheme,
         backgroundColor: backgroundColor,
         title: Text(
           'Animals',
@@ -662,6 +669,7 @@ class _ScifiWallpaperState extends State<ScifiWallpaper> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
+        iconTheme: Theme.of(context).iconTheme,
         backgroundColor: backgroundColor,
         title: Text(
           'Sci - Fi',
@@ -763,6 +771,7 @@ class _GamesWallpaperState extends State<GamesWallpaper> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
+        iconTheme: Theme.of(context).iconTheme,
         backgroundColor: backgroundColor,
         title: Text(
           'Games',

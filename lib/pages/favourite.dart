@@ -27,6 +27,7 @@ class FavoriteImagesPage extends StatelessWidget {
           )
         ],
         elevation: 0,
+        iconTheme: Theme.of(context).iconTheme,
         centerTitle: true,
         backgroundColor: backgroundColor,
         title: Text(

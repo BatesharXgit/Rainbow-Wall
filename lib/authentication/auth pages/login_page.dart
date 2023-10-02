@@ -33,14 +33,14 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('lib/images/bg.jpg'),
+                  image: AssetImage('assets/bg.jpg'),
                   fit: BoxFit.cover,
                 ),
               ),
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+                filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                 child: Container(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withOpacity(0.4),
                 ),
               ),
             ),
@@ -49,11 +49,24 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   const SizedBox(height: 20),
-                  SizedBox(
-                    height: 180,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(6),
-                      child: Image.asset('lib/images/luca.png'),
+                  // SizedBox(
+                  //   height: 150,
+                  //   child: ClipRRect(
+                  //     borderRadius: BorderRadius.circular(6),
+                  //     child: Image.asset('assets/luca.png'),
+                  //   ),
+                  // ),
+                  Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/luca.png'),
+                          fit: BoxFit.cover),
+                      border: Border.all(
+                          width: 4.0,
+                          color: Theme.of(context).colorScheme.primary),
+                      borderRadius: BorderRadius.circular(38.0),
                     ),
                   ),
                   const Center(
@@ -81,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       SquareTile(
                         onTap: () => AuthService().signInWithGoogle(),
-                        imagePath: 'lib/images/google.png',
+                        imagePath: 'assets/google.png',
                         text: 'Continue with Google',
                       ),
                     ],

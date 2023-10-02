@@ -83,8 +83,8 @@ class FavoriteImagesPage extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Clear Favorites?'),
-          content:
-              const Text('Are you sure you want to clear all your favorite images?'),
+          content: const Text(
+              'Are you sure you want to clear all your favorite images?'),
           actions: [
             TextButton(
               onPressed: () {

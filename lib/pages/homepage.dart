@@ -118,17 +118,20 @@ class MyHomePageState extends State<MyHomePage>
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              SizedBox(
-                height: 48,
-                width: 48,
-                child: ClipRRect(
-                  child: Image.asset('lib/images/luca.png'),
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  image: DecorationImage(image: AssetImage('assets/luca.png')),
+                  border: Border.all(
+                      width: 2.0, color: Theme.of(context).colorScheme.primary),
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
               const SizedBox(
-                width: 8.0,
+                width: 12.0,
               ),
               Text(
                 'LUCA',
@@ -213,7 +216,6 @@ class MyHomePageState extends State<MyHomePage>
     );
   }
 
-
   Widget _buildImageGridFromRef(Reference imageRef) {
     return FutureBuilder<ListResult>(
       future: imageRef.listAll(),
@@ -275,5 +277,4 @@ class MyHomePageState extends State<MyHomePage>
       ),
     );
   }
-
 }

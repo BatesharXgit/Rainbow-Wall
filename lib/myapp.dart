@@ -93,9 +93,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:luca/pages/dynamic/live_category.dart';
 import 'package:luca/pages/favourite.dart';
 import 'package:luca/pages/homepage.dart';
+import 'package:luca/pages/live.dart';
 import 'package:luca/pages/static/wallpapers.dart';
 
 class LucaHome extends StatefulWidget {

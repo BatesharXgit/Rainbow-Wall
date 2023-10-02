@@ -112,7 +112,7 @@ class MyHomePageState extends State<MyHomePage>
 
   Widget _buildAppBar(context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0),
+      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 8.0, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -189,7 +189,7 @@ class MyHomePageState extends State<MyHomePage>
 
   Widget _buildTabBar() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+      padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
       child: TabBar(
         physics: const BouncingScrollPhysics(),
         controller: _tabController,

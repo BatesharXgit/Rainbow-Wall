@@ -74,7 +74,7 @@ class _ApplyWallpaperPageState extends State<ApplyWallpaperPage> {
       if (byteData != null) {
         Uint8List pngBytes = byteData.buffer.asUint8List();
         final externalDir = await getExternalStorageDirectory();
-        final filePath = '${externalDir!.path}/InspirioImage.png';
+        final filePath = '${externalDir!.path}/LucaImage.png';
         final file = File(filePath);
         await file.writeAsBytes(pngBytes);
         final result = await ImageGallerySaver.saveFile(filePath);

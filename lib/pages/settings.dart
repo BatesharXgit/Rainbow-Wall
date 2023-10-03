@@ -32,6 +32,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void signUserOut() {
     FirebaseAuth.instance.signOut();
+    Navigator.pop(context);
   }
 
   void deleteAccount(BuildContext context) async {
@@ -45,7 +46,8 @@ class _SettingsPageState extends State<SettingsPage> {
             return AlertDialog(
               backgroundColor: backgroundColor,
               title: const Text('Confirm Deletion'),
-              content: const Text('Are you sure you want to delete your account?'),
+              content:
+                  const Text('Are you sure you want to delete your account?'),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
@@ -477,7 +479,8 @@ class ChangelogEntry extends StatelessWidget {
   final String date;
   final List<String> changes;
 
-  const ChangelogEntry({super.key, 
+  const ChangelogEntry({
+    super.key,
     required this.version,
     required this.date,
     required this.changes,
@@ -511,7 +514,8 @@ class ChangelogEntry extends StatelessWidget {
             return Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('•', style: TextStyle(color: Colors.white, fontSize: 18)),
+                const Text('•',
+                    style: TextStyle(color: Colors.white, fontSize: 18)),
                 const SizedBox(width: 8),
                 Flexible(
                   child: Text(

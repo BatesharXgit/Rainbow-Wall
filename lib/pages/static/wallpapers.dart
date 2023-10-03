@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:luca/pages/util/applyWallpaperPage.dart';
+import 'package:luca/pages/util/apply_walls.dart';
 
 import '../util/walls_category.dart';
 
@@ -674,15 +673,6 @@ class CategoryState extends State<Category> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildCircularIndicator() {
-    return Center(
-      child: LoadingAnimationWidget.fallingDot(
-        size: 35,
-        color: Theme.of(context).colorScheme.primary,
       ),
     );
   }

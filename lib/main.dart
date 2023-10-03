@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:luca/authentication/auth%20pages/auth_page.dart';
-import 'package:luca/pages/util/favouritesManager.dart';
+import 'package:luca/pages/util/favourites_manager.dart';
 import 'package:luca/pages/util/notify/notification.dart';
 import 'package:luca/pages/util/notify/notify.dart';
 import 'package:luca/themes/themes.dart';

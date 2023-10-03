@@ -9,6 +9,7 @@ class LiveWallCategory extends StatefulWidget {
 }
 
 class _LiveWallCategoryState extends State<LiveWallCategory> {
+  @override
   Widget build(BuildContext context) {
     Color backgroundColor = Theme.of(context).colorScheme.background;
     Color primaryColor = Theme.of(context).colorScheme.primary;

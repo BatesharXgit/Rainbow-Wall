@@ -1,6 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:luca/main.dart';
 import 'package:luca/pages/util/notify/notify.dart';
 
@@ -10,7 +9,7 @@ class FirebaseApi {
   Future<void> initNotifications() async {
     await _firebaseMessaging.requestPermission();
 
-    final fCMToken = await _firebaseMessaging.getToken();
+    // final fCMToken = await _firebaseMessaging.getToken();
 
 
     initPushNotifications();
@@ -19,7 +18,7 @@ class FirebaseApi {
   void handleMessage(RemoteMessage? message) {
     if (message == null) return;
 
-    Get.to(NotificationsPage());
+    Get.to(const NotificationsPage());
     navigatorKey.currentState
         ?.pushNamed('/notification_screen', arguments: message);
   }

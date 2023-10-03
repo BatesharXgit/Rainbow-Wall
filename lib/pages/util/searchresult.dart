@@ -18,6 +18,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path_provider/path_provider.dart';
 
 // ignore: constant_identifier_names

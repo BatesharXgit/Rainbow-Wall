@@ -2,7 +2,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:luca/pages/util/components.dart';
-import 'package:luca/themes/themes.dart';
 
 final FirebaseStorage storage = FirebaseStorage.instance;
 final Reference amoledRef = storage.ref().child('category/amoled');
@@ -260,7 +259,7 @@ class _StockWallpapersState extends State<StockWallpapers> {
         centerTitle: true,
         backgroundColor: backgroundColor,
         title: Text(
-          'Stock',
+          'Anime',
           style: GoogleFonts.kanit(
             color: primaryColor,
             fontSize: 22,

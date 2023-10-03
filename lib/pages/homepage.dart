@@ -124,7 +124,7 @@ class MyHomePageState extends State<MyHomePage>
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage('assets/luca.png')),
+                  image: const DecorationImage(image: AssetImage('assets/luca.png')),
                   border: Border.all(
                       width: 2.0, color: Theme.of(context).colorScheme.primary),
                   borderRadius: BorderRadius.circular(10.0),

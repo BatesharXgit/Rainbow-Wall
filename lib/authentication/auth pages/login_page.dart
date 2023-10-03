@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                     width: 150,
                     height: 150,
                     decoration: BoxDecoration(
-                      image: DecorationImage(
+                      image: const DecorationImage(
                           image: AssetImage('assets/luca.png'),
                           fit: BoxFit.cover),
                       border: Border.all(

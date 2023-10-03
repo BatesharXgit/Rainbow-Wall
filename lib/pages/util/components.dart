@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:luca/pages/util/applyWallpaperPage.dart';
+import 'package:luca/pages/util/apply_walls.dart';
 import 'package:luca/pages/util/location_list.dart';
 import 'package:luca/pages/util/walls_category.dart';
 

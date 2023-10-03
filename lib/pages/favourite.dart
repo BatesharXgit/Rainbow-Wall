@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:luca/pages/util/applyWallpaperPage.dart';
-import 'package:luca/pages/util/favouritesManager.dart';
+import 'package:luca/pages/util/apply_walls.dart';
+import 'package:luca/pages/util/favourites_manager.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteImagesPage extends StatelessWidget {

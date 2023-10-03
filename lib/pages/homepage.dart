@@ -121,8 +121,8 @@ class MyHomePageState extends State<MyHomePage>
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Container(
-                width: 44,
-                height: 44,
+                width: 40,
+                height: 40,
                 decoration: BoxDecoration(
                   image: DecorationImage(image: AssetImage('assets/luca.png')),
                   border: Border.all(
@@ -137,7 +137,7 @@ class MyHomePageState extends State<MyHomePage>
                 'LUCA',
                 style: TextStyle(
                   fontFamily: 'Anurati',
-                  color: Theme.of(context).iconTheme.color,
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 32,
                 ),
               ),
@@ -155,7 +155,7 @@ class MyHomePageState extends State<MyHomePage>
                 icon: Icon(
                   Iconsax.notification,
                   color: Theme.of(context).iconTheme.color,
-                  size: 30,
+                  size: 28,
                 ),
               ),
               IconButton(
@@ -168,13 +168,13 @@ class MyHomePageState extends State<MyHomePage>
                 icon: Icon(
                   BootstrapIcons.search,
                   color: Theme.of(context).iconTheme.color,
-                  size: 26,
+                  size: 24,
                 ),
               ),
               IconButton(
                 icon: const Icon(
                   Iconsax.setting_2,
-                  size: 30,
+                  size: 28,
                 ),
                 color: Theme.of(context).iconTheme.color,
                 onPressed: () =>

@@ -7,7 +7,7 @@ import 'package:luca/themes/themes.dart';
 final FirebaseStorage storage = FirebaseStorage.instance;
 final Reference amoledRef = storage.ref().child('category/amoled');
 final Reference spaceRef = storage.ref().child('category/space');
-final Reference stockRef = storage.ref().child('category/stock');
+final Reference animeRef = storage.ref().child('category/anime');
 final Reference minimalistRef = storage.ref().child('category/minimalist');
 final Reference natureRef = storage.ref().child('category/nature');
 final Reference animalsRef = storage.ref().child('category/animals');
@@ -242,7 +242,7 @@ class _StockWallpapersState extends State<StockWallpapers> {
   }
 
   Future<void> loadstockImages() async {
-    final ListResult result = await stockRef.listAll();
+    final ListResult result = await animeRef.listAll();
     stockRefs = result.items.toList();
     if (mounted) {
       setState(() {});
@@ -273,7 +273,7 @@ class _StockWallpapersState extends State<StockWallpapers> {
           children: [
             Expanded(
               child: FutureBuilder<ListResult>(
-                future: stockRef.listAll(),
+                future: animeRef.listAll(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Components.buildPlaceholder();

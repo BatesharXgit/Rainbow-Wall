@@ -124,7 +124,8 @@ class MyHomePageState extends State<MyHomePage>
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  image: const DecorationImage(image: AssetImage('assets/luca.png')),
+                  image: const DecorationImage(
+                      image: AssetImage('assets/luca.png')),
                   border: Border.all(
                       width: 2.0, color: Theme.of(context).colorScheme.primary),
                   borderRadius: BorderRadius.circular(10.0),
@@ -155,7 +156,7 @@ class MyHomePageState extends State<MyHomePage>
                 icon: Icon(
                   Iconsax.notification,
                   color: Theme.of(context).iconTheme.color,
-                  size: 28,
+                  size: 30,
                 ),
               ),
               IconButton(
@@ -168,13 +169,13 @@ class MyHomePageState extends State<MyHomePage>
                 icon: Icon(
                   BootstrapIcons.search,
                   color: Theme.of(context).iconTheme.color,
-                  size: 24,
+                  size: 26,
                 ),
               ),
               IconButton(
                 icon: const Icon(
                   Iconsax.setting_2,
-                  size: 28,
+                  size: 30,
                 ),
                 color: Theme.of(context).iconTheme.color,
                 onPressed: () =>

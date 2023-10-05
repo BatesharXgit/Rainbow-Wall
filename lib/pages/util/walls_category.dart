@@ -221,28 +221,28 @@ class _SpaceWallpaperState extends State<SpaceWallpaper> {
 }
 
 //=====================================================================================================================
-//===============================================  Stock Wallpaper ===================================================
+//===============================================  Anime Wallpaper ===================================================
 //=====================================================================================================================
 
-class StockWallpapers extends StatefulWidget {
-  const StockWallpapers({super.key});
+class AnimeWallpapers extends StatefulWidget {
+  const AnimeWallpapers({super.key});
 
   @override
-  State<StockWallpapers> createState() => _StockWallpapersState();
+  State<AnimeWallpapers> createState() => _AnimeWallpapersState();
 }
 
-class _StockWallpapersState extends State<StockWallpapers> {
-  List<Reference> stockRefs = [];
+class _AnimeWallpapersState extends State<AnimeWallpapers> {
+  List<Reference> AnimeRefs = [];
 
   @override
   void initState() {
     super.initState();
-    loadstockImages();
+    loadAnimeImages();
   }
 
-  Future<void> loadstockImages() async {
+  Future<void> loadAnimeImages() async {
     final ListResult result = await animeRef.listAll();
-    stockRefs = result.items.toList();
+    AnimeRefs = result.items.toList();
     if (mounted) {
       setState(() {});
     }
@@ -289,7 +289,7 @@ class _StockWallpapersState extends State<StockWallpapers> {
                         crossAxisCount: 2,
                         childAspectRatio: 0.75,
                       ),
-                      itemCount: stockRefs.length,
+                      itemCount: AnimeRefs.length,
                       itemBuilder: (context, index) {
                         final imageRef = imageRefs[index];
                         return FutureBuilder<String>(

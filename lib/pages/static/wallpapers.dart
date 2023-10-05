@@ -39,7 +39,16 @@ class CategoryState extends State<Category> {
     'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fspace%2F68.jpg?alt=media&token=1cff5422-cdf1-4e0c-998a-f67484fbaa5d'
   ];
 
-  final List<String> _stock = [];
+  final List<String> _anime = [
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanime%2F71.jpg?alt=media&token=2fffdff5-b525-49e3-accd-6b2c0a43919d',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanime%2F72.jpg?alt=media&token=e2b1105a-46c8-4f7c-aad0-1359f5f3fd97',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanime%2F73.jpg?alt=media&token=7a340fba-f07e-456b-ba39-2db4d87acc94',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanime%2F74.jpg?alt=media&token=4159cb05-0e30-42f6-9807-239fb20be369',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanime%2F75.jpg?alt=media&token=242ebb49-eb3b-4106-be03-df472e764494',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanime%2F76.jpg?alt=media&token=76c255cc-d440-4490-a6d8-74c8083deda8',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanime%2F77.jpg?alt=media&token=b65ae120-12d0-4cdd-a614-8d979052814c',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanime%2F78.jpg?alt=media&token=7e5d9d93-d290-419e-b458-4682f23b848d'
+  ];
 
   final List<String> _minimalist = [
     'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fminimalist%2F52.png?alt=media&token=9935c772-8975-480b-8605-e578bee29459',
@@ -99,6 +108,11 @@ class CategoryState extends State<Category> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -406,14 +420,14 @@ class CategoryState extends State<Category> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Stock",
+                          "Anime",
                           style: GoogleFonts.kanit(
                             fontSize: 18,
                           ),
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(const StockWallpapers());
+                            Get.to(const AnimeWallpapers());
                           },
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -448,7 +462,7 @@ class CategoryState extends State<Category> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => ApplyWallpaperPage(
-                                          imageUrl: _stock[index]),
+                                          imageUrl: _anime[index]),
                                     ),
                                   );
                                 },
@@ -456,7 +470,7 @@ class CategoryState extends State<Category> {
                                   borderRadius: BorderRadius.circular(20),
                                   child: CachedNetworkImage(
                                     // imageUrl: _stock[index],
-                                    imageUrl: _space[index],
+                                    imageUrl: _anime[index],
                                     fit: BoxFit.cover,
                                   ),
                                 ),

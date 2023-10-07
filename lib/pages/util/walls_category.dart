@@ -232,7 +232,7 @@ class AnimeWallpapers extends StatefulWidget {
 }
 
 class _AnimeWallpapersState extends State<AnimeWallpapers> {
-  List<Reference> AnimeRefs = [];
+  List<Reference> animeRefs = [];
 
   @override
   void initState() {
@@ -242,7 +242,7 @@ class _AnimeWallpapersState extends State<AnimeWallpapers> {
 
   Future<void> loadAnimeImages() async {
     final ListResult result = await animeRef.listAll();
-    AnimeRefs = result.items.toList();
+    animeRefs = result.items.toList();
     if (mounted) {
       setState(() {});
     }
@@ -289,7 +289,7 @@ class _AnimeWallpapersState extends State<AnimeWallpapers> {
                         crossAxisCount: 2,
                         childAspectRatio: 0.75,
                       ),
-                      itemCount: AnimeRefs.length,
+                      itemCount: animeRefs.length,
                       itemBuilder: (context, index) {
                         final imageRef = imageRefs[index];
                         return FutureBuilder<String>(

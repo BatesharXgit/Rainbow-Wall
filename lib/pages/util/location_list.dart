@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:luca/pages/util/parallax.dart';
 
 class LocationListItem extends StatelessWidget {
@@ -32,12 +33,24 @@ class LocationListItem extends StatelessWidget {
       children: [
         CachedNetworkImage(
           fadeInDuration: const Duration(milliseconds: 0),
-          fadeOutDuration: Duration(milliseconds: 0),
+          fadeOutDuration: const Duration(milliseconds: 0),
           imageUrl: imageUrl,
           key: _backgroundImageKey,
           fit: BoxFit.cover,
+          placeholder: (context, url) => _buildPlaceholder(),
         ),
       ],
     );
+  }
+
+  Widget _buildPlaceholder() {
+    return Builder(builder: (context) {
+      return Center(
+        child: LoadingAnimationWidget.fallingDot(
+          size: 35,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+      );
+    });
   }
 }

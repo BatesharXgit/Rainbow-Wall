@@ -8,7 +8,8 @@ class LocationListItem extends StatelessWidget {
   LocationListItem({
     Key? key,
     required this.imageUrl,
-    required this.scrollController, Uint8List? imageBytes,
+    required this.scrollController,
+    Uint8List? imageBytes,
   }) : super(key: key);
 
   final String imageUrl;
@@ -30,6 +31,8 @@ class LocationListItem extends StatelessWidget {
       ),
       children: [
         CachedNetworkImage(
+          fadeInDuration: const Duration(milliseconds: 0),
+          fadeOutDuration: Duration(milliseconds: 0),
           imageUrl: imageUrl,
           key: _backgroundImageKey,
           fit: BoxFit.cover,

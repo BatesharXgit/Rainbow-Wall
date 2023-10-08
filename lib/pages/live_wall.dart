@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:video_player/video_player.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -13,12 +14,13 @@ class LiveWallBeta extends StatefulWidget {
   const LiveWallBeta({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _LiveWallBetaState createState() => _LiveWallBetaState();
 }
 
 class _LiveWallBetaState extends State<LiveWallBeta>
     with AutomaticKeepAliveClientMixin<LiveWallBeta> {
-  PageController _pageController = PageController(viewportFraction: 0.8);
+  final PageController _pageController = PageController(viewportFraction: 0.8);
   List<String> videoUrls = [];
   int _currentVideoIndex = 0;
   VideoPlayerController? _controller;
@@ -113,6 +115,7 @@ class _LiveWallBetaState extends State<LiveWallBeta>
   bool get wantKeepAlive => true;
 
   Future<void> applyLiveWallpaper(String videoUrl) async {
+    // ignore: unused_local_variable
     String result;
     try {
       final httpUrl = await _getVideoUrl(_currentVideoIndex);
@@ -125,10 +128,8 @@ class _LiveWallBetaState extends State<LiveWallBeta>
           ? 'Live wallpaper set'
           : 'Failed to set live wallpaper.';
     } catch (e) {
-      print('Error applying live wallpaper: $e');
       result = 'Failed to set live wallpaper.';
     }
-    print(result);
   }
 
   @override
@@ -139,6 +140,33 @@ class _LiveWallBetaState extends State<LiveWallBeta>
     return Scaffold(
       appBar: AppBar(
         // elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      backgroundColor: Theme.of(context).colorScheme.background,
+                      title: const Text('Live Wallpaper Beta Version'),
+                      content: const Text(
+                        "Try out our beta version of the Live Wallpaper app for captivating, dynamic backgrounds on your device!",
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Close'),
+                        ),
+                      ],
+                    );
+                  });
+            },
+            icon: const Icon(Iconsax.info_circle),
+          )
+        ],
         centerTitle: true,
         backgroundColor: backgroundColor,
         title: Text(
@@ -151,103 +179,116 @@ class _LiveWallBetaState extends State<LiveWallBeta>
         ),
       ),
       backgroundColor: backgroundColor,
-      body: Column(
+      body: Stack(
         children: [
-          Expanded(
-            child: PageView.builder(
-              physics: ClampingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              padEnds: true,
-              controller: _pageController,
-              itemCount: videoUrls.length,
-              itemBuilder: (context, index) {
-                return Center(
-                  child: _videoInitialized && _controller != null
-                      ? Visibility(
-                          visible: index == _currentVideoIndex,
-                          child: AnimatedSwitcher(
-                            duration: Duration(milliseconds: 100),
-                            child: _controller!.value.isInitialized
-                                ? AnimatedContainer(
-                                    duration: const Duration(milliseconds: 250),
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 8.0, horizontal: 8.0),
-                                    decoration: BoxDecoration(
-                                      color: backgroundColor,
-                                      borderRadius: BorderRadius.circular(16),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.3),
-                                          offset: const Offset(0, 6),
-                                          blurRadius: 8,
+          Column(
+            children: [
+              Expanded(
+                child: PageView.builder(
+                  physics: const ClampingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  padEnds: true,
+                  controller: _pageController,
+                  itemCount: videoUrls.length,
+                  itemBuilder: (context, index) {
+                    return Center(
+                      child: _videoInitialized && _controller != null
+                          ? Visibility(
+                              visible: index == _currentVideoIndex,
+                              child: AnimatedSwitcher(
+                                duration: const Duration(milliseconds: 100),
+                                child: _controller!.value.isInitialized
+                                    ? AnimatedContainer(
+                                        duration:
+                                            const Duration(milliseconds: 250),
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 8.0, horizontal: 8.0),
+                                        decoration: BoxDecoration(
+                                          color: backgroundColor,
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.3),
+                                              offset: const Offset(0, 6),
+                                              blurRadius: 8,
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(16),
-                                      child: AspectRatio(
-                                        aspectRatio:
-                                            _controller!.value.aspectRatio,
-                                        child: VideoPlayer(_controller!),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                          child: AspectRatio(
+                                            aspectRatio:
+                                                _controller!.value.aspectRatio,
+                                            child: VideoPlayer(_controller!),
+                                          ),
+                                        ),
+                                      )
+                                    : Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          VideoPlayer(_controller!),
+                                          const CircularProgressIndicator(),
+                                        ],
                                       ),
-                                    ),
-                                  )
-                                : Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      VideoPlayer(_controller!),
-                                      CircularProgressIndicator(),
-                                    ],
-                                  ),
-                          ),
-                        )
-                      : CircularProgressIndicator(),
-                );
-              },
-            ),
-          ),
-          if (!_isPlaying && _videoInitialized)
-            Center(
-              child: IconButton(
-                icon: Icon(
-                  Icons.play_arrow,
-                  size: 48,
+                              ),
+                            )
+                          : const CircularProgressIndicator(),
+                    );
+                  },
                 ),
-                onPressed: () {
-                  setState(() {
-                    _isPlaying = true;
-                    _controller!.play();
-                  });
-                },
               ),
-            ),
-          GestureDetector(
-            onTap: () async {
-              if (_videoInitialized) {
-                await applyLiveWallpaper(videoUrls[_currentVideoIndex]);
-              }
-            },
-            child: Container(
-              height: 50,
-              width: 200,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.background,
-                borderRadius: BorderRadius.circular(20),
+              if (!_isPlaying && _videoInitialized)
+                Center(
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.play_arrow,
+                      size: 48,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isPlaying = true;
+                        _controller!.play();
+                      });
+                    },
+                  ),
+                ),
+              const SizedBox(
+                height: 100,
               ),
-              child: Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'Apply Wallpaper',
-                  style: GoogleFonts.kanit(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontSize: 22,
+            ],
+          ),
+          Positioned(
+            bottom: 80,
+            right: 60,
+            left: 60,
+            child: GestureDetector(
+              onTap: () async {
+                if (_videoInitialized) {
+                  await applyLiveWallpaper(videoUrls[_currentVideoIndex]);
+                }
+              },
+              child: Container(
+                height: 50,
+                width: 200,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.tertiary,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Apply Wallpaper',
+                    style: GoogleFonts.kanit(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontSize: 22,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 10,
           ),
         ],
       ),

@@ -1,9 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:luca/components/square_tile.dart';
 import 'package:luca/authentication/services/auth_service.dart';
+import 'package:luca/pages/util/privacy_policy.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({
@@ -118,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () => Get.to(PrivacyPage()),
                         child: const Text(
                           'Privacy Policy',
                           style: TextStyle(

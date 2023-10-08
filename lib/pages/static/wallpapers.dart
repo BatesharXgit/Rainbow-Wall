@@ -125,6 +125,7 @@ class CategoryState extends State<Category> {
       appBar: AppBar(
         // elevation: 0,
         centerTitle: true,
+       
         backgroundColor: backgroundColor,
         title: Text(
           'Categories',

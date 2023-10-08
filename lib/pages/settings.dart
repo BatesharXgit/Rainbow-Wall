@@ -2,10 +2,14 @@ import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:get/get.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'util/privacy_policy.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -147,6 +151,8 @@ class _SettingsPageState extends State<SettingsPage> {
         title: Text(
           'Settings',
           style: GoogleFonts.orbitron(
+              fontWeight: FontWeight.bold,
+              fontSize: 22,
               color: Theme.of(context).colorScheme.primary),
         ),
         elevation: 0,
@@ -263,16 +269,15 @@ class _SettingsPageState extends State<SettingsPage> {
                           },
                         ),
                         ListTile(
-                          leading: const Icon(Icons.policy_outlined),
-                          title: const Text('Privacy Policy'),
-                          subtitle: const Text('Luca privacy policy',
-                              style: TextStyle(color: Colors.grey)),
-                          iconColor: primaryColor,
-                          textColor: primaryColor,
-                          onTap: () {
-                            // Handle App Information menu item tap
-                          },
-                        ),
+                            leading: const Icon(Icons.policy_outlined),
+                            title: const Text('Privacy Policy'),
+                            subtitle: const Text('Luca privacy policy',
+                                style: TextStyle(color: Colors.grey)),
+                            iconColor: primaryColor,
+                            textColor: primaryColor,
+                            onTap: () {
+                              Get.to(PrivacyPage());
+                            }),
                       ],
                     ),
                   ),

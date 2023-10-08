@@ -123,7 +123,7 @@ class CategoryState extends State<Category> {
     // Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
+        // elevation: 0,
         centerTitle: true,
         backgroundColor: backgroundColor,
         title: Text(
@@ -151,7 +151,7 @@ class CategoryState extends State<Category> {
                 ),
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

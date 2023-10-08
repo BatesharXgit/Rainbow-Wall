@@ -490,10 +490,8 @@ class _ApplyWallpaperPageState extends State<ApplyWallpaperPage> {
                                 setState(() {
                                   if (favoriteImages
                                       .contains(widget.imageUrl)) {
-                                    // If the image is already a favorite, remove it
                                     favoriteImages.remove(widget.imageUrl);
                                   } else {
-                                    // If the image is not a favorite, add it
                                     favoriteImages.add(widget.imageUrl);
                                   }
                                 });
@@ -502,10 +500,8 @@ class _ApplyWallpaperPageState extends State<ApplyWallpaperPage> {
                               },
                               icon: Icon(
                                 favoriteImages.contains(widget.imageUrl)
-                                    ? Icons
-                                        .favorite // If it's a favorite, show a filled heart
-                                    : Icons
-                                        .favorite_border, // If not, show an outline heart
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
                                 color: Theme.of(context).iconTheme.color,
                                 size: 30,
                               ),

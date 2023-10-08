@@ -26,7 +26,7 @@ class FavoriteImagesPage extends StatelessWidget {
             icon: const Icon(Iconsax.trash),
           )
         ],
-        elevation: 0,
+        // elevation: 0,
         iconTheme: Theme.of(context).iconTheme,
         centerTitle: true,
         backgroundColor: backgroundColor,
@@ -83,19 +83,19 @@ class FavoriteImagesPage extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.background,
           title: const Text('Clear Favorites?'),
           content: const Text(
               'Are you sure you want to clear all your favorite images?'),
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop();
               },
               child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
-                // Clear favorites and close the dialog
                 Provider.of<FavoriteImagesProvider>(context, listen: false)
                     .clearFavorites();
                 Navigator.of(context).pop();

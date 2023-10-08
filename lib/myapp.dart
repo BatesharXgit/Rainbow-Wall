@@ -96,6 +96,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:luca/pages/favourite.dart';
 import 'package:luca/pages/homepage.dart';
 import 'package:luca/pages/live.dart';
+import 'package:luca/pages/live_wall.dart';
 import 'package:luca/pages/static/wallpapers.dart';
 
 class LucaHome extends StatefulWidget {
@@ -171,7 +172,8 @@ class _LucaHomeState extends State<LucaHome>
           children: const [
             MyHomePage(),
             Category(),
-            LiveWallCategory(),
+            // LiveWallCategory(),
+            LiveWallBeta(),
             FavoriteImagesPage(),
           ],
         ),

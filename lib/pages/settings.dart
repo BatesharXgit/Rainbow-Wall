@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:iconsax/iconsax.dart';
@@ -276,7 +275,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             iconColor: primaryColor,
                             textColor: primaryColor,
                             onTap: () {
-                              Get.to(PrivacyPage());
+                              Get.to(const PrivacyPage());
                             }),
                       ],
                     ),

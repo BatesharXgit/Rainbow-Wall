@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                       GestureDetector(
-                        onTap: () => Get.to(PrivacyPage()),
+                        onTap: () => Get.to(const PrivacyPage()),
                         child: const Text(
                           'Privacy Policy',
                           style: TextStyle(

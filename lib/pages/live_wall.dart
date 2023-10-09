@@ -18,8 +18,10 @@ class LiveWallBeta extends StatefulWidget {
   _LiveWallBetaState createState() => _LiveWallBetaState();
 }
 
-class _LiveWallBetaState extends State<LiveWallBeta>
-    with AutomaticKeepAliveClientMixin<LiveWallBeta> {
+class _LiveWallBetaState extends State<LiveWallBeta> {
+  // @override
+  // bool get wantKeepAlive => false;
+
   final PageController _pageController = PageController(viewportFraction: 0.8);
   List<String> videoUrls = [];
   int _currentVideoIndex = 0;
@@ -108,20 +110,17 @@ class _LiveWallBetaState extends State<LiveWallBeta>
     _controller?.removeListener(_onVideoStateChange);
     _controller?.dispose();
     _pageController.dispose();
-    disposeVideoPlayer();
+    // disposeVideoPlayer();
     super.dispose();
   }
 
-  void disposeVideoPlayer() {
-    _controller?.removeListener(_onVideoStateChange);
-    _controller?.pause();
-    _controller?.dispose();
-    _controller = null;
-    _videoInitialized = false;
-  }
-
-  @override
-  bool get wantKeepAlive => true;
+  // void disposeVideoPlayer() {
+  //   _controller?.removeListener(_onVideoStateChange);
+  //   _controller?.pause();
+  //   _controller?.dispose();
+  //   _controller = null;
+  //   _videoInitialized = false;
+  // }
 
   Future<void> applyLiveWallpaper(String videoUrl) async {
     // ignore: unused_local_variable
@@ -143,7 +142,8 @@ class _LiveWallBetaState extends State<LiveWallBeta>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
+    // super.build(context);
+
     Color backgroundColor = Theme.of(context).colorScheme.background;
     Color primaryColor = Theme.of(context).colorScheme.primary;
     return Scaffold(

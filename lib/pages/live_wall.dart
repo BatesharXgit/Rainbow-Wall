@@ -108,7 +108,16 @@ class _LiveWallBetaState extends State<LiveWallBeta>
     _controller?.removeListener(_onVideoStateChange);
     _controller?.dispose();
     _pageController.dispose();
+    disposeVideoPlayer();
     super.dispose();
+  }
+
+  void disposeVideoPlayer() {
+    _controller?.removeListener(_onVideoStateChange);
+    _controller?.pause();
+    _controller?.dispose();
+    _controller = null;
+    _videoInitialized = false;
   }
 
   @override

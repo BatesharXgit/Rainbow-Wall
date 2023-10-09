@@ -151,7 +151,7 @@ class MyHomePageState extends State<MyHomePage>
                 // onPressed: () {},
                 onPressed: () => Get.to(
                   const NotificationsPage(),
-                  transition: Transition.fadeIn,
+                  transition: Transition.native,
                 ),
                 icon: Icon(
                   Iconsax.notification,
@@ -164,7 +164,7 @@ class MyHomePageState extends State<MyHomePage>
                   const SearchWallpaper(
                     title: '',
                   ),
-                  transition: Transition.fadeIn,
+                  transition: Transition.native,
                 ),
                 icon: Icon(
                   BootstrapIcons.search,
@@ -179,7 +179,7 @@ class MyHomePageState extends State<MyHomePage>
                 ),
                 color: Theme.of(context).iconTheme.color,
                 onPressed: () =>
-                    Get.to(const SettingsPage(), transition: Transition.fadeIn),
+                    Get.to(const SettingsPage(), transition: Transition.native),
               ),
             ],
           ),

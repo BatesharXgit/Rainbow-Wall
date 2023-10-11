@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBlcFvKT-auh3Xp73-dPmEGSi2LGvi9qdQ',
-    appId: '1:803978399683:android:3afd14d414f756649d7776',
+    appId: '1:803978399683:android:f2ca5f5d55c12a4a9d7776',
     messagingSenderId: '803978399683',
     projectId: 'luca-ui',
     storageBucket: 'luca-ui.appspot.com',

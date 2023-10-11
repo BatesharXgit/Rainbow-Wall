@@ -105,9 +105,40 @@ class CategoryState extends State<Category> {
     'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fgames%2F91.jpg?alt=media&token=cd0b5b71-5a69-4915-b6bc-52397b20a927'
   ];
 
+  late bool _isNatureLoaded = false;
+  late bool _isSpaceLoaded = false;
+  late bool _isMinimalLoaded = false;
+  late bool _isAnimeLoaded = false;
+  late bool _isAnimalsLoaded = false;
+  late bool _isSciFiLoaded = false;
+  late bool _isGamesLoaded = false;
+
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration(milliseconds: 200), () {
+      setState(() {
+        _isNatureLoaded = true;
+      });
+    });
+    Future.delayed(Duration(milliseconds: 500), () {
+      setState(() {
+        _isSpaceLoaded = true;
+        _isMinimalLoaded = true;
+      });
+    });
+    Future.delayed(Duration(milliseconds: 700), () {
+      setState(() {
+        _isAnimeLoaded = true;
+        _isAnimalsLoaded = true;
+      });
+    });
+    Future.delayed(Duration(milliseconds: 900), () {
+      setState(() {
+        _isSciFiLoaded = true;
+        _isGamesLoaded = true;
+      });
+    });
   }
 
   @override
@@ -125,7 +156,7 @@ class CategoryState extends State<Category> {
       appBar: AppBar(
         // elevation: 0,
         centerTitle: true,
-       
+
         backgroundColor: backgroundColor,
         title: Text(
           'Categories',
@@ -250,37 +281,40 @@ class CategoryState extends State<Category> {
                     padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
                     child: SizedBox(
                       height: 200,
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 8,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ApplyWallpaperPage(
-                                        imageUrl: _nature[index]),
+                      child: (_isNatureLoaded)
+                          ? ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: 8,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ApplyWallpaperPage(
+                                                  imageUrl: _nature[index]),
+                                        ),
+                                      );
+                                    },
+                                    child: SizedBox(
+                                      width: 120,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(20),
+                                        child: CachedNetworkImage(
+                                          imageUrl: _nature[index],
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 );
                               },
-                              child: SizedBox(
-                                width: 120,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: CachedNetworkImage(
-                                    imageUrl: _nature[index],
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                            )
+                          : null,
                     ),
                   ),
                   Padding(
@@ -316,37 +350,40 @@ class CategoryState extends State<Category> {
                     padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
                     child: SizedBox(
                       height: 200,
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 8,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 120,
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ApplyWallpaperPage(
-                                          imageUrl: _space[index]),
+                      child: (_isSpaceLoaded)
+                          ? ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: 8,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SizedBox(
+                                    width: 120,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ApplyWallpaperPage(
+                                                    imageUrl: _space[index]),
+                                          ),
+                                        );
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(20),
+                                        child: CachedNetworkImage(
+                                          imageUrl: _space[index],
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                     ),
-                                  );
-                                },
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: CachedNetworkImage(
-                                    imageUrl: _space[index],
-                                    fit: BoxFit.cover,
                                   ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                                );
+                              },
+                            )
+                          : null,
                     ),
                   ),
                   Padding(
@@ -382,37 +419,41 @@ class CategoryState extends State<Category> {
                     padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
                     child: SizedBox(
                       height: 200,
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 8,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 120,
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ApplyWallpaperPage(
-                                          imageUrl: _minimalist[index]),
+                      child: (_isMinimalLoaded)
+                          ? ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: 8,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SizedBox(
+                                    width: 120,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ApplyWallpaperPage(
+                                                    imageUrl:
+                                                        _minimalist[index]),
+                                          ),
+                                        );
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(20),
+                                        child: CachedNetworkImage(
+                                          imageUrl: _minimalist[index],
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                     ),
-                                  );
-                                },
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: CachedNetworkImage(
-                                    imageUrl: _minimalist[index],
-                                    fit: BoxFit.cover,
                                   ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                                );
+                              },
+                            )
+                          : null,
                     ),
                   ),
                   Padding(
@@ -448,38 +489,41 @@ class CategoryState extends State<Category> {
                     padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
                     child: SizedBox(
                       height: 200,
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 8,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 120,
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ApplyWallpaperPage(
-                                          imageUrl: _anime[index]),
+                      child: (_isAnimeLoaded)
+                          ? ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: 8,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SizedBox(
+                                    width: 120,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ApplyWallpaperPage(
+                                                    imageUrl: _anime[index]),
+                                          ),
+                                        );
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(20),
+                                        child: CachedNetworkImage(
+                                          // imageUrl: _stock[index],
+                                          imageUrl: _anime[index],
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                     ),
-                                  );
-                                },
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: CachedNetworkImage(
-                                    // imageUrl: _stock[index],
-                                    imageUrl: _anime[index],
-                                    fit: BoxFit.cover,
                                   ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                                );
+                              },
+                            )
+                          : null,
                     ),
                   ),
                   Padding(
@@ -515,37 +559,40 @@ class CategoryState extends State<Category> {
                     padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
                     child: SizedBox(
                       height: 200,
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 8,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ApplyWallpaperPage(
-                                        imageUrl: _animals[index]),
+                      child: (_isAnimalsLoaded)
+                          ? ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: 8,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ApplyWallpaperPage(
+                                                  imageUrl: _animals[index]),
+                                        ),
+                                      );
+                                    },
+                                    child: SizedBox(
+                                      width: 120,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(20),
+                                        child: CachedNetworkImage(
+                                          imageUrl: _animals[index],
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 );
                               },
-                              child: SizedBox(
-                                width: 120,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: CachedNetworkImage(
-                                    imageUrl: _animals[index],
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                            )
+                          : null,
                     ),
                   ),
                   Padding(
@@ -581,37 +628,40 @@ class CategoryState extends State<Category> {
                     padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
                     child: SizedBox(
                       height: 200,
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 8,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ApplyWallpaperPage(
-                                        imageUrl: _scifi[index]),
+                      child: (_isSciFiLoaded)
+                          ? ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: 8,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ApplyWallpaperPage(
+                                                  imageUrl: _scifi[index]),
+                                        ),
+                                      );
+                                    },
+                                    child: SizedBox(
+                                      width: 120,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(20),
+                                        child: CachedNetworkImage(
+                                          imageUrl: _scifi[index],
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 );
                               },
-                              child: SizedBox(
-                                width: 120,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: CachedNetworkImage(
-                                    imageUrl: _scifi[index],
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                            )
+                          : null,
                     ),
                   ),
                   Padding(
@@ -647,37 +697,40 @@ class CategoryState extends State<Category> {
                     padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
                     child: SizedBox(
                       height: 200,
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: 8,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ApplyWallpaperPage(
-                                        imageUrl: _games[index]),
+                      child: (_isGamesLoaded)
+                          ? ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: 8,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ApplyWallpaperPage(
+                                                  imageUrl: _games[index]),
+                                        ),
+                                      );
+                                    },
+                                    child: SizedBox(
+                                      width: 120,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(20),
+                                        child: CachedNetworkImage(
+                                          imageUrl: _games[index],
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 );
                               },
-                              child: SizedBox(
-                                width: 120,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20),
-                                  child: CachedNetworkImage(
-                                    imageUrl: _games[index],
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                            )
+                          : null,
                     ),
                   ),
                   const SizedBox(

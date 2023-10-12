@@ -116,24 +116,24 @@ class CategoryState extends State<Category> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 200), () {
+    Future.delayed(Duration(milliseconds: 300), () {
       setState(() {
         _isNatureLoaded = true;
       });
     });
-    Future.delayed(Duration(milliseconds: 500), () {
+    Future.delayed(Duration(milliseconds: 700), () {
       setState(() {
         _isSpaceLoaded = true;
         _isMinimalLoaded = true;
       });
     });
-    Future.delayed(Duration(milliseconds: 700), () {
+    Future.delayed(Duration(milliseconds: 900), () {
       setState(() {
         _isAnimeLoaded = true;
         _isAnimalsLoaded = true;
       });
     });
-    Future.delayed(Duration(milliseconds: 900), () {
+    Future.delayed(Duration(milliseconds: 1200), () {
       setState(() {
         _isSciFiLoaded = true;
         _isGamesLoaded = true;
@@ -237,6 +237,7 @@ class CategoryState extends State<Category> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
                                   child: CachedNetworkImage(
+                                    fadeInDuration: Duration(milliseconds: 200),
                                     imageUrl: _amoled[index],
                                     fit: BoxFit.cover,
                                   ),
@@ -305,6 +306,8 @@ class CategoryState extends State<Category> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(20),
                                         child: CachedNetworkImage(
+                                          fadeInDuration:
+                                              Duration(milliseconds: 200),
                                           imageUrl: _nature[index],
                                           fit: BoxFit.cover,
                                         ),
@@ -374,6 +377,8 @@ class CategoryState extends State<Category> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(20),
                                         child: CachedNetworkImage(
+                                          fadeInDuration:
+                                              Duration(milliseconds: 200),
                                           imageUrl: _space[index],
                                           fit: BoxFit.cover,
                                         ),
@@ -444,6 +449,8 @@ class CategoryState extends State<Category> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(20),
                                         child: CachedNetworkImage(
+                                          fadeInDuration:
+                                              Duration(milliseconds: 200),
                                           imageUrl: _minimalist[index],
                                           fit: BoxFit.cover,
                                         ),
@@ -513,6 +520,8 @@ class CategoryState extends State<Category> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(20),
                                         child: CachedNetworkImage(
+                                          fadeInDuration:
+                                              Duration(milliseconds: 200),
                                           // imageUrl: _stock[index],
                                           imageUrl: _anime[index],
                                           fit: BoxFit.cover,
@@ -583,6 +592,8 @@ class CategoryState extends State<Category> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(20),
                                         child: CachedNetworkImage(
+                                          fadeInDuration:
+                                              Duration(milliseconds: 200),
                                           imageUrl: _animals[index],
                                           fit: BoxFit.cover,
                                         ),
@@ -652,6 +663,8 @@ class CategoryState extends State<Category> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(20),
                                         child: CachedNetworkImage(
+                                          fadeInDuration:
+                                              Duration(milliseconds: 200),
                                           imageUrl: _scifi[index],
                                           fit: BoxFit.cover,
                                         ),
@@ -721,6 +734,8 @@ class CategoryState extends State<Category> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(20),
                                         child: CachedNetworkImage(
+                                          fadeInDuration:
+                                              Duration(milliseconds: 200),
                                           imageUrl: _games[index],
                                           fit: BoxFit.cover,
                                         ),

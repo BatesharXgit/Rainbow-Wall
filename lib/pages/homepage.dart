@@ -96,87 +96,116 @@ class MyHomePageState extends State<MyHomePage>
     super.build(context);
     return Scaffold(
       key: _scaffoldKey,
-      body: NestedScrollView(
-        controller: ScrollController(),
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              expandedHeight: 200.0,
-              floating: false,
-              pinned: true,
-              backgroundColor: Theme.of(context).colorScheme.background,
-              flexibleSpace: FlexibleSpaceBar(
-                title: Text('LUCA', style: TextStyle(fontSize: 16)),
+      body: SafeArea(
+        child: NestedScrollView(
+          controller: ScrollController(),
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                expandedHeight: 200.0,
+                floating: false,
+                pinned: false,
+                backgroundColor: Theme.of(context).colorScheme.background,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: false,
+                  title: null, // Set the title to null
+
+                  background: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/luca.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'LUCA',
+                          style: TextStyle(
+                            fontFamily: "Anurati",
+                            fontSize: 42,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: () => Get.to(const NotificationsPage(),
+                                  transition: Transition.native),
+                              icon: Icon(
+                                Iconsax.notification,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () => Get.to(
+                                  const SearchWallpaper(title: ''),
+                                  transition: Transition.native),
+                              icon: Icon(
+                                BootstrapIcons.search,
+                                color: Colors.white,
+                                size: 26,
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(
+                                Iconsax.setting_2,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                              onPressed: () => Get.to(const SettingsPage(),
+                                  transition: Transition.native),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-              actions: [
-                IconButton(
-                  onPressed: () => Get.to(const NotificationsPage(),
-                      transition: Transition.native),
-                  icon: Icon(
-                    Iconsax.notification,
-                    color: Theme.of(context).iconTheme.color,
-                    size: 30,
-                  ),
-                ),
-                IconButton(
-                  onPressed: () => Get.to(const SearchWallpaper(title: ''),
-                      transition: Transition.native),
-                  icon: Icon(
-                    BootstrapIcons.search,
-                    color: Theme.of(context).iconTheme.color,
-                    size: 26,
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(
-                    Iconsax.setting_2,
-                    size: 30,
-                  ),
-                  color: Theme.of(context).iconTheme.color,
-                  onPressed: () => Get.to(const SettingsPage(),
-                      transition: Transition.native),
-                ),
-              ],
-            ),
-          ];
-        },
-        body: Column(
-          children: [
-            _buildTabBar(),
-            Expanded(
-              child: _buildTabViews(),
-            ),
-          ],
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverAppBarDelegate(_buildTabBar()),
+              ),
+            ];
+          },
+          body: _buildTabViews(),
         ),
       ),
     );
   }
 
   Widget _buildTabBar() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
-      child: TabBar(
-        physics: const BouncingScrollPhysics(),
-        controller: _tabController,
-        indicator: const BoxDecoration(
-          color: Colors.transparent,
-          border:
-              Border(bottom: BorderSide(color: Colors.transparent, width: 0)),
-        ),
-        labelColor: Theme.of(context).colorScheme.primary,
-        unselectedLabelColor: Theme.of(context).colorScheme.secondary,
-        isScrollable: true,
-        labelPadding: const EdgeInsets.symmetric(horizontal: 10),
-        tabs: data.map((tab) {
-          return Tab(
-            child: Text(
-              tab,
-              style: GoogleFonts.kanit(
-                fontSize: 14,
+    return Container(
+      color: Theme.of(context).colorScheme.background,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
+        child: TabBar(
+          physics: const BouncingScrollPhysics(),
+          controller: _tabController,
+          indicator: const BoxDecoration(
+            color: Colors.transparent,
+            border:
+                Border(bottom: BorderSide(color: Colors.transparent, width: 0)),
+          ),
+          labelColor: Theme.of(context).colorScheme.primary,
+          unselectedLabelColor: Theme.of(context).colorScheme.secondary,
+          isScrollable: true,
+          labelPadding: const EdgeInsets.symmetric(horizontal: 10),
+          tabs: data.map((tab) {
+            return Tab(
+              child: Text(
+                tab,
+                style: GoogleFonts.kanit(
+                  fontSize: 14,
+                ),
               ),
-            ),
-          );
-        }).toList(),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
@@ -232,14 +261,48 @@ class MyHomePageState extends State<MyHomePage>
       child: TabBarView(
         controller: _tabController,
         children: [
-          _buildImageGridFromRef(wallpaperRef),
-          _buildImageGridFromRef(aiRef),
-          _buildImageGridFromRef(illustrationRef),
-          _buildImageGridFromRef(carsRef),
-          _buildImageGridFromRef(abstractRef),
-          _buildImageGridFromRef(fantasyRef),
+          Container(
+              color: Theme.of(context).colorScheme.background,
+              child: _buildImageGridFromRef(wallpaperRef)),
+          Container(
+              color: Theme.of(context).colorScheme.background,
+              child: _buildImageGridFromRef(aiRef)),
+          Container(
+              color: Theme.of(context).colorScheme.background,
+              child: _buildImageGridFromRef(illustrationRef)),
+          Container(
+              color: Theme.of(context).colorScheme.background,
+              child: _buildImageGridFromRef(carsRef)),
+          Container(
+              color: Theme.of(context).colorScheme.background,
+              child: _buildImageGridFromRef(abstractRef)),
+          Container(
+              color: Theme.of(context).colorScheme.background,
+              child: _buildImageGridFromRef(fantasyRef)),
         ],
       ),
     );
+  }
+}
+
+class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  final Widget tab;
+
+  _SliverAppBarDelegate(this.tab);
+
+  @override
+  double get minExtent => 40;
+  @override
+  double get maxExtent => 40;
+
+  @override
+  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
+  }
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return tab;
   }
 }

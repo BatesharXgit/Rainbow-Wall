@@ -100,17 +100,20 @@ class MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
+    Color backgroundColor = Theme.of(context).colorScheme.background;
+    Color primaryColor = Theme.of(context).colorScheme.primary;
+    Color secondaryColor = Theme.of(context).colorScheme.secondary;
+    Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
     return Scaffold(
       key: _scaffoldKey,
-      // backgroundColor: Theme.of(context).colorScheme.background,
-      backgroundColor: Colors.transparent,
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: Stack(
           children: [
             Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/bg.jpg'),
+                    image: AssetImage('assets/luca.png'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -129,7 +132,6 @@ class MyHomePageState extends State<MyHomePage>
                 return <Widget>[
                   SliverAppBar(
                     forceMaterialTransparency: true,
-                    // expandedHeight: 280.0,
                     expandedHeight: MediaQuery.of(context).size.height * 0.35,
                     floating: true,
                     pinned: false,
@@ -138,19 +140,7 @@ class MyHomePageState extends State<MyHomePage>
                       centerTitle: false,
                       title: null,
                       background: Container(
-                        decoration: const BoxDecoration(
-                            // image: DecorationImage(
-                            //   image: AssetImage('assets/bg.jpg'),
-                            //   fit: BoxFit.cover,
-                            // ),
-                            ),
-                        // child: BackdropFilter(
-                        //   filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                        //   child: Container(
-                        //     color: Theme.of(context)
-                        //         .colorScheme
-                        //         .background
-                        //         .withOpacity(0.5),
+                        decoration: const BoxDecoration(),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -161,32 +151,46 @@ class MyHomePageState extends State<MyHomePage>
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  IconButton(
-                                    onPressed: () => Get.to(
-                                        const NotificationsPage(),
-                                        transition: Transition.native),
-                                    icon: const Icon(
-                                      Iconsax.notification,
-                                      color: Colors.white,
-                                      size: 30,
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background,
+                                        shape: BoxShape.circle),
+                                    child: IconButton(
+                                      onPressed: () => Get.to(
+                                          const NotificationsPage(),
+                                          transition: Transition.native),
+                                      icon: Icon(
+                                        Iconsax.notification,
+                                        color: primaryColor,
+                                        size: 30,
+                                      ),
                                     ),
                                   ),
-                                  const Text(
+                                  Text(
                                     'LUCA',
                                     style: TextStyle(
                                       fontFamily: "Anurati",
                                       fontSize: 42,
-                                      color: Colors.white,
+                                      color: primaryColor,
                                     ),
                                   ),
-                                  IconButton(
-                                    onPressed: () => Get.to(
-                                        const SearchWallpaper(title: ''),
-                                        transition: Transition.native),
-                                    icon: const Icon(
-                                      BootstrapIcons.search,
-                                      color: Colors.white,
-                                      size: 26,
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background,
+                                        shape: BoxShape.circle),
+                                    child: IconButton(
+                                      onPressed: () => Get.to(
+                                          const SearchWallpaper(title: ''),
+                                          transition: Transition.native),
+                                      icon: Icon(
+                                        BootstrapIcons.search,
+                                        color: primaryColor,
+                                        size: 26,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -201,7 +205,7 @@ class MyHomePageState extends State<MyHomePage>
                                   style: TextStyle(
                                       fontFamily: "Anurati",
                                       fontSize: 24,
-                                      color: Colors.white,
+                                      color: primaryColor,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -223,7 +227,7 @@ class MyHomePageState extends State<MyHomePage>
                                         width:
                                             MediaQuery.of(context).size.width,
                                         decoration: BoxDecoration(
-                                            color: kColours[index + 1],
+                                            color: kColours[index + 3],
                                             borderRadius:
                                                 BorderRadius.circular(20)),
                                         child: Text(
@@ -256,23 +260,22 @@ class MyHomePageState extends State<MyHomePage>
   }
 
   Widget _buildTabBar() {
+    Color primaryColor = Theme.of(context).colorScheme.primary;
     return Container(
-      // color: Theme.of(context).colorScheme.background,
       color: Colors.transparent,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
         child: TabBar(
           physics: const BouncingScrollPhysics(),
+          indicatorPadding: const EdgeInsets.fromLTRB(6, 2, 6, 2),
           controller: _tabController,
+          indicatorColor: Theme.of(context).colorScheme.background,
           indicator: BoxDecoration(
-            color: Colors.transparent,
-            border: Border(
-              bottom: BorderSide(
-                  color: Theme.of(context).colorScheme.background, width: 5),
-            ),
+            color: Theme.of(context).colorScheme.background,
+            borderRadius: BorderRadius.circular(15),
           ),
-          labelColor: Theme.of(context).colorScheme.primary,
-          unselectedLabelColor: Theme.of(context).colorScheme.secondary,
+          labelColor: primaryColor,
+          unselectedLabelColor: primaryColor,
           isScrollable: true,
           labelPadding: const EdgeInsets.symmetric(horizontal: 10),
           tabs: data.map((tab) {

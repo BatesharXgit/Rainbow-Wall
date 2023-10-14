@@ -59,6 +59,7 @@ class _LucaHomeState extends State<LucaHome>
     Color primaryColor = Theme.of(context).colorScheme.primary;
     return Scaffold(
       appBar: null,
+      backgroundColor: backgroundColor,
       body: BottomBar(
         borderRadius: BorderRadius.circular(500),
         duration: const Duration(milliseconds: 500),

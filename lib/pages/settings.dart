@@ -458,7 +458,7 @@ void _showChangelogPopup(BuildContext context) {
         backgroundColor: const Color(0xFF1E1E2A),
         content: Container(
           padding: const EdgeInsets.all(20),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [

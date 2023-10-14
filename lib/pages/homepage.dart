@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bootstrap_icons/bootstrap_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
@@ -91,62 +93,78 @@ class MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: NestedScrollView(
           controller: ScrollController(),
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                expandedHeight: 200.0,
-                floating: false,
+                forceMaterialTransparency: true,
+                expandedHeight: 300.0,
+                floating: true,
                 pinned: false,
                 backgroundColor: Theme.of(context).colorScheme.background,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: false,
                   title: null,
                   background: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/luca.png'),
+                        image: AssetImage('assets/bg.jpg'),
                         fit: BoxFit.cover,
                       ),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'LUCA',
-                          style: TextStyle(
-                            fontFamily: "Anurati",
-                            fontSize: 42,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Row(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                      child: Container(
+                        color: Theme.of(context)
+                            .colorScheme
+                            .background
+                            .withOpacity(0.5),
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            IconButton(
-                              onPressed: () => Get.to(const NotificationsPage(),
-                                  transition: Transition.native),
-                              icon: Icon(
-                                Iconsax.notification,
-                                color: Colors.white,
-                                size: 30,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () => Get.to(
-                                  const SearchWallpaper(title: ''),
-                                  transition: Transition.native),
-                              icon: Icon(
-                                BootstrapIcons.search,
-                                color: Colors.white,
-                                size: 26,
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconButton(
+                                    onPressed: () => Get.to(
+                                        const NotificationsPage(),
+                                        transition: Transition.native),
+                                    icon: const Icon(
+                                      Iconsax.notification,
+                                      color: Colors.white,
+                                      size: 30,
+                                    ),
+                                  ),
+                                  const Text(
+                                    'LUCA',
+                                    style: TextStyle(
+                                      fontFamily: "Anurati",
+                                      fontSize: 42,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () => Get.to(
+                                        const SearchWallpaper(title: ''),
+                                        transition: Transition.native),
+                                    icon: const Icon(
+                                      BootstrapIcons.search,
+                                      color: Colors.white,
+                                      size: 26,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),

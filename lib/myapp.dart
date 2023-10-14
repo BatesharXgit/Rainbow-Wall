@@ -80,7 +80,7 @@ class _LucaHomeState extends State<LucaHome>
               controller: controller,
             ),
             // LiveWallCategory(),
-            LiveWallBeta(),
+            const LiveWallBeta(),
             FavoriteImagesPage(
               controller: controller,
             ),
@@ -88,6 +88,18 @@ class _LucaHomeState extends State<LucaHome>
               controller: controller,
             ),
           ],
+        ),
+        fit: StackFit.expand,
+        icon: (width, height) => Center(
+          child: IconButton(
+            padding: EdgeInsets.zero,
+            onPressed: null,
+            icon: Icon(
+              Icons.arrow_upward_rounded,
+              color: Colors.grey,
+              size: width,
+            ),
+          ),
         ),
         child: TabBar(
           indicatorPadding: const EdgeInsets.fromLTRB(6, 0, 6, 0),
@@ -142,18 +154,6 @@ class _LucaHomeState extends State<LucaHome>
               )),
             ),
           ],
-        ),
-        fit: StackFit.expand,
-        icon: (width, height) => Center(
-          child: IconButton(
-            padding: EdgeInsets.zero,
-            onPressed: null,
-            icon: Icon(
-              Icons.arrow_upward_rounded,
-              color: Colors.grey,
-              size: width,
-            ),
-          ),
         ),
       ),
     );

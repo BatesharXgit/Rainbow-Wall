@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:luca/pages/favourite.dart';
 import 'package:luca/pages/homepage.dart';
 import 'package:luca/pages/live_wall.dart';
+import 'package:luca/pages/settings.dart';
 import 'package:luca/pages/static/wallpapers.dart';
 
 class LucaHome extends StatefulWidget {
@@ -27,7 +28,7 @@ class _LucaHomeState extends State<LucaHome>
   @override
   void initState() {
     currentPage = 0;
-    tabController = TabController(length: 4, vsync: this);
+    tabController = TabController(length: 5, vsync: this);
     tabController.animation!.addListener(
       () {
         final value = tabController.animation!.value.round();
@@ -80,7 +81,12 @@ class _LucaHomeState extends State<LucaHome>
             ),
             // LiveWallCategory(),
             LiveWallBeta(),
-            FavoriteImagesPage(),
+            FavoriteImagesPage(
+              controller: controller,
+            ),
+            SettingsPage(
+              controller: controller,
+            ),
           ],
         ),
         child: TabBar(
@@ -123,6 +129,15 @@ class _LucaHomeState extends State<LucaHome>
               child: Center(
                   child: Icon(
                 Iconsax.heart,
+                color: primaryColor,
+              )),
+            ),
+            SizedBox(
+              height: 55,
+              width: 40,
+              child: Center(
+                  child: Icon(
+                Iconsax.setting_2,
                 color: primaryColor,
               )),
             ),

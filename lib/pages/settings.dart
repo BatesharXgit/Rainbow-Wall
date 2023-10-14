@@ -11,7 +11,11 @@ import 'package:url_launcher/url_launcher.dart';
 import 'util/privacy_policy.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+  final ScrollController controller;
+  const SettingsPage({
+    required this.controller,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
@@ -159,6 +163,7 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
+        controller: widget.controller,
         physics: const BouncingScrollPhysics(),
         child: AnimationLimiter(
           child: Center(
@@ -383,7 +388,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           GoogleFonts.kanit(color: primaryColor, fontSize: 12),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 74),
                 ],
               ),
             ),

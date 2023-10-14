@@ -108,7 +108,7 @@ class MyHomePageState extends State<MyHomePage>
                 backgroundColor: Theme.of(context).colorScheme.background,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: false,
-                  title: null, // Set the title to null
+                  title: null, 
 
                   background: Container(
                     decoration: BoxDecoration(
@@ -150,15 +150,7 @@ class MyHomePageState extends State<MyHomePage>
                                 size: 26,
                               ),
                             ),
-                            IconButton(
-                              icon: const Icon(
-                                Iconsax.setting_2,
-                                size: 30,
-                                color: Colors.white,
-                              ),
-                              onPressed: () => Get.to(const SettingsPage(),
-                                  transition: Transition.native),
-                            ),
+                           
                           ],
                         ),
                       ],

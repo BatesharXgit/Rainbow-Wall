@@ -56,6 +56,7 @@ dependencies:
   firebase_messaging: ^14.6.8
   flutter_floating_bottom_bar: ^1.2.0
   path_provider: ^2.1.1
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

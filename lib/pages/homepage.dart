@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:bootstrap_icons/bootstrap_icons.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -43,6 +44,14 @@ class MyHomePageState extends State<MyHomePage>
   List<Reference> abstractRefs = [];
   List<Reference> illustrationRefs = [];
   List<Reference> fantasyRefs = [];
+
+  List<Color> kColours = [
+    Colors.red,
+    Colors.yellow,
+    Colors.green,
+    Colors.pink,
+    Colors.purple
+  ];
 
   int index = 0;
 
@@ -93,40 +102,61 @@ class MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: Theme.of(context).colorScheme.background,
+      // backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Colors.transparent,
       body: SafeArea(
-        child: NestedScrollView(
-          controller: ScrollController(),
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return <Widget>[
-              SliverAppBar(
-                forceMaterialTransparency: true,
-                expandedHeight: 300.0,
-                floating: true,
-                pinned: false,
-                backgroundColor: Theme.of(context).colorScheme.background,
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: false,
-                  title: null,
-                  background: Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/bg.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                      child: Container(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .background
-                            .withOpacity(0.5),
+        child: Stack(
+          children: [
+            Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/bg.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                  child: Container(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .background
+                        .withOpacity(0.5),
+                  ),
+                )),
+            NestedScrollView(
+              controller: ScrollController(),
+              headerSliverBuilder: (context, innerBoxIsScrolled) {
+                return <Widget>[
+                  SliverAppBar(
+                    forceMaterialTransparency: true,
+                    // expandedHeight: 280.0,
+                    expandedHeight: MediaQuery.of(context).size.height * 0.35,
+                    floating: true,
+                    pinned: false,
+                    backgroundColor: Theme.of(context).colorScheme.background,
+                    flexibleSpace: FlexibleSpaceBar(
+                      centerTitle: false,
+                      title: null,
+                      background: Container(
+                        decoration: const BoxDecoration(
+                            // image: DecorationImage(
+                            //   image: AssetImage('assets/bg.jpg'),
+                            //   fit: BoxFit.cover,
+                            // ),
+                            ),
+                        // child: BackdropFilter(
+                        //   filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                        //   child: Container(
+                        //     color: Theme.of(context)
+                        //         .colorScheme
+                        //         .background
+                        //         .withOpacity(0.5),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              padding:
+                                  const EdgeInsets.fromLTRB(10, 10, 10, 10),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -162,20 +192,64 @@ class MyHomePageState extends State<MyHomePage>
                                 ],
                               ),
                             ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 25),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Discover',
+                                  style: TextStyle(
+                                      fontFamily: "Anurati",
+                                      fontSize: 24,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            CarouselSlider(
+                              options: CarouselOptions(
+                                  scrollPhysics: BouncingScrollPhysics(),
+                                  height: 160.0,
+                                  enlargeCenterPage: true,
+                                  viewportFraction: 0.8,
+                                  enlargeFactor: 0.2),
+                              items: ['ABC', 2, 3, 4, 5].map((i) {
+                                return Builder(
+                                  builder: (BuildContext context) {
+                                    return Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                            color: kColours[index + 1],
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: Text(
+                                          'text $i',
+                                          style: TextStyle(fontSize: 16.0),
+                                        ));
+                                  },
+                                );
+                              }).toList(),
+                            )
                           ],
                         ),
                       ),
                     ),
+                    // ),
+                    // ),
                   ),
-                ),
-              ),
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _SliverAppBarDelegate(_buildTabBar()),
-              ),
-            ];
-          },
-          body: _buildTabViews(),
+                  SliverPersistentHeader(
+                    pinned: true,
+                    delegate: _SliverAppBarDelegate(_buildTabBar()),
+                  ),
+                ];
+              },
+              body: _buildTabViews(),
+            ),
+          ],
         ),
       ),
     );
@@ -183,16 +257,19 @@ class MyHomePageState extends State<MyHomePage>
 
   Widget _buildTabBar() {
     return Container(
-      color: Theme.of(context).colorScheme.background,
+      // color: Theme.of(context).colorScheme.background,
+      color: Colors.transparent,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10.0, 0, 0, 0),
         child: TabBar(
           physics: const BouncingScrollPhysics(),
           controller: _tabController,
-          indicator: const BoxDecoration(
+          indicator: BoxDecoration(
             color: Colors.transparent,
-            border:
-                Border(bottom: BorderSide(color: Colors.transparent, width: 0)),
+            border: Border(
+              bottom: BorderSide(
+                  color: Theme.of(context).colorScheme.background, width: 5),
+            ),
           ),
           labelColor: Theme.of(context).colorScheme.primary,
           unselectedLabelColor: Theme.of(context).colorScheme.secondary,
@@ -265,22 +342,28 @@ class MyHomePageState extends State<MyHomePage>
         controller: _tabController,
         children: [
           Container(
-              color: Theme.of(context).colorScheme.background,
+              color: Colors.transparent,
+              // color: Theme.of(context).colorScheme.background,
               child: _buildImageGridFromRef(wallpaperRef)),
           Container(
-              color: Theme.of(context).colorScheme.background,
+              color: Colors.transparent,
+              // color: Theme.of(context).colorScheme.background,
               child: _buildImageGridFromRef(aiRef)),
           Container(
-              color: Theme.of(context).colorScheme.background,
+              color: Colors.transparent,
+              // color: Theme.of(context).colorScheme.background,
               child: _buildImageGridFromRef(illustrationRef)),
           Container(
-              color: Theme.of(context).colorScheme.background,
+              color: Colors.transparent,
+              // color: Theme.of(context).colorScheme.background,
               child: _buildImageGridFromRef(carsRef)),
           Container(
-              color: Theme.of(context).colorScheme.background,
+              color: Colors.transparent,
+              // color: Theme.of(context).colorScheme.background,
               child: _buildImageGridFromRef(abstractRef)),
           Container(
-              color: Theme.of(context).colorScheme.background,
+              color: Colors.transparent,
+              // color: Theme.of(context).colorScheme.background,
               child: _buildImageGridFromRef(fantasyRef)),
         ],
       ),

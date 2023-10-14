@@ -8,7 +8,6 @@ import 'package:luca/pages/util/components.dart';
 import 'package:luca/pages/util/notify/notify.dart';
 import 'package:luca/pages/util/searchresult.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:luca/pages/settings.dart';
 
 final FirebaseStorage storage = FirebaseStorage.instance;
 
@@ -108,8 +107,7 @@ class MyHomePageState extends State<MyHomePage>
                 backgroundColor: Theme.of(context).colorScheme.background,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: false,
-                  title: null, 
-
+                  title: null,
                   background: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
@@ -150,7 +148,6 @@ class MyHomePageState extends State<MyHomePage>
                                 size: 26,
                               ),
                             ),
-                           
                           ],
                         ),
                       ],

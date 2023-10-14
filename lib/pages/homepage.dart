@@ -108,152 +108,130 @@ class MyHomePageState extends State<MyHomePage>
       key: _scaffoldKey,
       backgroundColor: backgroundColor,
       body: SafeArea(
-        child: Stack(
-          children: [
-            Container(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/luca.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                  child: Container(
+        child: NestedScrollView(
+          controller: ScrollController(),
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                forceMaterialTransparency: true,
+                expandedHeight: MediaQuery.of(context).size.height * 0.35,
+                floating: true,
+                pinned: false,
+                backgroundColor: Theme.of(context).colorScheme.background,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: false,
+                  title: null,
+                  background: Container(
                     color: Theme.of(context)
                         .colorScheme
                         .background
                         .withOpacity(0.5),
-                  ),
-                )),
-            NestedScrollView(
-              controller: ScrollController(),
-              headerSliverBuilder: (context, innerBoxIsScrolled) {
-                return <Widget>[
-                  SliverAppBar(
-                    forceMaterialTransparency: true,
-                    expandedHeight: MediaQuery.of(context).size.height * 0.35,
-                    floating: true,
-                    pinned: false,
-                    backgroundColor: Theme.of(context).colorScheme.background,
-                    flexibleSpace: FlexibleSpaceBar(
-                      centerTitle: false,
-                      title: null,
-                      background: Container(
-                        decoration: const BoxDecoration(),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .background,
-                                        shape: BoxShape.circle),
-                                    child: IconButton(
-                                      onPressed: () => Get.to(
-                                          const NotificationsPage(),
-                                          transition: Transition.native),
-                                      icon: Icon(
-                                        Iconsax.notification,
-                                        color: primaryColor,
-                                        size: 30,
-                                      ),
-                                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary,
+                                    shape: BoxShape.circle),
+                                child: IconButton(
+                                  onPressed: () => Get.to(
+                                      const NotificationsPage(),
+                                      transition: Transition.native),
+                                  icon: Icon(
+                                    Iconsax.notification,
+                                    color: primaryColor,
+                                    size: 30,
                                   ),
-                                  Text(
-                                    'LUCA',
-                                    style: TextStyle(
-                                      fontFamily: "Anurati",
-                                      fontSize: 42,
-                                      color: primaryColor,
-                                    ),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .background,
-                                        shape: BoxShape.circle),
-                                    child: IconButton(
-                                      onPressed: () => Get.to(
-                                          const SearchWallpaper(title: ''),
-                                          transition: Transition.native),
-                                      icon: Icon(
-                                        BootstrapIcons.search,
-                                        color: primaryColor,
-                                        size: 26,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 25),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'Discover',
-                                  style: TextStyle(
-                                      fontFamily: "Anurati",
-                                      fontSize: 24,
-                                      color: primaryColor,
-                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            CarouselSlider(
-                              options: CarouselOptions(
-                                  scrollPhysics: BouncingScrollPhysics(),
-                                  height: 160.0,
-                                  enlargeCenterPage: true,
-                                  viewportFraction: 0.8,
-                                  enlargeFactor: 0.2),
-                              items: ['ABC', 2, 3, 4, 5].map((i) {
-                                return Builder(
-                                  builder: (BuildContext context) {
-                                    return Container(
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                            color: kColours[index + 3],
-                                            borderRadius:
-                                                BorderRadius.circular(20)),
-                                        child: Text(
-                                          'text $i',
-                                          style: TextStyle(fontSize: 16.0),
-                                        ));
-                                  },
-                                );
-                              }).toList(),
-                            )
-                          ],
+                              Text(
+                                'LUCA',
+                                style: TextStyle(
+                                  fontFamily: "Anurati",
+                                  fontSize: 42,
+                                  color: primaryColor,
+                                ),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary,
+                                    shape: BoxShape.circle),
+                                child: IconButton(
+                                  onPressed: () => Get.to(
+                                      const SearchWallpaper(title: ''),
+                                      transition: Transition.native),
+                                  icon: Icon(
+                                    BootstrapIcons.search,
+                                    color: primaryColor,
+                                    size: 26,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Discover',
+                              style: TextStyle(
+                                  fontFamily: "Anurati",
+                                  fontSize: 24,
+                                  color: primaryColor,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CarouselSlider(
+                          options: CarouselOptions(
+                              scrollPhysics: BouncingScrollPhysics(),
+                              height: 160.0,
+                              enlargeCenterPage: true,
+                              viewportFraction: 0.8,
+                              enlargeFactor: 0.2),
+                          items: ['ABC', 2, 3, 4, 5].map((i) {
+                            return Builder(
+                              builder: (BuildContext context) {
+                                return Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    decoration: BoxDecoration(
+                                        color: kColours[index + 2],
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    child: Text(
+                                      'text $i',
+                                      style: TextStyle(fontSize: 16.0),
+                                    ));
+                              },
+                            );
+                          }).toList(),
+                        )
+                      ],
                     ),
-                    // ),
-                    // ),
                   ),
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: _SliverAppBarDelegate(_buildTabBar()),
-                  ),
-                ];
-              },
-              body: _buildTabViews(),
-            ),
-          ],
+                  // ),
+                  // ),
+                ),
+              ),
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _SliverAppBarDelegate(_buildTabBar()),
+              ),
+            ];
+          },
+          body: _buildTabViews(),
         ),
       ),
     );
@@ -261,6 +239,7 @@ class MyHomePageState extends State<MyHomePage>
 
   Widget _buildTabBar() {
     Color primaryColor = Theme.of(context).colorScheme.primary;
+    Color backgroundColor = Theme.of(context).colorScheme.background;
     return Container(
       color: Colors.transparent,
       child: Padding(
@@ -271,7 +250,7 @@ class MyHomePageState extends State<MyHomePage>
           controller: _tabController,
           indicatorColor: Theme.of(context).colorScheme.background,
           indicator: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.tertiary,
             borderRadius: BorderRadius.circular(15),
           ),
           labelColor: primaryColor,

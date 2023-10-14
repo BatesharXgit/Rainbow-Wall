@@ -18,7 +18,10 @@ class LucaHome extends StatefulWidget {
 }
 
 class _LucaHomeState extends State<LucaHome>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   late int currentPage;
   late TabController tabController;
 
@@ -51,6 +54,7 @@ class _LucaHomeState extends State<LucaHome>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     Color backgroundColor = Theme.of(context).colorScheme.tertiary;
     Color primaryColor = Theme.of(context).colorScheme.primary;
     return Scaffold(

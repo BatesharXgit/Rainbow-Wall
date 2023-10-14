@@ -30,10 +30,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class MyHomePageState extends State<MyHomePage>
-    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
-  @override
-  bool get wantKeepAlive => true;
-
+    with SingleTickerProviderStateMixin {
   ScrollController scrollController = ScrollController();
   late TabController _tabController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -92,7 +89,6 @@ class MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Scaffold(
       key: _scaffoldKey,
       body: SafeArea(

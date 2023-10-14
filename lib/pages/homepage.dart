@@ -301,7 +301,7 @@ class MyHomePageState extends State<MyHomePage>
     );
   }
 
-   Widget _buildImageGridFromRef(Reference imageRef) {
+  Widget _buildImageGridFromRef(Reference imageRef) {
     return FutureBuilder<ListResult>(
       future: imageRef.listAll(),
       builder: (context, snapshot) {
@@ -314,7 +314,7 @@ class MyHomePageState extends State<MyHomePage>
 
           return GridView.builder(
             clipBehavior: Clip.none,
-            controller: ScrollController(),
+            // controller: ScrollController(),
             physics: const ClampingScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

@@ -20,7 +20,9 @@ final Reference illustrationRef = storage.ref().child('illustration');
 final Reference fantasyRef = storage.ref().child('fantasy');
 
 class MyHomePage extends StatefulWidget {
+  final ScrollController controller;
   const MyHomePage({
+    required this.controller,
     Key? key,
   }) : super(key: key);
 
@@ -29,7 +31,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class MyHomePageState extends State<MyHomePage>
-    with SingleTickerProviderStateMixin {
+    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   ScrollController scrollController = ScrollController();
   late TabController _tabController;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -88,102 +93,61 @@ class MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Scaffold(
-          key: _scaffoldKey,
-          appBar: null,
-          backgroundColor: Theme.of(context).colorScheme.background,
-          body: SafeArea(
-            child: Column(
-              children: [
-                _buildAppBar(context),
-                _buildTabBar(),
-                Expanded(
-                  child: _buildTabViews(),
+    super.build(context);
+    return Scaffold(
+      key: _scaffoldKey,
+      body: NestedScrollView(
+        controller: ScrollController(),
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 200.0,
+              floating: false,
+              pinned: true,
+              backgroundColor: Theme.of(context).colorScheme.background,
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text('LUCA', style: TextStyle(fontSize: 16)),
+              ),
+              actions: [
+                IconButton(
+                  onPressed: () => Get.to(const NotificationsPage(),
+                      transition: Transition.native),
+                  icon: Icon(
+                    Iconsax.notification,
+                    color: Theme.of(context).iconTheme.color,
+                    size: 30,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () => Get.to(const SearchWallpaper(title: ''),
+                      transition: Transition.native),
+                  icon: Icon(
+                    BootstrapIcons.search,
+                    color: Theme.of(context).iconTheme.color,
+                    size: 26,
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Iconsax.setting_2,
+                    size: 30,
+                  ),
+                  color: Theme.of(context).iconTheme.color,
+                  onPressed: () => Get.to(const SettingsPage(),
+                      transition: Transition.native),
                 ),
               ],
             ),
-          ),
+          ];
+        },
+        body: Column(
+          children: [
+            _buildTabBar(),
+            Expanded(
+              child: _buildTabViews(),
+            ),
+          ],
         ),
-      ],
-    );
-  }
-
-  Widget _buildAppBar(context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(18.0, 10.0, 8.0, 0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  image: const DecorationImage(
-                      image: AssetImage('assets/luca.png')),
-                  border: Border.all(
-                      width: 2.0, color: Theme.of(context).colorScheme.primary),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-              const SizedBox(
-                width: 12.0,
-              ),
-              Text(
-                'LUCA',
-                style: TextStyle(
-                  fontFamily: 'Anurati',
-                  color: Theme.of(context).colorScheme.primary,
-                  fontSize: 32,
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              IconButton(
-                // onPressed: () {},
-                onPressed: () => Get.to(
-                  const NotificationsPage(),
-                  transition: Transition.native,
-                ),
-                icon: Icon(
-                  Iconsax.notification,
-                  color: Theme.of(context).iconTheme.color,
-                  size: 30,
-                ),
-              ),
-              IconButton(
-                onPressed: () => Get.to(
-                  const SearchWallpaper(
-                    title: '',
-                  ),
-                  transition: Transition.native,
-                ),
-                icon: Icon(
-                  BootstrapIcons.search,
-                  color: Theme.of(context).iconTheme.color,
-                  size: 26,
-                ),
-              ),
-              IconButton(
-                icon: const Icon(
-                  Iconsax.setting_2,
-                  size: 30,
-                ),
-                color: Theme.of(context).iconTheme.color,
-                onPressed: () =>
-                    Get.to(const SettingsPage(), transition: Transition.native),
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }
@@ -230,7 +194,7 @@ class MyHomePageState extends State<MyHomePage>
 
           return GridView.builder(
             clipBehavior: Clip.none,
-            controller: ScrollController(),
+            // controller: widget.controller,
             physics: const ClampingScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

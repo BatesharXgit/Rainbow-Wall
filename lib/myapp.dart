@@ -1,94 +1,3 @@
-// import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:iconsax/iconsax.dart';
-// import 'package:luca/pages/favourite.dart';
-// import 'package:luca/pages/homepage.dart';
-// import 'package:luca/pages/dynamic/live_category.dart';
-// import 'package:luca/pages/static/wallpapers.dart';
-// import 'package:luca/themes/themes.dart';
-
-// class LucaHome extends StatefulWidget {
-//   const LucaHome({
-//     super.key,
-//   });
-
-//   @override
-//   State<LucaHome> createState() => _LucaHomeState();
-// }
-
-// class _LucaHomeState extends State<LucaHome> {
-//   int _selectedIndex = 0;
-//   final colour = Colors.white;
-//   final List<Widget> _pages = [
-//     const MyHomePage(),
-//     const Category(),
-//     const LiveWallCategory(),
-//     FavoriteImagesPage(),
-//   ];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GetMaterialApp(
-//       themeMode: ThemeMode.system,
-//       theme: lightTheme,
-//       darkTheme: darkTheme,
-//       title: 'Luca',
-//       home: Scaffold(
-//         body: _pages[_selectedIndex],
-//         bottomNavigationBar: SizedBox(
-//           height: 64,
-//           child: FlashyTabBar(
-//             backgroundColor: const Color(0xFF131321),
-//             animationCurve: Curves.linear,
-//             selectedIndex: _selectedIndex,
-//             iconSize: 24,
-//             // showElevation: false,
-//             onItemSelected: (index) => setState(() {
-//               _selectedIndex = index;
-//             }),
-//             items: [
-//               FlashyTabBarItem(
-//                 activeColor: Colors.white,
-//                 inactiveColor: Colors.grey,
-//                 icon: const Icon(Iconsax.home_2),
-//                 title: const Text('Home'),
-//               ),
-//               FlashyTabBarItem(
-//                 activeColor: Colors.white,
-//                 inactiveColor: Colors.grey,
-//                 icon: const Icon(
-//                   Iconsax.image4,
-//                   size: 25,
-//                 ),
-//                 title: const Text('Category'),
-//               ),
-//               FlashyTabBarItem(
-//                 activeColor: Colors.white,
-//                 inactiveColor: Colors.grey,
-//                 icon: const Icon(
-//                   Iconsax.video_circle,
-//                   size: 25,
-//                 ),
-//                 title: const Text('Live'),
-//               ),
-//               FlashyTabBarItem(
-//                 activeColor: Colors.white,
-//                 inactiveColor: Colors.grey,
-//                 icon: const Icon(
-//                   Iconsax.heart,
-//                   size: 25,
-//                 ),
-//                 title: const Text('Favourites'),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
@@ -108,7 +17,10 @@ class LucaHome extends StatefulWidget {
 }
 
 class _LucaHomeState extends State<LucaHome>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   late int currentPage;
   late TabController tabController;
 
@@ -141,13 +53,9 @@ class _LucaHomeState extends State<LucaHome>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     Color backgroundColor = Theme.of(context).colorScheme.tertiary;
     Color primaryColor = Theme.of(context).colorScheme.primary;
-    // Color secondaryColor = Theme.of(context).colorScheme.secondary;
-    // Color tertiaryColor = Theme.of(context).colorScheme.tertiary;
-    // final Color unselectedColor = colors[currentPage].computeLuminance() < 0.5
-    //     ? Colors.black
-    //     : Colors.white;
     return Scaffold(
       appBar: null,
       body: BottomBar(
@@ -157,20 +65,19 @@ class _LucaHomeState extends State<LucaHome>
         showIcon: true,
         width: MediaQuery.of(context).size.width * 0.8,
         barColor: backgroundColor,
-        // barColor: colors[currentPage].computeLuminance() > 0.5
-        //     ? Colors.black
-        //     : Colors.white,
         iconHeight: 35,
         iconWidth: 35,
         reverse: false,
-        hideOnScroll: false,
+        hideOnScroll: true,
         body: (context, controller) => TabBarView(
           controller: tabController,
           dragStartBehavior: DragStartBehavior.down,
           physics: const NeverScrollableScrollPhysics(),
-          children: const [
-            MyHomePage(),
-            Category(),
+          children: [
+            MyHomePage(controller: controller),
+            Category(
+              controller: controller,
+            ),
             // LiveWallCategory(),
             LiveWallBeta(),
             FavoriteImagesPage(),
@@ -180,20 +87,7 @@ class _LucaHomeState extends State<LucaHome>
           indicatorPadding: const EdgeInsets.fromLTRB(6, 0, 6, 0),
           controller: tabController,
           indicator: UnderlineTabIndicator(
-              borderSide: BorderSide(
-                  color: primaryColor,
-                  // color: currentPage == 0
-                  //     ? colors[0]
-                  //     : currentPage == 1
-                  //         ? colors[1]
-                  //         : currentPage == 2
-                  //             ? colors[2]
-                  //             : currentPage == 3
-                  //                 ? colors[3]
-                  //                 : currentPage == 4
-                  //                     ? colors[4]
-                  //                     : unselectedColor,
-                  width: 4),
+              borderSide: BorderSide(color: primaryColor, width: 4),
               insets: const EdgeInsets.fromLTRB(16, 0, 16, 8)),
           tabs: [
             SizedBox(
@@ -202,7 +96,6 @@ class _LucaHomeState extends State<LucaHome>
               child: Center(
                   child: Icon(
                 Iconsax.home_1,
-                // color: currentPage == 0 ? colors[0] : unselectedColor,
                 color: primaryColor,
               )),
             ),
@@ -212,7 +105,6 @@ class _LucaHomeState extends State<LucaHome>
               child: Center(
                   child: Icon(
                 Iconsax.image4,
-                // color: currentPage == 1 ? colors[1] : unselectedColor,
                 color: primaryColor,
               )),
             ),
@@ -222,7 +114,6 @@ class _LucaHomeState extends State<LucaHome>
               child: Center(
                   child: Icon(
                 Iconsax.video_circle,
-                // color: currentPage == 3 ? colors[3] : unselectedColor,
                 color: primaryColor,
               )),
             ),
@@ -232,11 +123,22 @@ class _LucaHomeState extends State<LucaHome>
               child: Center(
                   child: Icon(
                 Iconsax.heart,
-                // color: currentPage == 4 ? colors[4] : unselectedColor,
                 color: primaryColor,
               )),
             ),
           ],
+        ),
+        fit: StackFit.expand,
+        icon: (width, height) => Center(
+          child: IconButton(
+            padding: EdgeInsets.zero,
+            onPressed: null,
+            icon: Icon(
+              Icons.arrow_upward_rounded,
+              color: Colors.grey,
+              size: width,
+            ),
+          ),
         ),
       ),
     );

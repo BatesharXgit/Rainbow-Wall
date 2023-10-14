@@ -223,7 +223,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           iconColor: primaryColor,
                           textColor: primaryColor,
                           onTap: () {
-                            _showChangelogBottomSheet(context);
+                            _showChangelogPopup(context);
                           },
                         ),
                         ListTile(
@@ -394,44 +394,47 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void _showAboutAppBottomSheet(BuildContext context) {
-    showModalBottomSheet(
+    showDialog(
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
       builder: (BuildContext context) {
-        return Container(
-          color: const Color(0xFF1E1E2A),
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'About the App',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          backgroundColor: const Color(0xFF1E1E2A),
+          content: Container(
+            color: const Color(0xFF1E1E2A),
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'About the App',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                '🌟 Immerse yourself in the world of Luca – the ultimate wallpaper app. Discover an extensive selection of static and dynamic wallpapers across various categories, all presented through a beautifully designed and intuitive interface. Elevate your device\'s aesthetic with Luca\'s stunning visuals that cater to every mood and style. 🎨📱',
-                style: TextStyle(
-                  color: Colors.grey[400],
-                  fontSize: 16,
+                const SizedBox(height: 16),
+                Text(
+                  '🌟 Immerse yourself in the world of Luca – the ultimate wallpaper app. Discover an extensive selection of static and dynamic wallpapers across various categories, all presented through a beautifully designed and intuitive interface. Elevate your device\'s aesthetic with Luca\'s stunning visuals that cater to every mood and style. 🎨📱',
+                  style: TextStyle(
+                    color: Colors.grey[400],
+                    fontSize: 16,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'Version: 1.0.0',
-                style: TextStyle(
-                  color: Colors.grey[400],
-                  fontSize: 16,
+                const SizedBox(height: 16),
+                Text(
+                  'Version: 1.0.0',
+                  style: TextStyle(
+                    color: Colors.grey[400],
+                    fontSize: 16,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
@@ -439,39 +442,41 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 }
 
-void _showChangelogBottomSheet(BuildContext context) {
-  showModalBottomSheet(
+void _showChangelogPopup(BuildContext context) {
+  showDialog(
     context: context,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
     builder: (BuildContext context) {
-      return Container(
-        color: const Color(0xFF1E1E2A),
-        padding: const EdgeInsets.all(20),
-        child: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              '🚀 Luca Initial Release Changelog',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        backgroundColor: const Color(0xFF1E1E2A),
+        content: Container(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                '🚀 Luca Initial Release Changelog',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-            ChangelogEntry(
-              version: '1.0.0',
-              date: 'October, 2023',
-              changes: [
-                '🎉 Welcome to the world of Luca - Your Ultimate Wallpaper Experience!',
-                '🖼️ Explore a captivating collection of dynamic and static wallpapers.',
-                '🎨 Immerse yourself in the beautifully designed user interface for seamless browsing.',
-              ],
-            ),
-          ],
+              SizedBox(height: 20),
+              ChangelogEntry(
+                version: '1.0.0',
+                date: 'October, 2023',
+                changes: [
+                  '🎉 Welcome to the world of Luca - Your Ultimate Wallpaper Experience!',
+                  '🖼️ Explore a captivating collection of dynamic and static wallpapers.',
+                  '🎨 Immerse yourself in the beautifully designed user interface for seamless browsing.',
+                ],
+              ),
+            ],
+          ),
         ),
       );
     },

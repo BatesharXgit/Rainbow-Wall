@@ -301,7 +301,7 @@ class MyHomePageState extends State<MyHomePage>
     );
   }
 
-  Widget _buildImageGridFromRef(Reference imageRef) {
+   Widget _buildImageGridFromRef(Reference imageRef) {
     return FutureBuilder<ListResult>(
       future: imageRef.listAll(),
       builder: (context, snapshot) {
@@ -314,7 +314,7 @@ class MyHomePageState extends State<MyHomePage>
 
           return GridView.builder(
             clipBehavior: Clip.none,
-            // controller: widget.controller,
+            controller: ScrollController(),
             physics: const ClampingScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -352,30 +352,12 @@ class MyHomePageState extends State<MyHomePage>
       child: TabBarView(
         controller: _tabController,
         children: [
-          Container(
-              color: Colors.transparent,
-              // color: Theme.of(context).colorScheme.background,
-              child: _buildImageGridFromRef(wallpaperRef)),
-          Container(
-              color: Colors.transparent,
-              // color: Theme.of(context).colorScheme.background,
-              child: _buildImageGridFromRef(aiRef)),
-          Container(
-              color: Colors.transparent,
-              // color: Theme.of(context).colorScheme.background,
-              child: _buildImageGridFromRef(illustrationRef)),
-          Container(
-              color: Colors.transparent,
-              // color: Theme.of(context).colorScheme.background,
-              child: _buildImageGridFromRef(carsRef)),
-          Container(
-              color: Colors.transparent,
-              // color: Theme.of(context).colorScheme.background,
-              child: _buildImageGridFromRef(abstractRef)),
-          Container(
-              color: Colors.transparent,
-              // color: Theme.of(context).colorScheme.background,
-              child: _buildImageGridFromRef(fantasyRef)),
+          _buildImageGridFromRef(wallpaperRef),
+          _buildImageGridFromRef(aiRef),
+          _buildImageGridFromRef(illustrationRef),
+          _buildImageGridFromRef(carsRef),
+          _buildImageGridFromRef(abstractRef),
+          _buildImageGridFromRef(fantasyRef),
         ],
       ),
     );

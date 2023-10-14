@@ -9,13 +9,18 @@ import 'package:luca/pages/util/notify/notify.dart';
 import 'package:luca/themes/themes.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'firebase_options.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    options: FirebaseOptions(
+      apiKey: 'AIzaSyBlcFvKT-auh3Xp73-dPmEGSi2LGvi9qdQ',
+      appId: '1:803978399683:android:f2ca5f5d55c12a4a9d7776',
+      messagingSenderId: '803978399683',
+      projectId: 'luca-ui',
+      storageBucket: 'luca-ui.appspot.com',
+    ),
   );
   await FirebaseApi().initNotifications();
   SystemChrome.setPreferredOrientations([

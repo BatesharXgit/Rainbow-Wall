@@ -76,7 +76,9 @@ class _LucaHomeState extends State<LucaHome>
           dragStartBehavior: DragStartBehavior.down,
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            MyHomePage(controller: controller),
+            MyHomePage(
+              controller: controller,
+            ),
             Category(
               controller: controller,
             ),
@@ -86,8 +88,8 @@ class _LucaHomeState extends State<LucaHome>
               controller: controller,
             ),
             SettingsPage(
-              controller: controller,
-            ),
+                // controller: controller,
+                ),
           ],
         ),
         fit: StackFit.expand,

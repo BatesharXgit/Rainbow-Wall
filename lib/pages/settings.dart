@@ -11,9 +11,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'util/privacy_policy.dart';
 
 class SettingsPage extends StatefulWidget {
-  final ScrollController controller;
+  // final ScrollController controller;
   const SettingsPage({
-    required this.controller,
+    // required this.controller,
     Key? key,
   }) : super(key: key);
 
@@ -163,7 +163,7 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
-        controller: widget.controller,
+        controller: ScrollController(),
         physics: const BouncingScrollPhysics(),
         child: AnimationLimiter(
           child: Center(

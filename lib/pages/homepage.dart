@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:bootstrap_icons/bootstrap_icons.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
@@ -45,12 +46,13 @@ class MyHomePageState extends State<MyHomePage>
   List<Reference> illustrationRefs = [];
   List<Reference> fantasyRefs = [];
 
-  List<Color> kColours = [
-    Colors.red,
-    Colors.yellow,
-    Colors.green,
-    Colors.pink,
-    Colors.purple
+  List<String> kImages = [
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fnature%2F58.jpg?alt=media&token=e3f7fafb-32bd-43b8-b006-118f91d77048',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fminimalist%2F81.jpg?alt=media&token=e3c08b97-0be5-4ed8-b9c1-8357212b5526',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fanime%2F72.jpg?alt=media&token=e2b1105a-46c8-4f7c-aad0-1359f5f3fd97',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Fspace%2F69.jpg?alt=media&token=65b35575-8529-4bb4-89ee-e788b89573cd',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Famoled%2F79.jpg?alt=media&token=ffd1a801-53c8-4df9-8269-d4a0cd394a19',
+    'https://firebasestorage.googleapis.com/v0/b/luca-ui.appspot.com/o/category%2Famoled%2F76.jpg?alt=media&token=0f0b1b82-879b-421e-9382-e6fb5f1074ee',
   ];
 
   int index = 0;
@@ -154,7 +156,7 @@ class MyHomePageState extends State<MyHomePage>
                                 'LUCA',
                                 style: TextStyle(
                                   fontFamily: "Anurati",
-                                  fontSize: 42,
+                                  fontSize: 38,
                                   color: primaryColor,
                                 ),
                               ),
@@ -184,10 +186,11 @@ class MyHomePageState extends State<MyHomePage>
                             child: Text(
                               'Discover',
                               style: TextStyle(
-                                  fontFamily: "Anurati",
-                                  fontSize: 24,
-                                  color: primaryColor,
-                                  fontWeight: FontWeight.bold),
+                                fontFamily: "Anurati",
+                                fontSize: 24,
+                                color: primaryColor,
+                                // fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
@@ -196,28 +199,54 @@ class MyHomePageState extends State<MyHomePage>
                         ),
                         CarouselSlider(
                           options: CarouselOptions(
-                              scrollPhysics: BouncingScrollPhysics(),
-                              height: 160.0,
-                              enlargeCenterPage: true,
-                              viewportFraction: 0.8,
-                              enlargeFactor: 0.2),
-                          items: ['ABC', 2, 3, 4, 5].map((i) {
+                            scrollPhysics: BouncingScrollPhysics(),
+                            height: 160.0,
+                            enlargeCenterPage: true,
+                            viewportFraction: 0.8,
+                            enlargeFactor: 0.2,
+                          ),
+                          items: kImages.map((String imageUrl) {
                             return Builder(
                               builder: (BuildContext context) {
                                 return Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                        color: kColours[index + 2],
-                                        borderRadius:
-                                            BorderRadius.circular(20)),
-                                    child: Text(
-                                      'text $i',
-                                      style: TextStyle(fontSize: 16.0),
-                                    ));
+                                  width: MediaQuery.of(context).size.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                      image:
+                                          CachedNetworkImageProvider(imageUrl),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                );
                               },
                             );
                           }).toList(),
-                        )
+                        ),
+//  CarouselSlider(
+//                           options: CarouselOptions(
+//                               scrollPhysics: BouncingScrollPhysics(),
+//                               height: 160.0,
+//                               enlargeCenterPage: true,
+//                               viewportFraction: 0.8,
+//                               enlargeFactor: 0.2),
+//                           items: ['ABC', 2, 3, 4, 5].map((i) {
+//                             return Builder(
+//                               builder: (BuildContext context) {
+//                                 return Container(
+//                                     width: MediaQuery.of(context).size.width,
+//                                     decoration: BoxDecoration(
+//                                         color: kColours[index + 2],
+//                                         borderRadius:
+//                                             BorderRadius.circular(20)),
+//                                     child: Text(
+//                                       'text $i',
+//                                       style: TextStyle(fontSize: 16.0),
+//                                     ));
+//                               },
+//                             );
+//                           }).toList(),
+//                         )
                       ],
                     ),
                   ),
